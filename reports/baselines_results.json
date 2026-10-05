@@ -1,0 +1,21 @@
+{
+  "sentiment": {
+    "model": "TF-IDF + Ridge",
+    "sample_size": 970,
+    "mae": 0.3668,
+    "pearson_corr": 0.6352,
+    "macro_f1": 0.67
+  },
+  "event_type": {
+    "model": "TF-IDF + LogisticRegression",
+    "sample_size": 1129,
+    "macro_f1": 0.2883,
+    "accuracy": 0.9238
+  },
+  "impact_score": {
+    "model": "TF-IDF + Ridge",
+    "sample_size": 160,
+    "mae": 2.5722,
+    "spearman_corr": 0.1762
+  }
+}
