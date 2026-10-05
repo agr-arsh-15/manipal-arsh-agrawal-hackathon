@@ -1,0 +1,47 @@
+# 9-Class Event Taxonomy with labeling function keyword priors
+
+classes:
+  - id: 0
+    name: "Geopolitical"
+    description: "Military conflict, state sanctions, international trade barriers, tariffs, territorial disputes."
+    keywords: ["sanction", "sanctions", "war", "military", "tariff", "trade war", "embargo", "geopolitical", "treaty", "nato", "defense"]
+
+  - id: 1
+    name: "Macroeconomic"
+    description: "Central bank monetary policy, benchmark interest rates, CPI inflation, GDP prints, non-farm payrolls."
+    keywords: ["federal reserve", "the fed", "inflation", "cpi", "interest rate", "rate hike", "rate cut", "gdp", "recession", "unemployment", "treasury yield"]
+
+  - id: 2
+    name: "Credit Event"
+    description: "Credit rating downgrades, debt default, bankruptcy filings, restructuring, debt covenants breach."
+    keywords: ["downgrade", "downgraded", "credit rating", "default", "bankruptcy", "chapter 11", "restructuring", "junk bond", "debt covenant", "insolvent"]
+
+  - id: 3
+    name: "Merger/Acquisition"
+    description: "Corporate buyouts, takeovers, mergers, divestitures, significant equity stakes."
+    keywords: ["acquire", "acquires", "acquisition", "merger", "takeover", "buyout", "merges with", "to buy", "stake purchase", "divestiture"]
+
+  - id: 4
+    name: "Product Launch"
+    description: "New flagship product unveilings, major platform updates, FDA drug approvals, innovative releases."
+    keywords: ["launch", "launches", "unveil", "unveils", "announces new", "release", "releases", "fda approval", "breakthrough", "rollout"]
+
+  - id: 5
+    name: "Regulatory/Legal"
+    description: "SEC investigations, Department of Justice antitrust lawsuits, compliance fines, court rulings."
+    keywords: ["sec", "lawsuit", "sued", "investigation", "probe", "antitrust", "fine", "fined", "doj", "court", "ruling", "litigation"]
+
+  - id: 6
+    name: "Earnings/Guidance"
+    description: "Quarterly EPS reports, revenue beats/misses, forward guidance revisions, profit warnings."
+    keywords: ["earnings", "eps", "revenue", "profit", "quarterly results", "guidance", "beat estimates", "missed estimates", "q1", "q2", "q3", "q4"]
+
+  - id: 7
+    name: "Operational/Supply-chain"
+    description: "Factory shutdowns, logistics disruptions, product recalls, labor union strikes, catastrophic outages."
+    keywords: ["recall", "outage", "strike", "supply chain", "factory shutdown", "plant closure", "shortage", "disruption", "labor dispute"]
+
+  - id: 8
+    name: "Other/None"
+    description: "General market commentary, executive opinion, neutral price movement with no specific event driver."
+    keywords: []

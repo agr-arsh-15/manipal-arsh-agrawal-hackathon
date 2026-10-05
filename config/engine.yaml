@@ -1,0 +1,25 @@
+engine:
+  name: "AI/NLP Financial Risk Engine"
+  version: "v0.1.0-alpha"
+  device: "auto" # options: auto, mps, cuda, cpu
+  random_seed: 42
+
+paths:
+  data_dir: "data"
+  samples_dir: "data/samples"
+  prices_dir: "data/prices"
+  models_dir: "models"
+  reports_dir: "reports"
+
+model:
+  encoder: "distilroberta-base"
+  fallback_encoder: "sentence-transformers/all-MiniLM-L6-v2"
+  max_length: 128
+  batch_size: 32
+
+impact:
+  event_window_days: [0, 1]
+  benchmark_ticker: "SPY"
+  volatility_lookback_days: 60
+  macro_volatility_ticker: "^VIX"
+  bin_count: 10

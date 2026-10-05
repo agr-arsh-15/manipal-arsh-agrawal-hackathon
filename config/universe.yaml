@@ -1,0 +1,123 @@
+# S&P 100 20 Large-Cap Universe configuration for Entity Linking & Disambiguation
+# Criteria: high liquidity, multi-sector representation, high presence in financial news and tweets.
+
+universe:
+  - ticker: "AAPL"
+    name: "Apple Inc."
+    aliases: ["Apple", "Apple Inc", "Apple Computer", "iPhone maker"]
+    negative_contexts: ["apple fruit", "green apple", "eating apple", "honeycrisp", "gala apple"]
+    sector: "Technology"
+
+  - ticker: "MSFT"
+    name: "Microsoft Corporation"
+    aliases: ["Microsoft", "Microsoft Corp", "Windows maker", "Azure"]
+    negative_contexts: []
+    sector: "Technology"
+
+  - ticker: "NVDA"
+    name: "NVIDIA Corporation"
+    aliases: ["Nvidia", "Nvidia Corp", "NVIDIA Corp"]
+    negative_contexts: []
+    sector: "Semiconductors"
+
+  - ticker: "AMZN"
+    name: "Amazon.com Inc."
+    aliases: ["Amazon", "Amazon.com", "AWS"]
+    negative_contexts: ["amazon river", "amazon rainforest", "amazon basin", "amazon jungle"]
+    sector: "Consumer Discretionary"
+
+  - ticker: "GOOGL"
+    name: "Alphabet Inc."
+    aliases: ["Google", "Alphabet", "Alphabet Inc", "Google Cloud"]
+    negative_contexts: ["google it", "googled"]
+    sector: "Communication Services"
+
+  - ticker: "META"
+    name: "Meta Platforms Inc."
+    aliases: ["Meta", "Meta Platforms", "Facebook", "Instagram", "Oculus"]
+    negative_contexts: ["meta analysis", "meta tag", "meta description", "meta data", "metadata"]
+    sector: "Communication Services"
+
+  - ticker: "TSLA"
+    name: "Tesla Inc."
+    aliases: ["Tesla", "Tesla Motors", "Tesla Inc"]
+    negative_contexts: ["nikola tesla", "tesla coil", "tesla unit"]
+    sector: "Automotive"
+
+  - ticker: "JPM"
+    name: "JPMorgan Chase & Co."
+    aliases: ["JPMorgan", "JP Morgan", "JPMorgan Chase", "Chase Bank"]
+    negative_contexts: []
+    sector: "Financials"
+
+  - ticker: "BAC"
+    name: "Bank of America Corporation"
+    aliases: ["Bank of America", "BofA", "BAC"]
+    negative_contexts: ["blood alcohol content"]
+    sector: "Financials"
+
+  - ticker: "GS"
+    name: "Goldman Sachs Group Inc."
+    aliases: ["Goldman Sachs", "Goldman"]
+    negative_contexts: []
+    sector: "Financials"
+
+  - ticker: "XOM"
+    name: "Exxon Mobil Corporation"
+    aliases: ["ExxonMobil", "Exxon", "Mobil"]
+    negative_contexts: []
+    sector: "Energy"
+
+  - ticker: "CVX"
+    name: "Chevron Corporation"
+    aliases: ["Chevron", "Chevron Corp"]
+    negative_contexts: ["chevron pattern"]
+    sector: "Energy"
+
+  - ticker: "JNJ"
+    name: "Johnson & Johnson"
+    aliases: ["Johnson & Johnson", "J&J"]
+    negative_contexts: []
+    sector: "Healthcare"
+
+  - ticker: "PFE"
+    name: "Pfizer Inc."
+    aliases: ["Pfizer", "Pfizer Inc"]
+    negative_contexts: []
+    sector: "Healthcare"
+
+  - ticker: "UNH"
+    name: "UnitedHealth Group Incorporated"
+    aliases: ["UnitedHealth", "United Health", "Optum"]
+    negative_contexts: []
+    sector: "Healthcare"
+
+  - ticker: "WMT"
+    name: "Walmart Inc."
+    aliases: ["Walmart", "Wal-Mart"]
+    negative_contexts: []
+    sector: "Consumer Staples"
+
+  - ticker: "KO"
+    name: "The Coca-Cola Company"
+    aliases: ["Coca-Cola", "Coca Cola", "Coke"]
+    negative_contexts: ["knockout", "knocked out"]
+    sector: "Consumer Staples"
+
+  - ticker: "BA"
+    name: "The Boeing Company"
+    aliases: ["Boeing", "Boeing Co"]
+    negative_contexts: ["bachelor of arts", "british airways"]
+    sector: "Industrials"
+
+  - ticker: "DIS"
+    name: "The Walt Disney Company"
+    aliases: ["Walt Disney", "Disney"]
+    negative_contexts: ["dis track", "dis r"]
+    sector: "Communication Services"
+
+  - ticker: "INTC"
+    name: "Intel Corporation"
+    aliases: ["Intel", "Intel Corp"]
+    negative_contexts: ["military intel", "secret intel"]
+    sector: "Semiconductors"

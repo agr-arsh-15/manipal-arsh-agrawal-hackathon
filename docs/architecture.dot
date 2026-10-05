@@ -1,0 +1,94 @@
+digraph RiskEngineArchitecture {
+    rankdir=TB;
+    fontname="Helvetica,Arial,sans-serif";
+    node [fontname="Helvetica,Arial,sans-serif", fontsize=11, shape=box, style="filled,rounded", color="#333333", fillcolor="#F8F9FA"];
+    edge [fontname="Helvetica,Arial,sans-serif", fontsize=9, color="#555555"];
+
+    subgraph cluster_sources {
+        label = "Multi-Source Text Ingestion";
+        style = "filled";
+        fillcolor = "#E8F0FE";
+        fontsize = 12;
+        color = "#1A73E8";
+
+        s1 [label="Financial News\n(FinancialPhraseBank, Benzinga)", fillcolor="#FFFFFF"];
+        s2 [label="Social Sentiment\n(Stock Tweets Stream)", fillcolor="#FFFFFF"];
+        s3 [label="Macro Event Feed\n(GDELT 2.0 Global Feeds)", fillcolor="#FFFFFF"];
+        s4 [label="Live Polling\n(NewsAPI Free Tier)", fillcolor="#FFFFFF"];
+    }
+
+    subgraph cluster_normalization {
+        label = "Data Ingestion & Normalization Layer";
+        style = "filled";
+        fillcolor = "#FEF7E0";
+        fontsize = 12;
+        color = "#F9AB00";
+
+        doc_adapter [label="Source Adapters\n(Timezone Standardization, Hash ID)", fillcolor="#FFFFFF"];
+        doc_schema [label="Unified Document Schema\n(doc_id, text, published_at, time_precision)", shape=note, fillcolor="#FFF9C4"];
+    }
+
+    subgraph cluster_entity {
+        label = "Entity Linking & Disambiguation";
+        style = "filled";
+        fillcolor = "#FCE8E6";
+        fontsize = 12;
+        color = "#EA4335";
+
+        universe_match [label="S&P 100 Universe Matcher\n(20 Liquid Tickers, Alias Dict)", fillcolor="#FFFFFF"];
+        disambiguate [label="Disambiguation Engine\n(Context Rules, Apple/Amazon/Meta Filters)", fillcolor="#FFFFFF"];
+    }
+
+    subgraph cluster_model {
+        label = "Multi-Task Risk Inference Engine (DistilRoBERTa)";
+        style = "filled";
+        fillcolor = "#E6F4EA";
+        fontsize = 12;
+        color = "#137333";
+
+        encoder [label="Shared Transformer Backbone\n(distilroberta-base / MiniLM fallback)", fillcolor="#C8E6C9", shape=component];
+        
+        head_sentiment [label="Sentiment Head\n(Tanh Regression [-1, 1]\n+ Discrete 3-Class)", fillcolor="#FFFFFF"];
+        head_event [label="Event Taxonomy Head\n(Softmax across 9 Classes)", fillcolor="#FFFFFF"];
+        head_impact [label="Market Impact Head\n(Calibrated Severity 1-10\nvia Event-Study CAR/σ)", fillcolor="#FFFFFF"];
+    }
+
+    subgraph cluster_output {
+        label = "Serving & Downstream Signals";
+        style = "filled";
+        fillcolor = "#F3E8FD";
+        fontsize = 12;
+        color = "#9334E6";
+
+        signal_schema [label="Unified Signal Schema\n(sentiment_score, event_type, impact_score)", shape=note, fillcolor="#E1BEE7"];
+        api_srv [label="FastAPI Microservice\n(/analyze, /signals, /health)", fillcolor="#FFFFFF"];
+        file_sink [label="Reproducible File Sink\n(data/signals.jsonl, CSV)", fillcolor="#FFFFFF"];
+        
+        downstream_a [label="Module A: Tactical Rebalancing\n(Sentiment Signal)", style="dashed,rounded", fillcolor="#EDE7F6"];
+        downstream_b [label="Module B: Stress Testing\n(Event Type + Impact Severity)", style="dashed,rounded", fillcolor="#EDE7F6"];
+    }
+
+    s1 -> doc_adapter;
+    s2 -> doc_adapter;
+    s3 -> doc_adapter;
+    s4 -> doc_adapter;
+
+    doc_adapter -> doc_schema;
+    doc_schema -> universe_match;
+    universe_match -> disambiguate;
+    disambiguate -> encoder;
+
+    encoder -> head_sentiment;
+    encoder -> head_event;
+    encoder -> head_impact;
+
+    head_sentiment -> signal_schema;
+    head_event -> signal_schema;
+    head_impact -> signal_schema;
+
+    signal_schema -> api_srv;
+    signal_schema -> file_sink;
+
+    api_srv -> downstream_a;
+    api_srv -> downstream_b;
+}

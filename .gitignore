@@ -1,0 +1,36 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Large / regenerable data (download scripts recreate these)
+data/raw/
+data/processed/
+data/cache/
+
+# Model artifacts (published separately; tiny baseline fallback is whitelisted)
+models/*
+!models/.gitkeep
+!models/baseline/
+models/baseline/*
+!models/baseline/*.joblib
+!models/baseline/*.json
+
+# Logs / runs
+runs/
+wandb/
+*.log
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
