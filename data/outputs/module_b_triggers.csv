@@ -1,0 +1,172 @@
+timestamp,signal_id,ticker,source,event_type,impact_score,event_confidence,text_excerpt,total_pnl,pnl_pct_of_value,cet1_ratio_after
+2018-05-04 00:00:00+00:00,90a4a7cce1363b14,NVDA,benzinga_news,Macroeconomic,8,0.9993,Jobs Growth Stays A Little Slow in April As Unemployment Rate Falls,-429688018.0,-0.04745,0.0695
+2018-05-24 00:00:00+00:00,5bd7b5fa184f3dd6,PFE,benzinga_news,Regulatory/Legal,8,0.9997,Justice Dept. Says Pfizer Agrees To Pay $23.85M To Resolve Allegations That It Paid Kickbacks Through A Co-Pay Assistance Foundation,-63140770.0,-0.00697,0.1168
+2018-07-13 00:00:00+00:00,58d0172ba5c3cba9,JNJ,benzinga_news,Regulatory/Legal,8,0.9995,Jury Returns $4.7B Verdict Against Johnson & Johnson In Asbestos-Laced Talcum Case,-63140770.0,-0.00697,0.1168
+2018-07-17 00:00:00+00:00,5fee904fd58e9e97,,benzinga_news,Macroeconomic,8,0.9752,"As Risks Balloon, Yield Chasers Blow Off The Fed",-429688018.0,-0.04745,0.0695
+2018-07-19 00:00:00+00:00,4aced55cb6ad3df5,NVDA,benzinga_news,Regulatory/Legal,8,0.9998,"European Union Antitrust Regulators Charge Qualcomm With New Violation In Case Related To NVIDIA Unit, ICERA",-63140770.0,-0.00697,0.1168
+2018-08-03 00:00:00+00:00,738a4b61ebced710,XOM,benzinga_news,Regulatory/Legal,9,0.9992,ExxonMobil Shares Volatile Amid Report SEC's Accounting Probe Has Ended With No Action,-70986583.0,-0.00784,0.1158
+2018-08-10 00:00:00+00:00,d23b6c1d8db2524f,,benzinga_news,Geopolitical,8,0.9994,U.S. Weekly FundFlows Insight Report: Trade-War Jitters Keep Equity Mutual Fund Investors At Bay During The Week,-48243110.0,-0.00533,0.1188
+2018-08-20 00:00:00+00:00,5540412254458779,BAC,benzinga_news,Regulatory/Legal,8,0.9996,UPDATE: SEC Says Merrill Lynch To Pay $8.9M To Settle Charges,-63140770.0,-0.00697,0.1168
+2018-08-27 00:00:00+00:00,849bd4b05caf218b,META,stock_tweets,Geopolitical,8,0.9995,"RT @Reuters: Facebook removes top Myanmar military official, others from website https://t.co/cn96YmhTFo",-48243110.0,-0.00533,0.1188
+2018-09-02 00:00:00+00:00,23c752a2ecf06f7b,AMZN,stock_tweets,Geopolitical,9,0.6476,"RT @DyingDaysZombie: United States Of Apocalypse by Mark Tufo &amp; Armand Rosamilia
+
+ https://t.co/YgXMIuBprz 
+
+via @amazon @ZombieFallout @Ar…",-53852600.0,-0.00595,0.118
+2018-09-18 00:00:00+00:00,5a8071253855ca7e,MSFT,stock_tweets,Geopolitical,10,0.9833,"@Microsoft @MakeAWish Cool, so when can we use our Warframe pc account on Xbox one, I know you guys like money and… https://t.co/v8IhbQGkNT",-59368557.0,-0.00656,0.1173
+2018-09-19 00:00:00+00:00,26041c3003440d04,AMZN,stock_tweets,Regulatory/Legal,9,0.9852,"Trust me I'm a lawyer T-shirt KnM
+#lawyer https://t.co/kcQAep8K9f via @amazon",-70986583.0,-0.00784,0.1158
+2018-09-24 00:00:00+00:00,251a92034fd3f3c3,JNJ,benzinga_news,Regulatory/Legal,8,0.993,"Hearing Johnson & Johnson California Talcum Powder Case Has Ended In Mistrial, Unconfirmed",-63140770.0,-0.00697,0.1168
+2018-09-25 00:00:00+00:00,cfc45e4d4e840e59,META,stock_tweets,Geopolitical,9,0.9939,"Dear @facebook, these are the type of friend requests I’m getting, several a week. Guys, all military connected. 1… https://t.co/oskCRfRcJt",-53852600.0,-0.00595,0.118
+2018-09-28 00:00:00+00:00,5f54b2fd906b21dc,GS,benzinga_news,Regulatory/Legal,8,0.9996,"Goldman, JPMorgan among banks facing stock-lending antitrust case: Reuters",-63140770.0,-0.00697,0.1168
+2018-09-29 00:00:00+00:00,7ec85bbd762e18dc,AAPL,stock_tweets,Regulatory/Legal,9,0.9985,"RT @AshishSinghLIVE: Cong demands CBI Probe into #Lucknow killing of @Apple area manager, supports family's demand of Independent CBI Probe…",-70986583.0,-0.00784,0.1158
+2018-10-04 00:00:00+00:00,0d003d15c50927a7,GOOGL,benzinga_news,Regulatory/Legal,8,0.9995,DoJ Could Investigate Google over Android OS,-63140770.0,-0.00697,0.1168
+2018-10-05 00:00:00+00:00,f3e2bd0c8f404349,JPM,benzinga_news,Macroeconomic,9,0.9989,US Jobless Rate Falls to a 48-Year Low - Rate Rises Ahead?,-482365932.0,-0.05327,0.0606
+2018-10-08 00:00:00+00:00,366e15c1f11481d9,GOOGL,benzinga_news,Regulatory/Legal,8,0.9997,UK Court Blocked Attempt to Bring Legal Action against Google over iPhone Data Collection Claims,-63140770.0,-0.00697,0.1168
+2018-10-09 00:00:00+00:00,d8721edfb1027fb4,JPM,benzinga_news,Regulatory/Legal,8,0.9995,Citi and Deutsche Bank Units Face Court Over Cartel Case,-63140770.0,-0.00697,0.1168
+2018-10-10 00:00:00+00:00,5340a41c03ca33c4,,benzinga_news,Macroeconomic,8,0.995,"US Equities trading lower amid concerns over interest rate hikes: Russell 2000 down 1.4%, S&P 500 down 1.9%, Dow 30 Down 1.9%, Nasdaq Down 2.3%.",-429688018.0,-0.04745,0.0695
+2018-10-11 00:00:00+00:00,c56432021f7f693e,,benzinga_news,Macroeconomic,8,0.9988,"Trump Says Federal Reserve Is Getting Too Aggressive, Making A Big Mistake",-429688018.0,-0.04745,0.0695
+2018-10-15 00:00:00+00:00,1f9c70d0f6117cee,,benzinga_news,Macroeconomic,10,0.6822,US Federal Government Posts Widest Deficit Since 2012,-536083396.0,-0.0592,0.0539
+2018-10-16 00:00:00+00:00,def09d9b739e33c5,GOOGL,benzinga_news,Regulatory/Legal,8,0.9987,"Google Says It Will Charge Smartphone Makers Licensing Fees For Google Play, Gmail, YouTube And Other Apps In Europe; Says Licensing Fees Will Offset Revenue Lost As A Result Of Its Compliance Efforts",-63140770.0,-0.00697,0.1168
+2018-10-18 00:00:00+00:00,76e608916170ecd1,JPM,stock_tweets,Macroeconomic,8,0.9952,"RT @EdKrassen: According to an economic prediction model by @jpmorgan, the U.S. Economy has a 60% chance of hitting a recession in 2020, an…",-429688018.0,-0.04745,0.0695
+2018-10-24 00:00:00+00:00,024ca286efb746dd,AMZN,stock_tweets,Geopolitical,9,0.9987,"RT @sandrayearman: Illusions And War/ Prophesies And War… by Sandra Yearman…When good men die…
+https://t.co/ZyWItUXI1f via @amazon
+https://…",-53852600.0,-0.00595,0.118
+2018-10-24 00:00:00+00:00,482401216e42957c,XOM,benzinga_news,Regulatory/Legal,8,0.9997,NY Attorney General Underwood Files Lawsuit Against Exxon Mobil For 'Defrauding' Investors Regarding Financial Risk The Company Faces From Climate Change Regulations,-63140770.0,-0.00697,0.1168
+2018-10-27 00:00:00+00:00,07e737834c5aa8c5,AMZN,stock_tweets,Regulatory/Legal,8,0.9961,"RT @alsalloumabdul: Dear @amazon,
+
+Despite the on-going investigation on the incident, these products clearly do violate Amazon's Listing G…",-63140770.0,-0.00697,0.1168
+2018-10-29 00:00:00+00:00,39cf727c0cb09e5d,BA,stock_tweets,Operational/Supply-chain,10,0.8421,"Delhi boy, Captain Bhavye Suneja, was captain of the ill-fated @lionairgroup @Boeing 737 Max that crashed into the… https://t.co/HjoqNqVUZH",-54654835.0,-0.00604,0.1179
+2018-10-31 00:00:00+00:00,4684574825da1622,JPM,benzinga_news,Regulatory/Legal,8,0.9987,JPMorgan in settlement talks with SEC on pre-released ADRs,-63140770.0,-0.00697,0.1168
+2018-11-16 00:00:00+00:00,fe373b63dc5919a9,BAC,benzinga_news,Regulatory/Legal,9,0.9986,"Deutsche Bank, BofA, JPMorgan drawn into Danske probe: Bloomberg",-70986583.0,-0.00784,0.1158
+2018-11-16 00:00:00+00:00,c3de5450a10da754,JPM,benzinga_news,Operational/Supply-chain,8,0.6336,"Oh Look, Another Hack Attack",-43847774.0,-0.00484,0.1193
+2018-11-17 00:00:00+00:00,54c65b4e54c6d4ef,BAC,benzinga_news,Regulatory/Legal,8,0.999,"Danske Bank Probe Expands As JPM, Deutsche Bank, BofA Face Scrutiny",-63140770.0,-0.00697,0.1168
+2018-11-26 00:00:00+00:00,6a8099c0e4130880,,benzinga_news,Macroeconomic,9,0.9236,The Fed Pulls The Punchbowl,-482365932.0,-0.05327,0.0606
+2018-11-28 00:00:00+00:00,aecb3a04b6dffc1a,,benzinga_news,Macroeconomic,8,0.9664,Fed's Powell Says Vulnerabilities Are Not Elevated In Financial System Today' Says Doesn't Know What Event Might Set Off Next Economic Downturn,-429688018.0,-0.04745,0.0695
+2018-11-30 00:00:00+00:00,0282de8c187b9750,,benzinga_news,Macroeconomic,8,0.8761,"Forget the Fed, the Everything Bubble Has Gone Corporate… And It's Bursting",-429688018.0,-0.04745,0.0695
+2018-12-04 00:00:00+00:00,35534bf8e83a5cc0,,benzinga_news,Macroeconomic,9,0.9771,S&P sees about $250B potential fallen angel debt in next recession,-482365932.0,-0.05327,0.0606
+2018-12-07 00:00:00+00:00,4fff33f1557507d7,JPM,benzinga_news,Macroeconomic,8,0.982,JPMorgan sees latest sell-off overpricing recession risk,-429688018.0,-0.04745,0.0695
+2018-12-07 00:00:00+00:00,3a7041ee64e126a0,INTC,benzinga_news,Geopolitical,9,0.8694,ARMed Attack: Intel And AMD Do Not See The Torpedo Headed Their Way,-53852600.0,-0.00595,0.118
+2018-12-13 00:00:00+00:00,dbc7503804125b28,JNJ,benzinga_news,Regulatory/Legal,8,0.9986,"J&J Drafted Into A Fight Over Shareholder Suits, Co. Asked SEC To Omit Proposal From 2019 Proxy Statement",-63140770.0,-0.00697,0.1168
+2018-12-14 00:00:00+00:00,d0b80953539563a8,JNJ,benzinga_news,Operational/Supply-chain,10,0.7103,Johnson & Johnson Falls Following Baby Powder Asbestos Report,-54654835.0,-0.00604,0.1179
+2018-12-14 00:00:00+00:00,51713ba730dea90c,INTC,benzinga_news,Geopolitical,10,0.9893,Intel Readies The Nukes For ARMed Battle As It Leads Competition To Barren Wasteland,-59368557.0,-0.00656,0.1173
+2018-12-20 00:00:00+00:00,38308be600f2cd4e,,benzinga_news,Macroeconomic,9,0.9821,Many gold stocks are trading higher in response to a significant move higher in gold prices following the Federal Reserve decision to raise interest rates Wednesday.,-482365932.0,-0.05327,0.0606
+2018-12-20 00:00:00+00:00,cf54cb704a51d07f,PFE,benzinga_news,Regulatory/Legal,9,0.9964,"Competition Bureau Has Closed Abuse-Of-Dominance Investigation Into Celgene, Pfizer, Sanofi Practices",-70986583.0,-0.00784,0.1158
+2018-12-21 00:00:00+00:00,2312b2230d03fa98,,benzinga_news,Macroeconomic,8,0.9403,A Peek Into The Markets: US Stock Futures Down Ahead Of GDP Report,-429688018.0,-0.04745,0.0695
+2018-12-26 00:00:00+00:00,4589f05def75007e,JPM,benzinga_news,Regulatory/Legal,9,0.9988,JPMorgan settles with SEC on ADRs,-70986583.0,-0.00784,0.1158
+2018-12-28 00:00:00+00:00,a05477e876c4d171,JPM,benzinga_news,Regulatory/Legal,8,0.9994,Hong Kong authority fines JPMorgan over money-laundering measures,-63140770.0,-0.00697,0.1168
+2018-12-28 00:00:00+00:00,aeb01c22fde1f863,XOM,benzinga_news,Geopolitical,9,0.9989,Hearing Venezuelan President Maduro Says Country's Armed Forces Will Defend Its Territory 'At Any Cost' And Won't Accept Exxon Mobil Corp Sending Oil Exploration Vessels Into Venezuelan Seas,-53852600.0,-0.00595,0.118
+2019-01-07 00:00:00+00:00,13a1a411a8220a34,INTC,benzinga_news,Regulatory/Legal,8,0.9995,Qualcomm Braces for Legal Battle with US Antitrust Regulator,-63140770.0,-0.00697,0.1168
+2019-01-08 00:00:00+00:00,6611365893021a31,,benzinga_news,Macroeconomic,8,0.9984,"Doubleline Capital's Gundlach On Investor Webcast Says 'Eerie Correlation Between Federal Reserve's Balance Sheet And US Stock Market'; Says Market Is Pricing In That Economic Indicators Have Dropped,",-429688018.0,-0.04745,0.0695
+2019-01-10 00:00:00+00:00,93a592fa069818a6,GOOGL,benzinga_news,Regulatory/Legal,8,0.9996,"Alphabet, Inc. Board Sued On Thursday In California State Court By Shareholder; Lawsuit Alleges Board Breached Fiduciary Duty By Covering Up Sexual Misconduct By Top Execs, Cites Meeting Minutes From ",-63140770.0,-0.00697,0.1168
+2019-01-14 00:00:00+00:00,f99e358e65d6286d,JPM,benzinga_news,Geopolitical,9,0.746,Recession Risk Hits 7-Year High: 5 Secure Picks,-53852600.0,-0.00595,0.118
+2019-01-29 00:00:00+00:00,13bc0269582a054c,,benzinga_news,Macroeconomic,8,0.9963,Who Guards The Guardians? The Federal Reserve's Dilemma,-429688018.0,-0.04745,0.0695
+2019-02-07 00:00:00+00:00,77e32dfd8733146a,BAC,benzinga_news,Regulatory/Legal,8,0.8966,Shares of several investment banking companies are trading lower after senator Elizabeth Warren called for the Senate Banking Committee to investigate allegations of money laundering by Deutsche Bank.,-63140770.0,-0.00697,0.1168
+2019-02-21 00:00:00+00:00,74f6a6d8baefae11,JNJ,benzinga_news,Regulatory/Legal,9,0.9991,'Johnson & Johnson receives federal subpoenas related to baby powder litigation' -Reuters Earlier Reported,-70986583.0,-0.00784,0.1158
+2019-02-28 00:00:00+00:00,c771a767ab27c892,,benzinga_news,Macroeconomic,8,0.7034,"A Peek Into The Markets: US Stock Futures Down Ahead Of GDP Data, Fed Speakers",-429688018.0,-0.04745,0.0695
+2019-03-06 00:00:00+00:00,7372e44ca5b48852,JPM,benzinga_news,Macroeconomic,8,0.9657,U.S. Clears First Depression Drug In Decades (Wall Street Breakfast Podcast),-429688018.0,-0.04745,0.0695
+2019-03-07 00:00:00+00:00,1baa6244e79feec9,JPM,benzinga_news,Macroeconomic,8,0.9314,Wall Street Breakfast: Stocks Sluggish Ahead Of ECB,-429688018.0,-0.04745,0.0695
+2019-03-07 00:00:00+00:00,91ae4aa7d7b839fa,,benzinga_news,Geopolitical,9,0.9944,This Day In Market History: Hitler's First Aggression,-53852600.0,-0.00595,0.118
+2019-03-19 00:00:00+00:00,3bd526ba61eed6f0,GOOGL,benzinga_news,Geopolitical,8,0.9594,"'JUST IN: Chairman of House Homeland Security Committee summons chiefs of Twitter, YouTube, Facebook & Microsoft to Capitol Hill over their response to the New Zealand attack.' -CNBC",-48243110.0,-0.00533,0.1188
+2019-03-20 00:00:00+00:00,54e5e2ab7a10fc5b,BAC,benzinga_news,Macroeconomic,9,0.9857,Banking and financial services stocks are trading lower after the US Federal Reserve announced it will leave rates unchanged.,-482365932.0,-0.05327,0.0606
+2019-03-21 00:00:00+00:00,7d3061e26cb678bc,,benzinga_news,Macroeconomic,8,0.9767,The Fed Is Still A Threat To The Markets,-429688018.0,-0.04745,0.0695
+2019-03-22 00:00:00+00:00,ca827db67f7f278d,BAC,benzinga_news,Regulatory/Legal,8,0.9996,BofA Shares Unaffected Amid Report Merrill Lynch Will Pay $8M To SEC For Improper Handling Of ADRs,-63140770.0,-0.00697,0.1168
+2019-03-25 00:00:00+00:00,9548c48ec98d1455,JNJ,benzinga_news,Regulatory/Legal,8,0.9995,"Court Records Show Bayer, J&J Have Settled XARELTO Litigation For $775M",-63140770.0,-0.00697,0.1168
+2019-03-28 00:00:00+00:00,ea94d017a57eb169,,benzinga_news,Macroeconomic,8,0.8846,A Peek Into The Markets: US Stock Futures Flat; GDP Report In Focus,-429688018.0,-0.04745,0.0695
+2019-04-10 00:00:00+00:00,aa151992f153fe32,BAC,benzinga_news,Regulatory/Legal,9,0.9753,"Bank CEOs Start Testimony At House Financial Services Committee Hearing, Bank Of America CEO Says Bank Has Not Found Any Suspicious Activity On Russian-Related Accounts, Citigroup CEO Declines To Comm",-70986583.0,-0.00784,0.1158
+2019-04-26 00:00:00+00:00,d0ea253929d1ba40,INTC,benzinga_news,Macroeconomic,9,0.9929,"Stock Market Falls Despite Strong GDP, As This Dow Jones Stock Tanks",-482365932.0,-0.05327,0.0606
+2019-05-03 00:00:00+00:00,ff7c20e2bebda479,,benzinga_news,Macroeconomic,9,0.9987,Fed's Kaplan Says Weak Europe Growth Could Impact GDP,-482365932.0,-0.05327,0.0606
+2019-05-10 00:00:00+00:00,f763a498d9a528a9,GOOGL,benzinga_news,Regulatory/Legal,8,0.9995,'Exclusive: India orders anti-trust probe of Google for alleged Android abuse - sources' -Earlier Article From Reuters,-63140770.0,-0.00697,0.1168
+2019-05-22 00:00:00+00:00,ef3688efc81a34fc,GOOGL,benzinga_news,Regulatory/Legal,8,0.9989,'EU regulator launches probe into Google over data privacy' -CNBC,-63140770.0,-0.00697,0.1168
+2019-05-29 00:00:00+00:00,0c4439549fd78a96,JNJ,benzinga_news,Regulatory/Legal,8,0.998,Shares of several healthcare companies are trading lower after the US state of Oklahoma filed a multi-billion dollar lawsuit against Johnson & Johnson relating to opioid abuse; Oklahoma settled an opi,-63140770.0,-0.00697,0.1168
+2019-06-03 00:00:00+00:00,1720612871ab38cd,GOOGL,benzinga_news,Regulatory/Legal,10,0.9996,Alphabet shares are trading lower after the Justice Department announced an antitrust investigation into Google.,-78822000.0,-0.0087,0.1148
+2019-06-03 00:00:00+00:00,187f8f7038922bde,,benzinga_news,Geopolitical,8,0.9991,Treasury Yields Drop To New Lows As Trade War Takes Bite Out Of Global Economy,-48243110.0,-0.00533,0.1188
+2019-06-07 00:00:00+00:00,1fa21297663941c8,GOOGL,benzinga_news,Macroeconomic,9,0.9989,Many US-traded stocks are trading higher as recent economic signals have raised the potential for a Federal Reserve rate cut.,-482365932.0,-0.05327,0.0606
+2019-06-10 00:00:00+00:00,1fddfae363041f4a,GOOGL,benzinga_news,Regulatory/Legal,8,0.9995,DOJ Demands Google Hand Over Data Pertinent To Roger Stone,-63140770.0,-0.00697,0.1168
+2019-06-12 00:00:00+00:00,c72510de3ed66ec5,JNJ,benzinga_news,Regulatory/Legal,8,0.9996,UPDATE: Recent Bloomberg Report Indicates J&J And Colgate Ordered To Pay Almost $10M In Talc Case,-63140770.0,-0.00697,0.1168
+2019-06-20 00:00:00+00:00,51d158bbb0e1efa1,GOOGL,benzinga_news,Macroeconomic,9,0.9945,Shares of several technology companies are trading higher amid renewed hopes of a Federal Reserve rate cut this year and in sympathy with Oracle reporting strong Q4 earnings.,-482365932.0,-0.05327,0.0606
+2019-07-08 00:00:00+00:00,e6246db08ae32fea,JPM,benzinga_news,Macroeconomic,8,0.9558,The Fed Is Now Bleeding The Patient,-429688018.0,-0.04745,0.0695
+2019-07-10 00:00:00+00:00,7eb9f9f19882b550,XOM,benzinga_news,Operational/Supply-chain,9,0.6091,"New Orleans May Face Daunting Tropical Storm, More Flooding This Week",-49259048.0,-0.00544,0.1186
+2019-07-12 00:00:00+00:00,8902aab72ae8d219,JNJ,benzinga_news,Regulatory/Legal,10,0.9994,Johnson & Johnson shares are trading lower following reports of a US criminal probe into the company's denial of asbestos in baby powder.,-78822000.0,-0.0087,0.1148
+2019-07-16 00:00:00+00:00,b44239784b99e83a,JNJ,benzinga_news,Regulatory/Legal,10,0.8664,J&J Executive Says Taking A $190M Charge In The Quarter Related To Talc Litigation For Defense Costs Only,-78822000.0,-0.0087,0.1148
+2019-07-22 00:00:00+00:00,877c8c6a84193a5a,TSLA,benzinga_news,Regulatory/Legal,8,0.9978,Tesla Drops Case Against Supposedly Dangerous Short-Seller After Being Asked to Show Evidence,-63140770.0,-0.00697,0.1168
+2019-07-24 00:00:00+00:00,3cb81c17055151b6,AMZN,benzinga_news,Regulatory/Legal,9,0.9986,"FANG Stocks Amazon, Alphabet To Report Amid Probe: Investing Action Plan",-70986583.0,-0.00784,0.1158
+2019-07-31 00:00:00+00:00,e3d33dbd01d8a67e,XOM,benzinga_news,Operational/Supply-chain,8,0.9223,ExxonMobil Reports 6 Non-Life Threatening Injuries At Baytown Complex,-43847774.0,-0.00484,0.1193
+2019-08-05 00:00:00+00:00,7f79ed7e4b840b0c,JPM,benzinga_news,Macroeconomic,9,0.993,Financial stocks slide as traders bet on more Fed rate cuts,-482365932.0,-0.05327,0.0606
+2019-08-07 00:00:00+00:00,6ceefefe44854180,JPM,benzinga_news,Macroeconomic,9,0.7248,Financials hammered as rates plumb new lows,-482365932.0,-0.05327,0.0606
+2019-08-11 00:00:00+00:00,4c0aac668f1aee26,,benzinga_news,Geopolitical,8,0.9991,Volatility Warrants Caution In U.S. High Yield,-48243110.0,-0.00533,0.1188
+2019-08-12 00:00:00+00:00,7fc065b4e9175f6f,JPM,benzinga_news,Macroeconomic,8,0.9878,Fed weighs new tool for a downturn - WSJ,-429688018.0,-0.04745,0.0695
+2019-08-12 00:00:00+00:00,ad30f4c60d4de0fb,TSLA,benzinga_news,Operational/Supply-chain,8,0.9383,'Tesla Autopilot applied brakes in Model 3 crash that resulted in explosions' -Electrek,-43847774.0,-0.00484,0.1193
+2019-08-13 00:00:00+00:00,bb43373880d3aa71,INTC,benzinga_news,Geopolitical,8,0.9746,"As Stocks Dropped Amidst Trade War, Perhaps A Global Recession Is On The Horizon",-48243110.0,-0.00533,0.1188
+2019-08-14 00:00:00+00:00,44db5fefa8897d1b,XOM,benzinga_news,Macroeconomic,8,0.9361,"Shares of several oil & gas companies are trading lower with the overall market following US and UK yield curve inversions, which have raised concerns of a recession.",-429688018.0,-0.04745,0.0695
+2019-08-16 00:00:00+00:00,a6810f21a058f98a,AAPL,benzinga_news,Macroeconomic,8,0.9929,Stock Market Soars As Recession Fears Go On Back Burner — For Now; Apple Leads Dow Jones,-429688018.0,-0.04745,0.0695
+2019-08-27 00:00:00+00:00,fca7746c56b9f8cd,GOOGL,benzinga_news,Regulatory/Legal,8,0.993,"Former Google, Uber Self-Driving Tech Engineer Levandowski Indicted On IP Theft Charges",-63140770.0,-0.00697,0.1168
+2019-08-29 00:00:00+00:00,cf4ef274f0309966,GOOGL,benzinga_news,Regulatory/Legal,8,0.9997,'Google is facing another EU antitrust probe — this time over its jobs search tool' -CNBC From Yesterday,-63140770.0,-0.00697,0.1168
+2019-08-29 00:00:00+00:00,c1c331c31b3d45e9,JPM,benzinga_news,Macroeconomic,8,0.9795,Dick Bove says banks selling loans could lead to recession - CNBC,-429688018.0,-0.04745,0.0695
+2019-08-30 00:00:00+00:00,650993fd41808eec,GOOGL,benzinga_news,Regulatory/Legal,9,0.9996,'Google to pay up to $200M to settle FTC YouTube investigation' -POLITICO,-70986583.0,-0.00784,0.1158
+2019-09-03 00:00:00+00:00,ece9f2581f09ad10,GOOGL,benzinga_news,Regulatory/Legal,9,0.9995,'Google emerges as target of a new state attorneys general antitrust probe' -Washington Post,-70986583.0,-0.00784,0.1158
+2019-09-04 00:00:00+00:00,d68e4b38226820bb,GOOGL,benzinga_news,Regulatory/Legal,8,0.9997,Google Fined $170M By FTC Over Accusations Of Child Privacy Violations By YouTube,-63140770.0,-0.00697,0.1168
+2019-09-13 00:00:00+00:00,bf4256473c80dc07,JPM,benzinga_news,Regulatory/Legal,10,0.9991,"J.P. Morgan places traders on leave amid DoJ criminal probe, reports say",-78822000.0,-0.0087,0.1148
+2019-09-16 00:00:00+00:00,296a383c004aebaf,JPM,benzinga_news,Regulatory/Legal,8,0.9729,JPMorgan traders charged with rigging metals markets,-63140770.0,-0.00697,0.1168
+2019-09-16 00:00:00+00:00,31665e1eb03f63a1,XOM,benzinga_news,Geopolitical,8,0.986,"Oil Prices, Stocks Pump Higher After Drone Strike Cripples Saudi Oil Supply",-48243110.0,-0.00533,0.1188
+2019-09-17 00:00:00+00:00,2400e3ae4cfb5c31,BAC,benzinga_news,Geopolitical,10,0.9885,Bank Of America Merrill Lynch Sees Limited Direct Impact On US Economy After Attack On Saudi Oil Production Facilities,-59368557.0,-0.00656,0.1173
+2019-09-23 00:00:00+00:00,3d45219818d990c1,XOM,benzinga_news,Operational/Supply-chain,8,0.6452,Remnants Of Tropical Storm Imelda Still Affecting Freight Businesses In The Houston Area,-43847774.0,-0.00484,0.1193
+2019-09-28 00:00:00+00:00,baf38864c030ae5b,TSLA,benzinga_news,Operational/Supply-chain,9,0.8877,First Report Of Accident With Tesla Smart Summon Emerges,-49259048.0,-0.00544,0.1186
+2019-09-30 00:00:00+00:00,0934bc665b0a874c,JNJ,benzinga_news,Regulatory/Legal,8,0.9988,California Jury Returns $40M Talc Verdict Against Johnson & Johnson,-63140770.0,-0.00697,0.1168
+2019-10-02 00:00:00+00:00,40974713d35a81f1,JPM,benzinga_news,Macroeconomic,8,0.9882,Wall Street Breakfast: Recession Red Flags?,-429688018.0,-0.04745,0.0695
+2019-10-13 00:00:00+00:00,47ce939a41d72864,,benzinga_news,Geopolitical,8,0.9638,Why China's Currency Will Not Be Weaponized,-48243110.0,-0.00533,0.1188
+2019-10-16 00:00:00+00:00,0a00dbd5ba667b3b,TSLA,benzinga_news,Regulatory/Legal,8,0.9983,"'AIG Faces Potential Claim in Elon Musk Defamation Case, Filing Shows' -Bloomberg",-63140770.0,-0.00697,0.1168
+2019-10-18 00:00:00+00:00,1df8fa95627b3805,,benzinga_news,Geopolitical,10,0.9589,Value Rally Fails To Disrupt Defensive Bias,-59368557.0,-0.00656,0.1173
+2019-10-18 00:00:00+00:00,ccc93e7887d48962,JPM,benzinga_news,Macroeconomic,8,0.9703,Week In Review: Market Falls After China Reports Lousy GDP Growth,-429688018.0,-0.04745,0.0695
+2019-10-21 00:00:00+00:00,d89b894618bcae4e,JNJ,benzinga_news,Regulatory/Legal,8,0.9977,How Much Litigation Risk Is Priced Into Johnson & Johnson?,-63140770.0,-0.00697,0.1168
+2019-10-23 00:00:00+00:00,89be2e97f95809d0,TSLA,benzinga_news,Operational/Supply-chain,9,0.8068,Tesla's Futuristic Door Handles Blamed for Death in Fiery Wreck,-49259048.0,-0.00544,0.1186
+2019-10-29 00:00:00+00:00,1e7cb16ba7553079,GOOGL,benzinga_news,Regulatory/Legal,8,0.9977,Australia's ACCC Says Google Allegedly Misled Consumers on Collection and Use of Location Data,-63140770.0,-0.00697,0.1168
+2019-10-29 00:00:00+00:00,03009b747c0c019a,TSLA,benzinga_news,Credit Event,8,0.8234,Tesla shares are trading lower after the company in its 10-Q guided capital expenditures slightly below its prior guidance range. Roth Capital downgraded the stock from Neutral to Sell.,-267120193.0,-0.0295,0.0898
+2019-10-31 00:00:00+00:00,498093cfbefa185e,GOOGL,benzinga_news,Regulatory/Legal,8,0.9997,"Court Filing Shows Google, Alphabet Have Sued Texas State Attorney General To Ensure Protection For Confidential Business Info",-63140770.0,-0.00697,0.1168
+2019-11-01 00:00:00+00:00,fe35aafe2da52e4b,TSLA,benzinga_news,Regulatory/Legal,9,0.9691,"'Per $TSLA, these 8 pages of comprehensive NHTSA investigative demands NHTSA constitute a mere ""request for information""...Tesla has used this language to hide subpoenas as well...' -Tweet From Stanph",-70986583.0,-0.00784,0.1158
+2019-11-06 00:00:00+00:00,7b0b54d89d0f9511,GOOGL,benzinga_news,Regulatory/Legal,9,0.9989,Alphabet Is Investigating Sexual Misconduct Allegations Against Execs,-70986583.0,-0.00784,0.1158
+2019-11-13 00:00:00+00:00,84e12626b5533afa,INTC,benzinga_news,Geopolitical,10,0.9882,Paul Tudor Jones Says Market Is Being Propelled by an 'Explosive Combination' of Forces,-59368557.0,-0.00656,0.1173
+2019-11-14 00:00:00+00:00,bf162118206bc4f7,GOOGL,benzinga_news,Regulatory/Legal,9,0.9996,'States' massive Google antitrust probe will expand into search and Android businesses' -CNBC,-70986583.0,-0.00784,0.1158
+2019-11-18 00:00:00+00:00,0dffd5caad4344bd,,benzinga_news,Operational/Supply-chain,8,0.9789,VIX Explosion Overdue Or Something Far Less Sinister?,-43847774.0,-0.00484,0.1193
+2019-11-26 00:00:00+00:00,c24e96c9398860c0,JNJ,benzinga_news,Regulatory/Legal,10,0.9985,Shares of opioid-related drugmakers are trading lower on reports federal prosecutors have opened a criminal probe of opioid manufacturers.,-78822000.0,-0.0087,0.1148
+2019-12-02 00:00:00+00:00,ef3540f6058defa7,JPM,benzinga_news,Regulatory/Legal,9,0.9992,Deutsche Bank (DB) Under DoJ Probe Over Danske Bank Scandal,-70986583.0,-0.00784,0.1158
+2019-12-06 00:00:00+00:00,6e054fd51cad7308,TSLA,benzinga_news,Regulatory/Legal,8,0.8558,'Did Someone At 10 Downing Street Ask If You Were A Pedophile?' Musk's Lawyer To UK Caver,-63140770.0,-0.00697,0.1168
+2019-12-10 00:00:00+00:00,c1cb2f0b8fa6b609,GOOGL,benzinga_news,Regulatory/Legal,9,0.9957,"Fitbit Shares Dip To Session Low, Down 1.9% Over Last Min. As Hearing Alphabet Deal For Fitbit Is Facing A Dept. Of Justice Probe",-70986583.0,-0.00784,0.1158
+2019-12-10 00:00:00+00:00,a40ee8ba942210c4,DIS,benzinga_news,Geopolitical,9,0.8901,Funko Will Have The Force In 2020,-53852600.0,-0.00595,0.118
+2019-12-23 00:00:00+00:00,6862f676a4877fe6,INTC,benzinga_news,Operational/Supply-chain,9,0.764,Intel Corp (INTC) Slams Into Double Top Resistance,-49259048.0,-0.00544,0.1186
+2019-12-26 00:00:00+00:00,3f90ef0fe64bb12c,JPM,benzinga_news,Macroeconomic,8,0.769,"Looks Like The Fed's Been Duped – But It Hasn't ""Lost Control""",-429688018.0,-0.04745,0.0695
+2020-01-06 00:00:00+00:00,35812cd33e914064,BA,benzinga_news,Regulatory/Legal,9,0.9927,Boeing Internal Investigation Reveals More Design Flaws In Troubled 737 MAX Aircraft,-70986583.0,-0.00784,0.1158
+2020-01-14 00:00:00+00:00,d6111e1e67ca8974,,benzinga_news,Macroeconomic,8,0.8761,The Repo Market Is So Broken That The Fed Wants To Change It,-429688018.0,-0.04745,0.0695
+2020-01-17 00:00:00+00:00,70f3005916f89bb8,TSLA,benzinga_news,Regulatory/Legal,9,0.9977,NHTSA Considers Investigation Into Reports Of Teslas With Unintended Acceleration,-70986583.0,-0.00784,0.1158
+2020-02-13 00:00:00+00:00,d1b328d511f79c3b,TSLA,benzinga_news,Regulatory/Legal,8,0.982,Tesla shares are trading lower after the company issued a 10-K filing indicating the SEC has issued a subpoena seeking info related to certain financial data. The company also reported a $2 billion co,-63140770.0,-0.00697,0.1168
+2020-02-21 00:00:00+00:00,53bc48eb6e86467a,GOOGL,benzinga_news,Regulatory/Legal,8,0.9997,"New Mexico Accuses Google Of Violating Children's Data Privacy, Files Lawsuit",-63140770.0,-0.00697,0.1168
+2020-03-03 00:00:00+00:00,2319114ec8670dfa,BAC,benzinga_news,Macroeconomic,8,0.9968,Shares of several banks and financial services companies are trading lower after the Federal Reserve announced a rate cut of 50 bps.,-429688018.0,-0.04745,0.0695
+2020-03-03 00:00:00+00:00,e21131bda0876b6a,DIS,benzinga_news,Operational/Supply-chain,8,0.8541,Viral Collapse Of Economic Optimism,-43847774.0,-0.00484,0.1193
+2020-03-09 00:00:00+00:00,a62d26ca5ae29394,META,benzinga_news,Regulatory/Legal,8,0.9984,Australia Sues Facebook For Data Breach Of 300K Citizens In Cambridge Analytica Case,-63140770.0,-0.00697,0.1168
+2020-03-10 00:00:00+00:00,43926a0f49635e2b,JPM,benzinga_news,Regulatory/Legal,8,0.9995,Fifth Third (FITB) Faces Lawsuit Over Fake Account Opening,-63140770.0,-0.00697,0.1168
+2020-03-10 00:00:00+00:00,b382a253ce38a8e3,AAPL,benzinga_news,Geopolitical,8,0.8614,Jedi Wars Between Amazon And Microsoft Are Still Very Much On,-48243110.0,-0.00533,0.1188
+2020-03-16 00:00:00+00:00,f41a7e9218b6a06c,JPM,benzinga_news,Macroeconomic,8,0.9711,"Dow Jones Plunges Further As Fed Rate Cut Fails To Boost Confidence, Coronavirus Cases Rise",-429688018.0,-0.04745,0.0695
+2020-03-17 00:00:00+00:00,3a80542c953a6fdb,BAC,benzinga_news,Macroeconomic,8,0.963,Shares of several financial services companies are trading higher as the sector rebounds following Monday's Crash. Financials have been negatively impacted by economic weakness from the coronavirus ou,-429688018.0,-0.04745,0.0695
+2020-03-23 00:00:00+00:00,e043c5e0adaaedfd,JNJ,benzinga_news,Macroeconomic,8,0.9853,Shares of several healthcare companies are trading lower amid market volatility. Sunday's fiscal stimulus bill failed a procedural senate vote while the Fed Monday morning announced further stimulus m,-429688018.0,-0.04745,0.0695
+2020-03-24 00:00:00+00:00,0f9ee1038748bacc,KO,benzinga_news,Macroeconomic,8,0.6578,Shares of several consumer goods companies are trading higher amid market strength on hopes of a US economic stimulus agreement. The sector has been volatile recently amid consumer demand for househol,-429688018.0,-0.04745,0.0695
+2020-03-27 00:00:00+00:00,74c6787398f67ed6,,benzinga_news,Macroeconomic,8,0.9278,"""The Bond Bubble Pops"": This Is Why The Fed Bailed Out The Bond Market",-429688018.0,-0.04745,0.0695
+2020-03-31 00:00:00+00:00,d5fd25150e35e6b5,META,benzinga_news,Regulatory/Legal,9,0.998,"Zoom Shares Drop As New York Attorney General Looks Into Company's Privacy, Security Practices",-70986583.0,-0.00784,0.1158
+2020-04-03 00:00:00+00:00,000e3c5f59c1d828,JPM,benzinga_news,Macroeconomic,9,0.7493,"Jobs Report: -701K in March, Unemployment 4.4%",-482365932.0,-0.05327,0.0606
+2020-04-06 00:00:00+00:00,e10f42c076e81122,XOM,benzinga_news,Geopolitical,9,0.9592,TD Ameritrade Index Reflects A Direct Response To The COVID-19 Pandemic,-53852600.0,-0.00595,0.118
+2020-04-09 00:00:00+00:00,408013b47061cf92,DIS,benzinga_news,Macroeconomic,8,0.9211,"Dow Jones Today, Futures Jump On Fed Details, Despite Unemployment Report; Oil Prices Rise; Disney Stock Jumps On Subscriber Gains",-429688018.0,-0.04745,0.0695
+2020-04-11 00:00:00+00:00,a359e7b06b38975c,,benzinga_news,Macroeconomic,9,0.811,The Fed Gone Wild!,-482365932.0,-0.05327,0.0606
+2020-04-13 00:00:00+00:00,89396395f5a353ae,BAC,benzinga_news,Macroeconomic,8,0.7301,Monday's Market Minute: OPEC Production Cut To Avoid A Glut,-429688018.0,-0.04745,0.0695
+2020-04-20 00:00:00+00:00,8c2fc8090b18d940,JNJ,benzinga_news,Geopolitical,9,0.889,How The COVID-19 Pandemic Could End,-53852600.0,-0.00595,0.118
+2020-04-28 00:00:00+00:00,fb533c703815c791,AMZN,benzinga_news,Regulatory/Legal,9,0.9993,"Amazon May Have Violated Labor And Whistleblower Laws, New York Preliminary Investigation Says",-70986583.0,-0.00784,0.1158
+2020-05-08 00:00:00+00:00,6b0e8a27980ab591,,benzinga_news,Macroeconomic,9,0.9242,US indices are higher for the session after US unemployment figures came in below consensus estimates. Equities have been strong this week amid a rebound in oil prices and some US states easing lockdo,-482365932.0,-0.05327,0.0606
+2020-05-11 00:00:00+00:00,b65a98fdb8760203,,benzinga_news,Geopolitical,10,0.9655,"Iran Fires Missile on Own Ship During Training Exercise, Killing 19 Sailors, Wounding 15",-59368557.0,-0.00656,0.1173
+2020-05-12 00:00:00+00:00,8eaabf49e672ab12,AMZN,benzinga_news,Regulatory/Legal,8,0.9798,"Amazon Shares Unaffected Amid Report Coalition Of 13 US Attorney Generals Have Asked Co. To Provide Data About Infections, Deaths Among Its Workers, Evidence Co Is In Compliance With State Paid Sick L",-63140770.0,-0.00697,0.1168
+2020-05-14 00:00:00+00:00,6282e3c6d8cf5499,,benzinga_news,Macroeconomic,8,0.9707,US indices are lower for the session on continued weakness following US unemployment data as well as cautious outlook from the WHO. Stocks Moved lower on Wednesday after US Fed Chair Powell warned of ,-429688018.0,-0.04745,0.0695
+2020-05-15 00:00:00+00:00,b82146675b1bea45,GOOGL,benzinga_news,Regulatory/Legal,9,0.9996,Google Shares Tumble On Reports Of Imminent Antitrust Lawsuit,-70986583.0,-0.00784,0.1158
+2020-05-19 00:00:00+00:00,e209a58ae55acd55,NVDA,benzinga_news,Regulatory/Legal,8,0.9151,Nvidia Investors Accuse Chipmaker Of Misrepresenting $1B In Crypto Revenue In Lawsuit,-63140770.0,-0.00697,0.1168
+2020-05-28 00:00:00+00:00,8a8056e5d5b021ee,GOOGL,benzinga_news,Regulatory/Legal,8,0.9996,Arizona Alleges Consumer Fraud In Lawsuit Against Google,-63140770.0,-0.00697,0.1168
+2020-05-29 00:00:00+00:00,c5a4ad06e88788ef,GOOGL,benzinga_news,Regulatory/Legal,9,0.9966,"Fitbit Shares Fall To Session Low As Hearing MLEX Reporting Google's Offer Is Under Probe By Texas Attorney General, Other States",-70986583.0,-0.00784,0.1158
+2020-06-02 00:00:00+00:00,7f4aee824fa6b351,,benzinga_news,Geopolitical,9,0.651,"Tropical Storm Cristobal Has Formed In The Gulf Of Mexico, Expected To Move North Next Week",-53852600.0,-0.00595,0.118
+2020-06-10 14:22:11+00:00,c295293f9b3d4894,BAC,benzinga_news,Macroeconomic,8,0.9861,Shares of several financial services companies are trading lower as markets sell off following recent strength and as investors await today's Federal Reserve decision. UPDATE: Equities spiked followin,-429688018.0,-0.04745,0.0695
+2026-10-06 07:45:00+00:00,97038c899b1d7ce2,,gdelt,Macroeconomic,9,0.9584,IMF warns debt-financed tax cuts increase global interest rates,-482365932.0,-0.05327,0.0606
+2026-10-06 07:45:00+00:00,4826b58b19af183a,,gdelt,Regulatory/Legal,9,0.9552,South Korea orders emergency probe after AI-powered cyberattacks target major banks,-70986583.0,-0.00784,0.1158

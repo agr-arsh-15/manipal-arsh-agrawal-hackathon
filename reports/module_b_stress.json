@@ -1,0 +1,1079 @@
+{
+  "portfolio": {
+    "positions": 144,
+    "by_asset_class": {
+      "Bond": {
+        "count": 45.0,
+        "sum": 2944800000.0
+      },
+      "Derivative": {
+        "count": 39.0,
+        "sum": 5388100000.0
+      },
+      "Loan": {
+        "count": 60.0,
+        "sum": 6151100000.0
+      }
+    }
+  },
+  "trigger_rule": {
+    "min_impact": 8,
+    "event_types": [
+      "Geopolitical",
+      "Macroeconomic",
+      "Credit Event",
+      "Operational/Supply-chain",
+      "Regulatory/Legal"
+    ],
+    "max_sentiment": 0.0,
+    "min_event_confidence": 0.6
+  },
+  "reference_scenarios_at_impact": 9,
+  "reference_scenarios": {
+    "Geopolitical": {
+      "shock": {
+        "event_type": "Geopolitical",
+        "severity": 0.9,
+        "narrative": "Armed conflict / sanctions shock: risk-off equities, flight to quality, commodity spike.",
+        "equity": -0.108,
+        "rates_bp": -22.5,
+        "ig_spread_bp": 54.0,
+        "hy_spread_bp": 198.0,
+        "fx_usd": 0.045000000000000005,
+        "commodity": 0.225,
+        "pd_multiplier": {
+          "all": 1.3599999999999999,
+          "Energy": 1.18,
+          "Industrials": 1.7200000000000002,
+          "Consumer Discretionary": 1.54
+        }
+      },
+      "portfolio_value_before": 9055243446.0,
+      "portfolio_value_after": 9001390846.0,
+      "total_pnl": -53852600.0,
+      "pnl_pct_of_value": -0.00595,
+      "pnl_by_asset_class": {
+        "Bond": -114452372.0,
+        "Derivative": 68464462.0,
+        "Loan": -7864689.0
+      },
+      "pnl_by_sector": {
+        "Real Estate": -46920646.0,
+        "Energy": -29526492.0,
+        "Utilities": -20413117.0,
+        "Healthcare": -19823299.0,
+        "Technology": -8710846.0,
+        "Consumer Discretionary": -4617132.0,
+        "Industrials": -2568695.0,
+        "Financials": -665904.0,
+        "Sovereign": 10929069.0,
+        "Markets": 68464462.0
+      },
+      "ecl_before": 22942462.0,
+      "ecl_after": 30807151.0,
+      "loans_moved_to_stage2": 0,
+      "rwa_before": 7741492238.0,
+      "rwa_after": 7741492238.0,
+      "cet1_ratio_before": 0.125,
+      "cet1_ratio_after": 0.118,
+      "cet1_minimum_with_buffer": 0.07,
+      "breaches_buffer": false,
+      "top_losses": [
+        {
+          "position_id": "DV-015",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-05",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 311600000.0,
+          "pnl": -33652800.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-045",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-045",
+          "sector": "Real Estate",
+          "rating": "B",
+          "notional": 106600000.0,
+          "pnl": -31654799.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-019",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-03",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 241500000.0,
+          "pnl": -26082000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-032",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-032",
+          "sector": "Energy",
+          "rating": "B",
+          "notional": 54600000.0,
+          "pnl": -15505062.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-018",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-03",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 106500000.0,
+          "pnl": -11502000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-029",
+          "asset_class": "Derivative",
+          "instrument": "FX forward (short USD)",
+          "counterparty": "Dealer-08",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 214300000.0,
+          "pnl": -9643500.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-017",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-02",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 87400000.0,
+          "pnl": -9439200.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-016",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-08",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 80300000.0,
+          "pnl": -8672400.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-041",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-041",
+          "sector": "Healthcare",
+          "rating": "B",
+          "notional": 62200000.0,
+          "pnl": -8662982.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-004",
+          "asset_class": "Derivative",
+          "instrument": "Interest rate swap (pay fixed)",
+          "counterparty": "Dealer-03",
+          "sector": "Markets",
+          "rating": "AA",
+          "notional": 363800000.0,
+          "pnl": -7776225.0,
+          "stressed_rating": null,
+          "stage_after": null
+        }
+      ]
+    },
+    "Macroeconomic": {
+      "shock": {
+        "event_type": "Macroeconomic",
+        "severity": 0.9,
+        "narrative": "Hawkish policy surprise: +200bp rates, equity drawdown, wider credit spreads.",
+        "equity": -0.09000000000000001,
+        "rates_bp": 180.0,
+        "ig_spread_bp": 45.0,
+        "hy_spread_bp": 135.0,
+        "fx_usd": 0.027,
+        "commodity": -0.045000000000000005,
+        "pd_multiplier": {
+          "all": 1.27,
+          "Real Estate": 1.9,
+          "Consumer Discretionary": 1.45
+        }
+      },
+      "portfolio_value_before": 9055243446.0,
+      "portfolio_value_after": 8572877514.0,
+      "total_pnl": -482365932.0,
+      "pnl_pct_of_value": -0.05327,
+      "pnl_by_asset_class": {
+        "Bond": -524290314.0,
+        "Derivative": 72800795.0,
+        "Loan": -30876414.0
+      },
+      "pnl_by_sector": {
+        "Real Estate": -157669694.0,
+        "Sovereign": -87351484.0,
+        "Energy": -86193972.0,
+        "Utilities": -84845563.0,
+        "Healthcare": -81962100.0,
+        "Consumer Discretionary": -28545918.0,
+        "Technology": -17878625.0,
+        "Industrials": -7228562.0,
+        "Financials": -3490809.0,
+        "Markets": 72800795.0
+      },
+      "ecl_before": 22942462.0,
+      "ecl_after": 53818876.0,
+      "loans_moved_to_stage2": 5,
+      "rwa_before": 7741492238.0,
+      "rwa_after": 8008342238.0,
+      "cet1_ratio_before": 0.125,
+      "cet1_ratio_after": 0.0606,
+      "cet1_minimum_with_buffer": 0.07,
+      "breaches_buffer": true,
+      "top_losses": [
+        {
+          "position_id": "BD-045",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-045",
+          "sector": "Real Estate",
+          "rating": "B",
+          "notional": 106600000.0,
+          "pnl": -56734163.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-022",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-022",
+          "sector": "Healthcare",
+          "rating": "A",
+          "notional": 91400000.0,
+          "pnl": -36252280.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-016",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-016",
+          "sector": "Utilities",
+          "rating": "A",
+          "notional": 81400000.0,
+          "pnl": -33835673.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-017",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-017",
+          "sector": "Real Estate",
+          "rating": "BBB",
+          "notional": 81400000.0,
+          "pnl": -31184778.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-015",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-05",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 311600000.0,
+          "pnl": -28044000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-032",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-032",
+          "sector": "Energy",
+          "rating": "B",
+          "notional": 54600000.0,
+          "pnl": -27789417.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-014",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-014",
+          "sector": "Consumer Discretionary",
+          "rating": "A",
+          "notional": 74400000.0,
+          "pnl": -27548205.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-019",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-03",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 241500000.0,
+          "pnl": -21735000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-025",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-025",
+          "sector": "Utilities",
+          "rating": "BBB",
+          "notional": 113800000.0,
+          "pnl": -20280575.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-031",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-031",
+          "sector": "Healthcare",
+          "rating": "A",
+          "notional": 52600000.0,
+          "pnl": -18998994.0,
+          "stressed_rating": null,
+          "stage_after": null
+        }
+      ]
+    },
+    "Credit Event": {
+      "shock": {
+        "event_type": "Credit Event",
+        "severity": 0.9,
+        "narrative": "Large default / downgrade wave: credit spreads gap wider, financials under pressure.",
+        "equity": -0.07200000000000001,
+        "rates_bp": -13.5,
+        "ig_spread_bp": 90.0,
+        "hy_spread_bp": 315.0,
+        "fx_usd": 0.018000000000000002,
+        "commodity": -0.027,
+        "pd_multiplier": {
+          "all": 1.7200000000000002,
+          "Financials": 2.35,
+          "Real Estate": 2.08
+        }
+      },
+      "portfolio_value_before": 9055243446.0,
+      "portfolio_value_after": 8739604807.0,
+      "total_pnl": -315638639.0,
+      "pnl_pct_of_value": -0.03486,
+      "pnl_by_asset_class": {
+        "Bond": -236907920.0,
+        "Derivative": -41779302.0,
+        "Loan": -36951416.0
+      },
+      "pnl_by_sector": {
+        "Real Estate": -104500061.0,
+        "Energy": -58251839.0,
+        "Markets": -41779302.0,
+        "Utilities": -41582879.0,
+        "Healthcare": -40789607.0,
+        "Technology": -15580769.0,
+        "Consumer Discretionary": -10384013.0,
+        "Financials": -5590343.0,
+        "Industrials": -3736995.0,
+        "Sovereign": 6557171.0
+      },
+      "ecl_before": 22942462.0,
+      "ecl_after": 59893878.0,
+      "loans_moved_to_stage2": 12,
+      "rwa_before": 7741492238.0,
+      "rwa_after": 7801092238.0,
+      "cet1_ratio_before": 0.125,
+      "cet1_ratio_after": 0.0836,
+      "cet1_minimum_with_buffer": 0.07,
+      "breaches_buffer": false,
+      "top_losses": [
+        {
+          "position_id": "BD-045",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-045",
+          "sector": "Real Estate",
+          "rating": "B",
+          "notional": 106600000.0,
+          "pnl": -54310307.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-032",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-032",
+          "sector": "Energy",
+          "rating": "B",
+          "notional": 54600000.0,
+          "pnl": -26602164.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-015",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-05",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 311600000.0,
+          "pnl": -22435200.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-019",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-03",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 241500000.0,
+          "pnl": -17388000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-041",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-041",
+          "sector": "Healthcare",
+          "rating": "B",
+          "notional": 62200000.0,
+          "pnl": -14872858.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-022",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-022",
+          "sector": "Healthcare",
+          "rating": "A",
+          "notional": 91400000.0,
+          "pnl": -12344620.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-020",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-020",
+          "sector": "Energy",
+          "rating": "B",
+          "notional": 85500000.0,
+          "pnl": -11563448.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-016",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-016",
+          "sector": "Utilities",
+          "rating": "A",
+          "notional": 81400000.0,
+          "pnl": -11522562.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-017",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-017",
+          "sector": "Real Estate",
+          "rating": "BBB",
+          "notional": 81400000.0,
+          "pnl": -10619235.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-005",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-005",
+          "sector": "Utilities",
+          "rating": "BB",
+          "notional": 57400000.0,
+          "pnl": -10071510.0,
+          "stressed_rating": null,
+          "stage_after": null
+        }
+      ]
+    },
+    "Operational/Supply-chain": {
+      "shock": {
+        "event_type": "Operational/Supply-chain",
+        "severity": 0.9,
+        "narrative": "Supply-chain disruption: industrial and consumer borrowers hit, input costs rise.",
+        "equity": -0.045000000000000005,
+        "rates_bp": 9.0,
+        "ig_spread_bp": 22.5,
+        "hy_spread_bp": 81.0,
+        "fx_usd": 0.0,
+        "commodity": 0.108,
+        "pd_multiplier": {
+          "all": 1.09,
+          "Industrials": 1.63,
+          "Consumer Discretionary": 1.45,
+          "Technology": 1.27
+        }
+      },
+      "portfolio_value_before": 9055243446.0,
+      "portfolio_value_after": 9005984398.0,
+      "total_pnl": -49259048.0,
+      "pnl_pct_of_value": -0.00544,
+      "pnl_by_asset_class": {
+        "Bond": -88050552.0,
+        "Derivative": 43470556.0,
+        "Loan": -4679052.0
+      },
+      "pnl_by_sector": {
+        "Real Estate": -28957999.0,
+        "Energy": -18064121.0,
+        "Utilities": -14820283.0,
+        "Healthcare": -14130864.0,
+        "Technology": -4977286.0,
+        "Consumer Discretionary": -4510089.0,
+        "Sovereign": -4370997.0,
+        "Industrials": -2396907.0,
+        "Financials": -501058.0,
+        "Markets": 43470556.0
+      },
+      "ecl_before": 22942462.0,
+      "ecl_after": 27621514.0,
+      "loans_moved_to_stage2": 0,
+      "rwa_before": 7741492238.0,
+      "rwa_after": 7741492238.0,
+      "cet1_ratio_before": 0.125,
+      "cet1_ratio_after": 0.1186,
+      "cet1_minimum_with_buffer": 0.07,
+      "breaches_buffer": false,
+      "top_losses": [
+        {
+          "position_id": "BD-045",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-045",
+          "sector": "Real Estate",
+          "rating": "B",
+          "notional": 106600000.0,
+          "pnl": -16247615.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-015",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-05",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 311600000.0,
+          "pnl": -14022000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-019",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-03",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 241500000.0,
+          "pnl": -10867500.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-032",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-032",
+          "sector": "Energy",
+          "rating": "B",
+          "notional": 54600000.0,
+          "pnl": -7958350.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-022",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-022",
+          "sector": "Healthcare",
+          "rating": "A",
+          "notional": 91400000.0,
+          "pnl": -5085430.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-018",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-03",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 106500000.0,
+          "pnl": -4792500.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-016",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-016",
+          "sector": "Utilities",
+          "rating": "A",
+          "notional": 81400000.0,
+          "pnl": -4746884.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-041",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-041",
+          "sector": "Healthcare",
+          "rating": "B",
+          "notional": 62200000.0,
+          "pnl": -4444520.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-017",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-017",
+          "sector": "Real Estate",
+          "rating": "BBB",
+          "notional": 81400000.0,
+          "pnl": -4374674.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-017",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-02",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 87400000.0,
+          "pnl": -3933000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        }
+      ]
+    },
+    "Regulatory/Legal": {
+      "shock": {
+        "event_type": "Regulatory/Legal",
+        "severity": 0.9,
+        "narrative": "Sweeping regulatory action / litigation: sector-specific credit and equity repricing.",
+        "equity": -0.036000000000000004,
+        "rates_bp": 0.0,
+        "ig_spread_bp": 18.0,
+        "hy_spread_bp": 54.0,
+        "fx_usd": 0.0,
+        "commodity": 0.0,
+        "pd_multiplier": {
+          "all": 1.045,
+          "Financials": 1.3599999999999999,
+          "Technology": 1.3599999999999999,
+          "Healthcare": 1.27
+        }
+      },
+      "portfolio_value_before": 9055243446.0,
+      "portfolio_value_after": 8984256863.0,
+      "total_pnl": -70986583.0,
+      "pnl_pct_of_value": -0.00784,
+      "pnl_by_asset_class": {
+        "Bond": -49081748.0,
+        "Derivative": -18840407.0,
+        "Loan": -3064428.0
+      },
+      "pnl_by_sector": {
+        "Markets": -18840407.0,
+        "Real Estate": -17044174.0,
+        "Energy": -10525290.0,
+        "Healthcare": -9115825.0,
+        "Utilities": -8625105.0,
+        "Technology": -3507760.0,
+        "Consumer Discretionary": -2270984.0,
+        "Industrials": -576891.0,
+        "Financials": -480149.0,
+        "Sovereign": 0.0
+      },
+      "ecl_before": 22942462.0,
+      "ecl_after": 26006890.0,
+      "loans_moved_to_stage2": 0,
+      "rwa_before": 7741492238.0,
+      "rwa_after": 7741492238.0,
+      "cet1_ratio_before": 0.125,
+      "cet1_ratio_after": 0.1158,
+      "cet1_minimum_with_buffer": 0.07,
+      "breaches_buffer": false,
+      "top_losses": [
+        {
+          "position_id": "DV-015",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-05",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 311600000.0,
+          "pnl": -11217600.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-045",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-045",
+          "sector": "Real Estate",
+          "rating": "B",
+          "notional": 106600000.0,
+          "pnl": -9752203.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-019",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-03",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 241500000.0,
+          "pnl": -8694000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-032",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-032",
+          "sector": "Energy",
+          "rating": "B",
+          "notional": 54600000.0,
+          "pnl": -4776787.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-018",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-03",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 106500000.0,
+          "pnl": -3834000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-017",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-02",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 87400000.0,
+          "pnl": -3146400.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-022",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-022",
+          "sector": "Healthcare",
+          "rating": "A",
+          "notional": 91400000.0,
+          "pnl": -2906363.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-016",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-08",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 80300000.0,
+          "pnl": -2890800.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-016",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-016",
+          "sector": "Utilities",
+          "rating": "A",
+          "notional": 81400000.0,
+          "pnl": -2712900.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-041",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-041",
+          "sector": "Healthcare",
+          "rating": "B",
+          "notional": 62200000.0,
+          "pnl": -2667208.0,
+          "stressed_rating": null,
+          "stage_after": null
+        }
+      ]
+    }
+  },
+  "historical_replay": {
+    "signals_scanned": 27669,
+    "stress_tests_triggered": 162,
+    "by_event_type": {
+      "Regulatory/Legal": 72,
+      "Macroeconomic": 51,
+      "Geopolitical": 26,
+      "Operational/Supply-chain": 12,
+      "Credit Event": 1
+    },
+    "worst_event": {
+      "shock": {
+        "event_type": "Macroeconomic",
+        "severity": 1.0,
+        "narrative": "Hawkish policy surprise: +200bp rates, equity drawdown, wider credit spreads.",
+        "equity": -0.1,
+        "rates_bp": 200.0,
+        "ig_spread_bp": 50.0,
+        "hy_spread_bp": 150.0,
+        "fx_usd": 0.03,
+        "commodity": -0.05,
+        "pd_multiplier": {
+          "all": 1.3,
+          "Real Estate": 2.0,
+          "Consumer Discretionary": 1.5
+        }
+      },
+      "portfolio_value_before": 9055243446.0,
+      "portfolio_value_after": 8519160050.0,
+      "total_pnl": -536083396.0,
+      "pnl_pct_of_value": -0.0592,
+      "pnl_by_asset_class": {
+        "Bond": -582433598.0,
+        "Derivative": 81204428.0,
+        "Loan": -34854225.0
+      },
+      "pnl_by_sector": {
+        "Real Estate": -175547566.0,
+        "Sovereign": -97048308.0,
+        "Energy": -95827553.0,
+        "Utilities": -94259098.0,
+        "Healthcare": -91061100.0,
+        "Consumer Discretionary": -31724557.0,
+        "Technology": -19884912.0,
+        "Industrials": -8050380.0,
+        "Financials": -3884350.0,
+        "Markets": 81204428.0
+      },
+      "ecl_before": 22942462.0,
+      "ecl_after": 57796687.0,
+      "loans_moved_to_stage2": 8,
+      "rwa_before": 7741492238.0,
+      "rwa_after": 8008342238.0,
+      "cet1_ratio_before": 0.125,
+      "cet1_ratio_after": 0.0539,
+      "cet1_minimum_with_buffer": 0.07,
+      "breaches_buffer": true,
+      "top_losses": [
+        {
+          "position_id": "BD-045",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-045",
+          "sector": "Real Estate",
+          "rating": "B",
+          "notional": 106600000.0,
+          "pnl": -63015059.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-022",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-022",
+          "sector": "Healthcare",
+          "rating": "A",
+          "notional": 91400000.0,
+          "pnl": -40269944.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-016",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-016",
+          "sector": "Utilities",
+          "rating": "A",
+          "notional": 81400000.0,
+          "pnl": -37585051.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-017",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-017",
+          "sector": "Real Estate",
+          "rating": "BBB",
+          "notional": 81400000.0,
+          "pnl": -34640725.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-015",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-05",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 311600000.0,
+          "pnl": -31160000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-032",
+          "asset_class": "Bond",
+          "instrument": "Corporate HY",
+          "counterparty": "Issuer-032",
+          "sector": "Energy",
+          "rating": "B",
+          "notional": 54600000.0,
+          "pnl": -30865929.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-014",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-014",
+          "sector": "Consumer Discretionary",
+          "rating": "A",
+          "notional": 74400000.0,
+          "pnl": -30601810.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "DV-019",
+          "asset_class": "Derivative",
+          "instrument": "Equity index total return swap",
+          "counterparty": "Dealer-03",
+          "sector": "Markets",
+          "rating": "A",
+          "notional": 241500000.0,
+          "pnl": -24150000.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-025",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-025",
+          "sector": "Utilities",
+          "rating": "BBB",
+          "notional": 113800000.0,
+          "pnl": -22531265.0,
+          "stressed_rating": null,
+          "stage_after": null
+        },
+        {
+          "position_id": "BD-031",
+          "asset_class": "Bond",
+          "instrument": "Corporate IG",
+          "counterparty": "Issuer-031",
+          "sector": "Healthcare",
+          "rating": "A",
+          "notional": 52600000.0,
+          "pnl": -21104836.0,
+          "stressed_rating": null,
+          "stage_after": null
+        }
+      ],
+      "trigger_signal": {
+        "signal_id": "1f9c70d0f6117cee",
+        "timestamp": "2018-10-15T00:00:00+00:00",
+        "text_excerpt": "US Federal Government Posts Widest Deficit Since 2012",
+        "ticker": null,
+        "event_type": "Macroeconomic",
+        "event_confidence": 0.6822,
+        "impact_score": 10,
+        "impact_confidence": 0.3665,
+        "sentiment_score": -0.3052
+      }
+    }
+  }
+}

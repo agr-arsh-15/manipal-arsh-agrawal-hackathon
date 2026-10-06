@@ -1,0 +1,530 @@
+{
+  "splits": {
+    "train_end": "2019-07-01",
+    "val_end": "2019-11-01"
+  },
+  "test": {
+    "baseline": {
+      "sentiment": {
+        "n": 730,
+        "mae": 0.3798,
+        "pearson_r": 0.5811,
+        "macro_f1": 0.6182,
+        "accuracy": 0.6863
+      },
+      "event_type": {
+        "n": 2839,
+        "macro_f1": 0.3963,
+        "weighted_f1": 0.767,
+        "accuracy": 0.7978,
+        "per_class": {
+          "Geopolitical": {
+            "precision": 1.0,
+            "recall": 0.158,
+            "f1": 0.273,
+            "support": 19
+          },
+          "Macroeconomic": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 32
+          },
+          "Credit Event": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 11
+          },
+          "Merger/Acquisition": {
+            "precision": 0.956,
+            "recall": 0.609,
+            "f1": 0.744,
+            "support": 320
+          },
+          "Product Launch": {
+            "precision": 0.868,
+            "recall": 0.319,
+            "f1": 0.466,
+            "support": 207
+          },
+          "Regulatory/Legal": {
+            "precision": 1.0,
+            "recall": 0.207,
+            "f1": 0.343,
+            "support": 87
+          },
+          "Earnings/Guidance": {
+            "precision": 0.969,
+            "recall": 0.861,
+            "f1": 0.912,
+            "support": 758
+          },
+          "Operational/Supply-chain": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 57
+          },
+          "Other/None": {
+            "precision": 0.714,
+            "recall": 0.987,
+            "f1": 0.828,
+            "support": 1348
+          }
+        },
+        "labels": [
+          "Geopolitical",
+          "Macroeconomic",
+          "Credit Event",
+          "Merger/Acquisition",
+          "Product Launch",
+          "Regulatory/Legal",
+          "Earnings/Guidance",
+          "Operational/Supply-chain",
+          "Other/None"
+        ],
+        "confusion": [
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            16
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            31
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            9
+          ],
+          [
+            0,
+            0,
+            0,
+            195,
+            0,
+            0,
+            4,
+            0,
+            121
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            66,
+            0,
+            6,
+            0,
+            135
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            18,
+            1,
+            0,
+            67
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            653,
+            0,
+            101
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            1,
+            0,
+            54
+          ],
+          [
+            0,
+            0,
+            0,
+            7,
+            5,
+            0,
+            6,
+            0,
+            1330
+          ]
+        ]
+      },
+      "impact_score": {
+        "n": 7114,
+        "mae": 2.5904,
+        "spearman_rho": 0.0759,
+        "high_impact_precision": 0.4365,
+        "high_impact_recall": 0.0908,
+        "high_impact_base_rate": 0.3035
+      },
+      "impact_score_company": {
+        "n": 6421,
+        "mae": 2.5711,
+        "spearman_rho": 0.0807,
+        "high_impact_precision": 0.4572,
+        "high_impact_recall": 0.0938,
+        "high_impact_base_rate": 0.3104
+      },
+      "impact_score_market": {
+        "n": 693,
+        "mae": 2.7691,
+        "spearman_rho": 0.0288,
+        "high_impact_precision": 0.225,
+        "high_impact_recall": 0.0542,
+        "high_impact_base_rate": 0.2395
+      }
+    },
+    "transformer": {
+      "sentiment": {
+        "n": 730,
+        "mae": 0.1715,
+        "pearson_r": 0.8373,
+        "macro_f1": 0.8313,
+        "accuracy": 0.8452
+      },
+      "event_type": {
+        "n": 2839,
+        "macro_f1": 0.7827,
+        "weighted_f1": 0.9023,
+        "accuracy": 0.901,
+        "per_class": {
+          "Geopolitical": {
+            "precision": 0.528,
+            "recall": 1.0,
+            "f1": 0.691,
+            "support": 19
+          },
+          "Macroeconomic": {
+            "precision": 0.61,
+            "recall": 0.781,
+            "f1": 0.685,
+            "support": 32
+          },
+          "Credit Event": {
+            "precision": 0.5,
+            "recall": 0.909,
+            "f1": 0.645,
+            "support": 11
+          },
+          "Merger/Acquisition": {
+            "precision": 0.88,
+            "recall": 0.919,
+            "f1": 0.899,
+            "support": 320
+          },
+          "Product Launch": {
+            "precision": 0.806,
+            "recall": 0.821,
+            "f1": 0.813,
+            "support": 207
+          },
+          "Regulatory/Legal": {
+            "precision": 0.839,
+            "recall": 0.897,
+            "f1": 0.867,
+            "support": 87
+          },
+          "Earnings/Guidance": {
+            "precision": 0.949,
+            "recall": 0.989,
+            "f1": 0.969,
+            "support": 758
+          },
+          "Operational/Supply-chain": {
+            "precision": 0.559,
+            "recall": 0.579,
+            "f1": 0.569,
+            "support": 57
+          },
+          "Other/None": {
+            "precision": 0.939,
+            "recall": 0.875,
+            "f1": 0.906,
+            "support": 1348
+          }
+        },
+        "labels": [
+          "Geopolitical",
+          "Macroeconomic",
+          "Credit Event",
+          "Merger/Acquisition",
+          "Product Launch",
+          "Regulatory/Legal",
+          "Earnings/Guidance",
+          "Operational/Supply-chain",
+          "Other/None"
+        ],
+        "confusion": [
+          [
+            19,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            25,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            6
+          ],
+          [
+            0,
+            1,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            294,
+            1,
+            2,
+            4,
+            0,
+            17
+          ],
+          [
+            1,
+            0,
+            0,
+            2,
+            170,
+            1,
+            9,
+            0,
+            24
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            2,
+            78,
+            0,
+            1,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            750,
+            1,
+            6
+          ],
+          [
+            4,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            33,
+            18
+          ],
+          [
+            9,
+            15,
+            10,
+            37,
+            37,
+            12,
+            25,
+            24,
+            1179
+          ]
+        ]
+      },
+      "impact_score": {
+        "n": 7114,
+        "mae": 3.0254,
+        "spearman_rho": 0.1112,
+        "high_impact_precision": 0.3801,
+        "high_impact_recall": 0.3201,
+        "high_impact_base_rate": 0.3035
+      },
+      "impact_score_company": {
+        "n": 6421,
+        "mae": 3.0073,
+        "spearman_rho": 0.1241,
+        "high_impact_precision": 0.4012,
+        "high_impact_recall": 0.3332,
+        "high_impact_base_rate": 0.3104
+      },
+      "impact_score_market": {
+        "n": 693,
+        "mae": 3.1934,
+        "spearman_rho": 0.0015,
+        "high_impact_precision": 0.1656,
+        "high_impact_recall": 0.1627,
+        "high_impact_base_rate": 0.2395
+      }
+    }
+  },
+  "hand_labelled": {
+    "status": "pending",
+    "labelled_rows": 0,
+    "note": "Run `streamlit run scripts/label_helper.py` to label the 268-row set."
+  },
+  "latency": {
+    "baseline_cpu": {
+      "single_p50_ms": 1.25,
+      "single_p95_ms": 1.47,
+      "batch_throughput_per_s": 23019.6
+    },
+    "transformer_mps": {
+      "single_p50_ms": 9.45,
+      "single_p95_ms": 12.24,
+      "batch_throughput_per_s": 912.2
+    },
+    "transformer_cpu": {
+      "single_p50_ms": 11.76,
+      "single_p95_ms": 12.13,
+      "batch_throughput_per_s": 579.1
+    }
+  },
+  "impact_calibration": [
+    {
+      "predicted_bucket": 1,
+      "realised_mean": 5.36,
+      "n": 673
+    },
+    {
+      "predicted_bucket": 2,
+      "realised_mean": 5.441,
+      "n": 706
+    },
+    {
+      "predicted_bucket": 3,
+      "realised_mean": 5.191,
+      "n": 738
+    },
+    {
+      "predicted_bucket": 4,
+      "realised_mean": 5.188,
+      "n": 966
+    },
+    {
+      "predicted_bucket": 5,
+      "realised_mean": 5.563,
+      "n": 737
+    },
+    {
+      "predicted_bucket": 6,
+      "realised_mean": 5.795,
+      "n": 732
+    },
+    {
+      "predicted_bucket": 7,
+      "realised_mean": 5.794,
+      "n": 744
+    },
+    {
+      "predicted_bucket": 8,
+      "realised_mean": 6.14,
+      "n": 749
+    },
+    {
+      "predicted_bucket": 9,
+      "realised_mean": 5.891,
+      "n": 642
+    },
+    {
+      "predicted_bucket": 10,
+      "realised_mean": 6.496,
+      "n": 427
+    }
+  ],
+  "transformer_checkpoint": {
+    "base_encoder": "distilroberta-base",
+    "event_labels": [
+      "Geopolitical",
+      "Macroeconomic",
+      "Credit Event",
+      "Merger/Acquisition",
+      "Product Launch",
+      "Regulatory/Legal",
+      "Earnings/Guidance",
+      "Operational/Supply-chain",
+      "Other/None"
+    ],
+    "max_length": 64,
+    "best_epoch": 4,
+    "model_version": "multitask-distilroberta-base-v1.0.0",
+    "val_metrics": {
+      "sentiment_pearson": 0.8038825117872457,
+      "event_macro_f1": 0.7968081933164581,
+      "impact_spearman": 0.19341673042833576,
+      "composite": 0.5980358118440132
+    },
+    "impact_deciles": [
+      4.79394,
+      5.02652,
+      5.17221,
+      5.35835,
+      5.54902,
+      5.73865,
+      5.94033,
+      6.21659,
+      6.56831
+    ]
+  }
+}

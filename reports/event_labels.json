@@ -1,0 +1,69 @@
+{
+  "labelled_rows": 10554,
+  "total_rows": 24982,
+  "rule_vs_zeroshot_agreement": 0.4423,
+  "agreement_when_rule_fires": 0.7485,
+  "label_source_counts": {
+    "agree": 4668,
+    "default": 3885,
+    "zeroshot": 1328,
+    "rule": 673
+  },
+  "class_support_by_split": {
+    "train": {
+      "Other/None": 3759,
+      "Earnings/Guidance": 1244,
+      "Product Launch": 458,
+      "Merger/Acquisition": 408,
+      "Regulatory/Legal": 123,
+      "Geopolitical": 52,
+      "Macroeconomic": 41,
+      "Operational/Supply-chain": 39,
+      "Credit Event": 32
+    },
+    "val": {
+      "Other/None": 719,
+      "Earnings/Guidance": 476,
+      "Merger/Acquisition": 93,
+      "Regulatory/Legal": 89,
+      "Product Launch": 87,
+      "Geopolitical": 38,
+      "Macroeconomic": 29,
+      "Operational/Supply-chain": 18,
+      "Credit Event": 10
+    },
+    "test": {
+      "Other/None": 1348,
+      "Earnings/Guidance": 758,
+      "Merger/Acquisition": 320,
+      "Product Launch": 207,
+      "Regulatory/Legal": 87,
+      "Operational/Supply-chain": 57,
+      "Macroeconomic": 32,
+      "Geopolitical": 19,
+      "Credit Event": 11
+    }
+  },
+  "rule_class_distribution": {
+    "Other/None": 6642,
+    "Earnings/Guidance": 2427,
+    "Merger/Acquisition": 433,
+    "Product Launch": 392,
+    "Regulatory/Legal": 261,
+    "Macroeconomic": 129,
+    "Geopolitical": 121,
+    "Operational/Supply-chain": 75,
+    "Credit Event": 74
+  },
+  "final_class_distribution": {
+    "Other/None": 5826,
+    "Earnings/Guidance": 2478,
+    "Merger/Acquisition": 821,
+    "Product Launch": 752,
+    "Regulatory/Legal": 299,
+    "Operational/Supply-chain": 114,
+    "Geopolitical": 109,
+    "Macroeconomic": 102,
+    "Credit Event": 53
+  }
+}
