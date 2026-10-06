@@ -2,6 +2,7 @@ import hashlib
 import logging
 import math
 import os
+import threading
 import time
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Sequence
@@ -76,9 +77,13 @@ class RiskEngine:
             self.model = _BaselineBackend(baseline_dir)
             self.backend = "baseline"
         self.model_version = self.model.version
+        self._predict_lock = threading.Lock()
 
     def predict_raw(self, texts: Sequence[str]) -> Dict[str, np.ndarray]:
-        return self.model.predict(list(texts))
+        # One engine is shared across dashboard sessions; concurrent torch forward passes on
+        # the same model segfault the process, so inference is serialized.
+        with self._predict_lock:
+            return self.model.predict(list(texts))
 
     def analyze_documents(self, docs: Sequence[Document], batch_size: int = 64) -> List[Signal]:
         signals: List[Signal] = []

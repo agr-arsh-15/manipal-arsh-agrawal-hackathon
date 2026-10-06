@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
 import pytest
@@ -35,6 +36,14 @@ def test_multi_ticker_document_fans_out(engine):
     signals = engine.analyze_documents([doc])
     assert {s.ticker for s in signals} == {"MSFT", "NVDA"}
     assert all(s.timestamp == doc.published_at for s in signals)
+
+
+def test_concurrent_scoring_from_many_sessions(engine):
+    text = "Apple shares jump after iPhone revenue beats analyst estimates"
+    expected = engine.analyze_texts([text])[0].sentiment_score
+    with ThreadPoolExecutor(8) as pool:
+        scores = list(pool.map(lambda _: engine.analyze_texts([text])[0].sentiment_score, range(32)))
+    assert scores == [expected] * 32
 
 
 def test_store_roundtrip_and_filters(engine, tmp_path):

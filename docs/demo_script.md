@@ -14,6 +14,10 @@ python run.py api              # FastAPI on :8000 (in a second terminal)
 python run.py dashboard        # Streamlit on :8501
 ```
 
+The public deployment at https://manipal-arsh-agrawal-hackathon.streamlit.app/ runs the same code
+and the same transformer. Recording from it shows judges exactly what they will open. Load it once
+a few minutes before recording so it is awake.
+
 Optionally show the green CI badge (Windows, macOS, Ubuntu) on the GitHub page.
 
 Open `docs/presentation.pdf` in a second window for the opening and closing slides.
@@ -42,17 +46,22 @@ Open `docs/presentation.pdf` in a second window for the opening and closing slid
 
 ## 2:30 – 4:30 · Live engine (dashboard tab "Risk Engine")
 
-1. Click **Run engine** on the five default headlines and read the results:
-   - Russia invasion → Geopolitical, negative sentiment, high impact.
-   - Fed 75bp hike → Macroeconomic.
-   - Moody's downgrades Boeing to junk → Credit Event, linked to BA.
-   - Apple record → positive sentiment, linked to AAPL.
-   - $TSLA recall → Operational/Supply-chain, linked to TSLA.
-   - Point out the confidence columns, and that the impact score carries an uncertainty (σ).
+0. Start at the header: the four headline numbers, the one-line data flow, and the
+   "Evaluate this in 60 seconds" guide.
+1. Click **Score headlines** on the six default headlines and read the results:
+   - Microsoft beats and raises → Earnings/Guidance, strongly positive, linked to MSFT.
+   - Intel plunges on weak guidance → Earnings/Guidance, strongly negative, linked to INTC.
+   - US unemployment surges → Macroeconomic, negative, high impact.
+   - S&P cuts Ford to junk → Credit Event, negative.
+   - Factory fire halts a chip supplier → Operational/Supply-chain, negative.
+   - Disney to acquire Fox assets → Merger/Acquisition, linked to DIS.
+   - Point out the confidence columns, and that these are model predictions, not ground truth.
 2. Type one headline of your own, ideally today's news.
-3. Click **Fetch GDELT headlines** to score live global news from the GDELT raw feed.
-4. Scroll to the **signal stream explorer**. Filter to Credit Event with impact ≥ 7. Pick a ticker and
-   show sentiment plotted over its price.
+3. Click **Fetch GDELT headlines** to score live global news. If GDELT rate-limits the request,
+   the dashboard says it is replaying the saved snapshot instead.
+4. Scroll to the **signal stream explorer**. Read the coverage line (which source covers which
+   dates). Filter to Credit Event with impact ≥ 7, pick a ticker, show sentiment plotted over its
+   price, and use **Download filtered signals** to export the view.
 5. In the terminal, show the API working:
    ```bash
    curl -s 127.0.0.1:8000/health
@@ -74,29 +83,37 @@ Open `docs/presentation.pdf` in a second window for the opening and closing slid
 - Show the **weights-over-time** chart, which is the deliverable the problem statement asks for. Then
   inspect one stock to show its weight following its sentiment.
 - Move the λ slider live to show the trade-off between tilt strength, turnover and tracking error.
+  Point out the warning that the out-of-sample figures are no longer clean once parameters change,
+  then click **Reset to selected parameters**.
 
 ## 6:30 – 8:30 · Module B (tab "Module B · Stress Testing")
 
 1. Show the portfolio sunburst: loans, bonds and derivatives by sector.
-2. **Headline through the engine**: type *"Fed delivers surprise 100bp hike as inflation spirals"*. Show
-   the trigger rule firing (impact ≥ 8, a systemic event type, adverse sentiment and event confidence
-   ≥ 60%), or tick "run anyway". Mention that the historical replay fires about 6 stress tests a
-   month because same-day headlines on the same event type count once.
+2. **Headline through the engine**: the default headline, *"US Federal Government Posts Widest
+   Deficit Since 2012"*, has already been scored. Walk the trigger-gate table: a systemic event type,
+   impact ≥ 8, adverse sentiment and event confidence ≥ 60% all pass, so the label reads "Triggered
+   by the model". Then enter an earnings headline to show which gate fails, and tick the what-if box
+   to show a forced run labelled as such. Mention that the historical replay fires about 6 stress
+   tests a month because same-day headlines on the same event type count once.
 3. Read the before/after view:
    - The P&L waterfall by asset class: bonds lose on duration and spreads, while pay-fixed swaps gain.
    - Loans: ECL rises and some loans move to IFRS 9 Stage 2.
    - The CET1 ratio before and after, against the 7% line (4.5% minimum + 2.5% buffer).
 4. Switch to **Manual scenario → Credit Event at impact 9**. Show the Stage 2 migrations and the CDS
    hedge offset.
-5. Switch to **Historical triggered signal** and replay a real headline from the stream.
+5. Switch to **Historical triggered signal**: 162 replayed triggers, 51 of which breach the CET1
+   buffer (marked x). Replay one and download its result as JSON.
 
 ## 8:30 – 9:20 · Model performance (tab "Model Performance")
 
-- Baseline vs transformer on the same held-out test split, task by task.
-- The impact calibration chart: higher predicted buckets should realise higher impact.
-- Latency: p50 per headline on MPS and on CPU.
-- Hand-labelled set: be explicit that event labels are teacher labels, and that the hand-labelled set
-  is the independent check.
+- The model card: where the model is strong, where it is weak, and what it is appropriate for.
+- Baseline vs transformer on the same held-out test split, metric by metric, with the
+  better/worse column.
+- The impact calibration chart: the slope is upward but flat, so impact is a relative priority,
+  not an absolute severity forecast.
+- Latency: median per headline on MPS and on CPU.
+- Be explicit that event labels are teacher labels and that the 268-row hand-labelled check is
+  still being labelled.
 
 ## 9:20 – 10:00 · Impact and limitations (slides 6–7)
 

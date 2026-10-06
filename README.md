@@ -6,8 +6,26 @@ Tested on Windows, macOS and Ubuntu (Python 3.11) on every push.
 **Candidate Name:** Arsh Agrawal  
 **College Email ID:** ARSH.23FE10CDS00069@muj.manipal.edu  
 **College / Campus:** Manipal University Jaipur  
+**Live Dashboard:** [manipal-arsh-agrawal-hackathon.streamlit.app](https://manipal-arsh-agrawal-hackathon.streamlit.app/) (public, no login; the first load after a quiet period can take about a minute while the app wakes up)  
 **Demo Video Link:** _to be added — unlisted YouTube link (script in [`docs/demo_script.md`](docs/demo_script.md))_  
 **Slide Deck Link:** [docs/presentation.pdf](https://github.com/agr-arsh-15/manipal-arsh-agrawal-hackathon/blob/main/docs/presentation.pdf) (7 slides, built reproducibly by `scripts/build_deck.py`)
+
+### Evaluate it in 60 seconds
+
+Open the [live dashboard](https://manipal-arsh-agrawal-hackathon.streamlit.app/), then:
+
+1. **Risk Engine:** click **Score headlines**. Six curated headlines are scored. Microsoft and Intel
+   are tagged as earnings news with opposite sentiment, the Ford downgrade as a Credit Event, the
+   factory fire as Operational/Supply-chain, and Disney–Fox as M&A, each linked to its ticker.
+   Replace them with any headline of your own.
+2. **Module A · Index Rebalancer:** read the out-of-sample metrics next to the "Honest read" note,
+   then move the tilt-strength slider. A warning makes clear the out-of-sample figures are then no
+   longer clean. **Reset to selected parameters** restores the in-sample choice.
+3. **Module B · Stress Testing:** the default macro headline has already passed all four trigger
+   gates and revalued the synthetic book (P&L waterfall, IFRS 9 staging, CET1 vs the 7% line).
+   Enter an earnings headline to see which gate fails, or tick the what-if box to force a run.
+4. **Model Performance:** a model card listing where the model is strong, where it is weak and what
+   it is appropriate for, with every metric compared against the TF-IDF baseline.
 
 ---
 
@@ -52,7 +70,8 @@ written to a **JSONL file**. Two downstream risk modules consume them, and both 
   - Headlines published at or after 16:00 New York time roll to the next session.
   - Module A weights formed on day *t* only earn day *t+1* returns.
 - **Honest labels.** Event classes come from a zero-shot NLI model (`facebook/bart-large-mnli`)
-  reconciled with keyword rules. A 268-row hand-labelled set is the independent check.
+  reconciled with keyword rules. A 268-row hand-labelled set has been drawn as the independent
+  check; its labelling is still in progress, so no human-label metric is reported yet.
 - **Uncertainty is first-class.** The impact head predicts a mean and a variance, so every signal
   says how sure it is.
 
@@ -205,8 +224,8 @@ same commands.
 
 | Command | What it does | Time on a laptop CPU |
 |---|---|---|
-| `python run.py test` | Full pytest suite (44 tests; the 3 raw-adapter tests skip unless the Kaggle data is downloaded) | about 15 s |
-| `python run.py smoke` | Scores 5 demo headlines, runs Module A and Module B, loads all reports, executes the dashboard script and checks the Streamlit server | about 1 min |
+| `python run.py test` | Full pytest suite (64 tests; the 3 raw-adapter tests skip unless the Kaggle data is downloaded, and the pinned demo-output tests skip without the transformer) | about 15 s |
+| `python run.py smoke` | Scores the 6 dashboard demo headlines (and, on the transformer, checks the default stress headline triggers), runs Module A and Module B, loads all reports, clicks through every dashboard tab and interaction path, and checks the Streamlit server | about 1 min |
 | `python run.py dashboard` | Streamlit UI on http://localhost:8501 (engine, Module A, Module B and model-performance tabs) | starts in about 10 s |
 | `python run.py api` | FastAPI on http://127.0.0.1:8000, with interactive docs at http://127.0.0.1:8000/docs | starts in about 10 s |
 | `python run.py evaluate` | Baseline vs transformer report (`reports/engine_eval.*`) and figures | about 5 min |
@@ -357,8 +376,9 @@ docs/                       architecture.{dot,png}, presentation.pdf, figures/, 
 reports/                    engine_eval, module_a_backtest, module_b_stress, event_labels, training_history
 scripts/                    dataset build, labelling, training, evaluation, signal generation, modules,
                             deck, model packaging / download, smoke check
-src/                        ingestion, linking, labeling, models, engine, api, modules, eval
-tests/                      pytest suite (adapters, impact, GDELT, pipeline, API, modules, eval)
+src/                        ingestion, linking, labeling, models, engine, api, modules, eval,
+                            dashboard_logic (testable presentation logic for the dashboard)
+tests/                      pytest suite (adapters, impact, GDELT, pipeline, API, modules, eval, dashboard)
 .github/workflows/ci.yml    install + tests + smoke on Windows, macOS and Ubuntu
 ```
 
@@ -369,8 +389,8 @@ not committed. The checkpoint is a release asset, and the raw data has download 
 ### Limitations
 
 - **Event labels are weak labels.** Event macro-F1 on the test split measures agreement with the
-  zero-shot and rule teacher. The hand-labelled set is the ground-truth check (see
-  `reports/engine_eval.md`).
+  zero-shot and rule teacher. The 268-row hand-labelled set will be the ground-truth check once
+  labelling is finished (status in `reports/engine_eval.md`).
 - **Headline-level impact is inherently noisy.** Most daily return variance is not news-driven,
   and market-wide labels are day-level. Intraday prices would sharpen both.
 - **Coverage is limited.** The data covers 2018 to mid-2020 and 20 large caps. GDELT is live but

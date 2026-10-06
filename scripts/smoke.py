@@ -3,10 +3,11 @@ End-to-end smoke check, run by CI on Windows, macOS and Linux.
 
     python run.py smoke [--backend auto|baseline|transformer] [--skip-dashboard]
 
-Checks, in order: the engine scores demo headlines into schema-valid signals; a Module B
+Checks, in order: the engine scores the dashboard's demo headlines into schema-valid signals
+(and, on the transformer, the default stress headline passes every trigger gate); a Module B
 scenario runs and lowers CET1; a Module A backtest runs on the committed signal stream; the
-committed reports and docs load; the dashboard script executes without exceptions and the
-Streamlit server answers its health endpoint.
+committed reports and docs load; every dashboard tab and interaction path executes without
+exceptions; and the Streamlit server answers its health endpoint.
 """
 import argparse
 import json
@@ -19,14 +20,10 @@ import traceback
 
 import requests
 
+from src.dashboard_logic import DEMO_HEADLINES, STRESS_DEFAULT_HEADLINE, STRESS_TRIGGERED
+
 SIGNALS = "data/samples/signals.jsonl"
-DEMO = [
-    "Russia launches invasion as Western allies prepare sweeping sanctions",
-    "Federal Reserve signals 75 basis point rate hike to fight surging inflation",
-    "Moody's downgrades Boeing to junk as cash burn accelerates",
-    "Apple shares hit record after iPhone revenue beats analyst estimates",
-    "$TSLA recalls 360,000 vehicles over self-driving software defect",
-]
+DEMO = DEMO_HEADLINES
 ARTIFACTS = ["reports/engine_eval.json", "reports/module_a_backtest.json", "reports/module_b_stress.json",
              "docs/presentation.pdf", "docs/architecture.png"]
 
@@ -46,7 +43,14 @@ def check_engine(backend: str) -> str:
     for s in signals:
         print(f"       {s.sentiment_score:+.2f}  {s.event_type:24s} impact {s.impact_score:2d}  "
               f"{s.ticker or '-':5s} {s.text_excerpt[:60]}")
-    return f"{engine.backend} backend ({engine.model_version}), {len(signals)} signals"
+    detail = f"{engine.backend} backend ({engine.model_version}), {len(signals)} signals"
+    if engine.backend == "transformer":
+        from src.modules.stress import StressTestEngine
+
+        sig = engine.analyze_texts([STRESS_DEFAULT_HEADLINE])[0]
+        assert StressTestEngine().should_trigger(sig), f"default stress headline no longer triggers: {sig}"
+        detail += "; default stress headline triggers"
+    return detail
 
 
 def check_module_b() -> str:
@@ -80,13 +84,71 @@ def check_artifacts() -> str:
     return f"{len(ARTIFACTS)} reports and docs present"
 
 
-def check_dashboard_script() -> str:
+def engine_backend(requested: str) -> str:
+    if requested != "auto":
+        return requested
+    from src.engine.pipeline import TRANSFORMER_DIR
+    return "transformer" if os.path.exists(os.path.join(TRANSFORMER_DIR, "heads.pt")) else "baseline"
+
+
+def _page_text(at) -> str:
+    kinds = ("markdown", "caption", "info", "warning", "success", "json")
+    return "\n".join(str(e.value) for kind in kinds for e in getattr(at, kind))
+
+
+def _ok(at, step: str):
+    if at.exception:
+        raise AssertionError(f"{step}: " + "; ".join(str(e.value) for e in at.exception))
+    return at
+
+
+def _button(at, label: str):
+    return next(b for b in at.button if b.label == label)
+
+
+def check_dashboard_script(backend: str) -> str:
+    """Walks every tab and the main interaction paths a judge will click through."""
     from streamlit.testing.v1 import AppTest
 
-    at = AppTest.from_file(os.path.abspath("app/dashboard.py"), default_timeout=300).run()
-    if at.exception:
-        raise AssertionError("; ".join(str(e.value) for e in at.exception))
-    return f"script ran cleanly ({len(at.tabs)} tabs)"
+    at = _ok(AppTest.from_file(os.path.abspath("app/dashboard.py"), default_timeout=300).run(), "initial load")
+    assert len(at.tabs) == 4, f"expected 4 tabs, got {len(at.tabs)}"
+    text = _page_text(at)
+    assert "label_helper" not in text and '"pending"' not in text, "pending human-label status leaked into the UI"
+    if backend == "transformer":
+        assert any(STRESS_TRIGGERED in s.value for s in at.success), "default stress run should be model-triggered"
+
+    _button(at, "Score headlines").click()
+    _ok(at.run(), "score demo headlines")
+    assert any("signal(s)" in c.value for c in at.caption), "scoring the demo should show results"
+
+    at.text_area[0].set_value("   ")
+    _button(at, "Score headlines").click()
+    _ok(at.run(), "score empty input")
+    assert any("Enter at least one headline" in w.value for w in at.warning)
+
+    at.slider(key="p_lambda").set_value(8.0)
+    _ok(at.run(), "change Module A parameter")
+    assert any("differ from the in-sample selection" in w.value for w in at.warning)
+    _button(at, "Reset to selected parameters").click()
+    _ok(at.run(), "reset Module A parameters")
+
+    next(t for t in at.text_input if t.label == "Headline").set_value(
+        "Apple shares hit record after iPhone revenue beats analyst estimates")
+    _button(at, "Run stress test").click()
+    _ok(at.run(), "non-triggering stress headline")
+    assert any("Not triggered" in i.value for i in at.info)
+    next(c for c in at.checkbox if c.label.startswith("Run the scenario even")).check()
+    _button(at, "Run stress test").click()
+    _ok(at.run(), "forced what-if stress run")
+    assert any("What-if" in w.value for w in at.warning)
+
+    trigger_source = next(r for r in at.radio if r.label == "Trigger source")
+    trigger_source.set_value("Historical triggered signal")
+    _ok(at.run(), "historical stress replay")
+    trigger_source = next(r for r in at.radio if r.label == "Trigger source")
+    trigger_source.set_value("Manual scenario")
+    _ok(at.run(), "manual stress scenario")
+    return f"{len(at.tabs)} tabs and 9 interaction paths ran cleanly"
 
 
 def check_dashboard_server(timeout_s: int = 120) -> str:
@@ -129,7 +191,8 @@ def main() -> int:
     steps = [("engine", lambda: check_engine(args.backend)), ("module B", check_module_b),
              ("module A", check_module_a), ("artifacts", check_artifacts)]
     if not args.skip_dashboard:
-        steps += [("dashboard script", check_dashboard_script), ("dashboard server", check_dashboard_server)]
+        steps += [("dashboard script", lambda: check_dashboard_script(engine_backend(args.backend))),
+                  ("dashboard server", check_dashboard_server)]
 
     failed = 0
     for name, fn in steps:
