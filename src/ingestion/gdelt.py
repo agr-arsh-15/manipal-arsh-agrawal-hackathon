@@ -1,7 +1,13 @@
+import csv
+import html
+import io
 import json
 import os
+import re
+import sys
 import time
-from datetime import datetime, timezone
+import zipfile
+from datetime import datetime, timedelta, timezone
 from typing import List, Optional
 
 import requests
@@ -10,6 +16,21 @@ from src.ingestion.adapters import generate_doc_id
 from src.schemas import Document
 
 GDELT_DOC_API = "https://api.gdeltproject.org/api/v2/doc/doc"
+GDELT_RAW = "https://data.gdeltproject.org/gdeltv2"
+
+# GKG themes that mark an article as market-relevant. Broad families such as EPU_* or ECON_* alone
+# also tag lifestyle and local-politics stories, so a headline must hit at least two of these.
+GKG_THEME_PREFIXES = (
+    "ECON_STOCKMARKET", "ECON_INTEREST_RATE", "ECON_INFLATION", "ECON_BANKRUPTCY", "ECON_DEBT",
+    "ECON_CENTRALBANK", "ECON_CURRENCY", "ECON_TRADE_DISPUTE", "ECON_OILPRICE", "ECON_EARNINGSREPORT",
+    "ECON_IPO", "ECON_FREETRADE", "ECON_SUBPRIME", "ECON_UNEMPLOYMENT", "ECON_MONOPOLY",
+    "EPU_CATS_MONETARY_POLICY", "EPU_CATS_TRADE_POLICY", "EPU_CATS_FINANCIAL_REGULATION",
+    "SANCTIONS", "ARMEDCONFLICT", "CYBER_ATTACK", "WB_1104_MACROECONOMIC", "WB_318_FINANCIAL",
+    "TAX_FNCACT_CENTRAL_BANK",
+)
+GKG_MIN_THEMES = 2
+PAGE_TITLE = re.compile(r"<PAGE_TITLE>(.*?)</PAGE_TITLE>", re.S)
+csv.field_size_limit(sys.maxsize)
 
 # Macro / geopolitical / credit themes the engine monitors when no query is supplied.
 DEFAULT_QUERIES = [
@@ -61,7 +82,8 @@ class GdeltAdapter:
             self._throttle()
             resp = requests.get(GDELT_DOC_API, params=params, headers=headers, timeout=self.timeout_s)
             if resp.status_code == 429:
-                time.sleep(self.min_interval_s * (attempt + 2))
+                if attempt + 1 < retries:
+                    time.sleep(self.min_interval_s * (attempt + 2))
                 continue
             resp.raise_for_status()
             try:
@@ -70,6 +92,61 @@ class GdeltAdapter:
                 # GDELT answers some malformed or throttled queries with plain text.
                 return []
         return []
+
+    def fetch_gkg_articles(self, n_files: int = 8, max_records: int = 200) -> List[dict]:
+        """
+        Fallback that reads GDELT's raw 15-minute Global Knowledge Graph exports instead of the
+        rate-limited DOC API. Keeps English articles tagged with market-relevant themes and uses
+        their page titles as headlines. Returns records in the DOC API article format.
+        """
+        latest = requests.get(f"{GDELT_RAW}/lastupdate.txt", timeout=self.timeout_s)
+        latest.raise_for_status()
+        stamp = re.search(r"/(\d{14})\.gkg\.csv\.zip", latest.text)
+        if not stamp:
+            return []
+        t = datetime.strptime(stamp.group(1), "%Y%m%d%H%M%S")
+        articles: List[dict] = []
+        for k in range(n_files):
+            ts = (t - timedelta(minutes=15 * k)).strftime("%Y%m%d%H%M%S")
+            resp = requests.get(f"{GDELT_RAW}/{ts}.gkg.csv.zip", timeout=self.timeout_s * 3)
+            if resp.status_code != 200:
+                continue
+            articles += self._parse_gkg(resp.content)
+            if len(articles) >= max_records:
+                break
+        seen, unique = set(), []
+        for a in sorted(articles, key=lambda a: (a["_theme_hits"], a["seendate"]), reverse=True):
+            if a["title"].lower() not in seen:
+                seen.add(a["title"].lower())
+                unique.append(a)
+        return unique[:max_records]
+
+    @staticmethod
+    def _parse_gkg(zipped: bytes) -> List[dict]:
+        out = []
+        with zipfile.ZipFile(io.BytesIO(zipped)) as zf:
+            raw = zf.read(zf.namelist()[0]).decode("utf-8", errors="replace")
+        for row in csv.reader(io.StringIO(raw), delimiter="\t", quoting=csv.QUOTE_NONE):
+            if len(row) < 27 or row[2] != "1":  # collection 1 = web news
+                continue
+            themes = [th for th in row[7].split(";") if th]
+            matched = sorted({th for th in themes if th.startswith(GKG_THEME_PREFIXES)})
+            title_match = PAGE_TITLE.search(row[26])
+            if len(matched) < GKG_MIN_THEMES or not title_match:
+                continue
+            title = " ".join(html.unescape(title_match.group(1)).split())
+            if len(title.split()) < 6 or sum(ch.isascii() for ch in title) < 0.95 * len(title):
+                continue
+            out.append({
+                "title": title,
+                "url": row[4],
+                "seendate": f"{row[1][:8]}T{row[1][8:]}Z",
+                "domain": row[3],
+                "sourcecountry": None,
+                "_query": "gkg:" + ",".join(matched[:5]),
+                "_theme_hits": len(matched),
+            })
+        return out
 
     @staticmethod
     def _parse_seendate(value: str) -> datetime:
@@ -112,13 +189,17 @@ class GdeltAdapter:
         raw: List[dict] = []
         try:
             for q in queries:
-                for art in self.fetch_articles(q, max_records=max_records, timespan=timespan):
+                for art in self.fetch_articles(q, max_records=max_records, timespan=timespan, retries=1):
                     art["_query"] = q
                     raw.append(art)
-            self.last_fetch_was_live = bool(raw)
         except requests.RequestException:
             raw = []
-            self.last_fetch_was_live = False
+        if not raw:
+            try:
+                raw = self.fetch_gkg_articles(max_records=max(max_records, 100))
+            except (requests.RequestException, zipfile.BadZipFile):
+                raw = []
+        self.last_fetch_was_live = bool(raw)
 
         if raw:
             os.makedirs(os.path.dirname(self.snapshot_path), exist_ok=True)

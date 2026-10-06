@@ -1,5 +1,7 @@
-# Secrets
+# Secrets / local tooling config
 .env
+.env.*
+!.env.example
 
 # Python
 __pycache__/
@@ -24,6 +26,9 @@ models/*
 models/baseline/*
 !models/baseline/*.joblib
 !models/baseline/*.json
+
+# Local previews
+.deck_preview/
 
 # Logs / runs
 runs/

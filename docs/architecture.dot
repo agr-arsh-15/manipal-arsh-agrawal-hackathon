@@ -1,94 +1,71 @@
 digraph RiskEngineArchitecture {
     rankdir=TB;
+    newrank=true;
+    nodesep=0.3;
+    ranksep=0.35;
     fontname="Helvetica,Arial,sans-serif";
-    node [fontname="Helvetica,Arial,sans-serif", fontsize=11, shape=box, style="filled,rounded", color="#333333", fillcolor="#F8F9FA"];
-    edge [fontname="Helvetica,Arial,sans-serif", fontsize=9, color="#555555"];
+    node [fontname="Helvetica,Arial,sans-serif", fontsize=10, shape=box, style="filled,rounded", color="#333333", fillcolor="#FFFFFF"];
+    edge [fontname="Helvetica,Arial,sans-serif", fontsize=8, color="#555555"];
 
     subgraph cluster_sources {
-        label = "Multi-Source Text Ingestion";
-        style = "filled";
-        fillcolor = "#E8F0FE";
-        fontsize = 12;
-        color = "#1A73E8";
-
-        s1 [label="Financial News\n(FinancialPhraseBank, Benzinga)", fillcolor="#FFFFFF"];
-        s2 [label="Social Sentiment\n(Stock Tweets Stream)", fillcolor="#FFFFFF"];
-        s3 [label="Macro Event Feed\n(GDELT 2.0 Global Feeds)", fillcolor="#FFFFFF"];
-        s4 [label="Live Polling\n(NewsAPI Free Tier)", fillcolor="#FFFFFF"];
+        label="1 · Text sources"; style="filled,rounded"; fillcolor="#E8F0FE"; color="#1A73E8"; fontsize=12;
+        news   [label="News headlines\nBenzinga analyst-ratings +\npartner feeds (2018-2020)"];
+        social [label="Social posts\nStock Tweets dataset\n(cashtags / @mentions)"];
+        gdelt  [label="Global event feed\nGDELT 2.0 DOC API\n(live, snapshot fallback)"];
     }
 
-    subgraph cluster_normalization {
-        label = "Data Ingestion & Normalization Layer";
-        style = "filled";
-        fillcolor = "#FEF7E0";
-        fontsize = 12;
-        color = "#F9AB00";
-
-        doc_adapter [label="Source Adapters\n(Timezone Standardization, Hash ID)", fillcolor="#FFFFFF"];
-        doc_schema [label="Unified Document Schema\n(doc_id, text, published_at, time_precision)", shape=note, fillcolor="#FFF9C4"];
+    subgraph cluster_ingest {
+        label="2 · Ingestion & linking"; style="filled,rounded"; fillcolor="#FEF7E0"; color="#F9AB00"; fontsize=12;
+        adapters [label="Source adapters\nUTC timestamps · stable doc_id\nDocument schema"];
+        linker   [label="Entity linker\n20-stock S&P 100 universe\ncashtags · aliases · context rules"];
     }
 
-    subgraph cluster_entity {
-        label = "Entity Linking & Disambiguation";
-        style = "filled";
-        fillcolor = "#FCE8E6";
-        fontsize = 12;
-        color = "#EA4335";
-
-        universe_match [label="S&P 100 Universe Matcher\n(20 Liquid Tickers, Alias Dict)", fillcolor="#FFFFFF"];
-        disambiguate [label="Disambiguation Engine\n(Context Rules, Apple/Amazon/Meta Filters)", fillcolor="#FFFFFF"];
+    subgraph cluster_labels {
+        label="Offline label factory (training time)"; style="filled,rounded"; fillcolor="#FCE8E6"; color="#EA4335"; fontsize=12;
+        fpb    [label="FinancialPhraseBank\nhuman sentiment labels", style="filled,rounded,dashed"];
+        zs     [label="Event labels\nBART-large-MNLI zero-shot\n⊕ keyword rules"];
+        car    [label="Impact labels\nevent study: CAR[0,+1] vs SPY\n÷ 60d idio-vol → deciles 1-10"];
+        splits [label="Chronological split\ntrain < 2019-07 < val < 2019-11 < test"];
     }
 
     subgraph cluster_model {
-        label = "Multi-Task Risk Inference Engine (DistilRoBERTa)";
-        style = "filled";
-        fillcolor = "#E6F4EA";
-        fontsize = 12;
-        color = "#137333";
-
-        encoder [label="Shared Transformer Backbone\n(distilroberta-base / MiniLM fallback)", fillcolor="#C8E6C9", shape=component];
-        
-        head_sentiment [label="Sentiment Head\n(Tanh Regression [-1, 1]\n+ Discrete 3-Class)", fillcolor="#FFFFFF"];
-        head_event [label="Event Taxonomy Head\n(Softmax across 9 Classes)", fillcolor="#FFFFFF"];
-        head_impact [label="Market Impact Head\n(Calibrated Severity 1-10\nvia Event-Study CAR/σ)", fillcolor="#FFFFFF"];
+        label="3 · Multi-task risk model"; style="filled,rounded"; fillcolor="#E6F4EA"; color="#137333"; fontsize=12;
+        encoder [label="DistilRoBERTa encoder\n(fine-tuned, mean-pooled)", shape=component, fillcolor="#C8E6C9"];
+        h_sent  [label="Sentiment head\ntanh → [-1, 1]"];
+        h_event [label="Event head\nsoftmax · 9 classes"];
+        h_imp   [label="Impact head\nμ ∈ [1,10] + σ (Gaussian NLL)"];
+        fallback [label="TF-IDF + linear baseline\n(automatic fallback)", style="filled,rounded,dashed"];
     }
 
-    subgraph cluster_output {
-        label = "Serving & Downstream Signals";
-        style = "filled";
-        fillcolor = "#F3E8FD";
-        fontsize = 12;
-        color = "#9334E6";
-
-        signal_schema [label="Unified Signal Schema\n(sentiment_score, event_type, impact_score)", shape=note, fillcolor="#E1BEE7"];
-        api_srv [label="FastAPI Microservice\n(/analyze, /signals, /health)", fillcolor="#FFFFFF"];
-        file_sink [label="Reproducible File Sink\n(data/signals.jsonl, CSV)", fillcolor="#FFFFFF"];
-        
-        downstream_a [label="Module A: Tactical Rebalancing\n(Sentiment Signal)", style="dashed,rounded", fillcolor="#EDE7F6"];
-        downstream_b [label="Module B: Stress Testing\n(Event Type + Impact Severity)", style="dashed,rounded", fillcolor="#EDE7F6"];
+    subgraph cluster_serve {
+        label="4 · Signal delivery"; style="filled,rounded"; fillcolor="#F3E8FD"; color="#9334E6"; fontsize=12;
+        signal [label="Signal\nsentiment_score · event_type · impact_score\n+ confidences · ticker · timestamp", shape=note, fillcolor="#E1BEE7"];
+        api    [label="FastAPI\n/analyze · /signals · /signals/{ticker}\n/ingest/gdelt · /modules/*"];
+        file   [label="File sink\ndata/samples/signals.jsonl"];
     }
 
-    s1 -> doc_adapter;
-    s2 -> doc_adapter;
-    s3 -> doc_adapter;
-    s4 -> doc_adapter;
+    subgraph cluster_modules {
+        label="5 · Downstream risk modules"; style="filled,rounded"; fillcolor="#FFF3E0"; color="#E65100"; fontsize=12;
+        modA [label="Module A · Index rebalancer\nEWMA sentiment → w ∝ exp(λs)\ncaps · turnover budget · costs"];
+        modB [label="Module B · Stress test\nimpact ≥ 8 & macro-type event →\nshock vector → bonds · loans (ECL) ·\nderivatives → CET1"];
+        dash [label="Streamlit dashboard\nlive engine · weights over time ·\nbefore/after stress · model metrics", fillcolor="#FFE0B2"];
+    }
 
-    doc_adapter -> doc_schema;
-    doc_schema -> universe_match;
-    universe_match -> disambiguate;
-    disambiguate -> encoder;
+    news -> adapters; social -> adapters; gdelt -> adapters;
+    adapters -> linker;
+    linker -> encoder [label="inference"];
+    encoder -> h_sent; encoder -> h_event; encoder -> h_imp;
+    h_sent -> signal; h_event -> signal; h_imp -> signal;
+    fallback -> signal [style=dashed];
+    signal -> api; signal -> file;
+    api -> modA [label="sentiment_score"];
+    api -> modB [label="event_type, impact_score"];
+    file -> modA; file -> modB;
+    modA -> dash; modB -> dash; api -> dash;
 
-    encoder -> head_sentiment;
-    encoder -> head_event;
-    encoder -> head_impact;
-
-    head_sentiment -> signal_schema;
-    head_event -> signal_schema;
-    head_impact -> signal_schema;
-
-    signal_schema -> api_srv;
-    signal_schema -> file_sink;
-
-    api_srv -> downstream_a;
-    api_srv -> downstream_b;
+    fpb -> splits [style=dashed];
+    adapters -> zs [style=dashed, label="training rows"];
+    adapters -> car [style=dashed];
+    zs -> splits [style=dashed]; car -> splits [style=dashed];
+    splits -> encoder [style=dashed, label="fine-tune"];
 }

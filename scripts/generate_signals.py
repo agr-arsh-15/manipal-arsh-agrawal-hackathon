@@ -18,17 +18,21 @@ from src.ingestion.gdelt import GdeltAdapter
 
 def collect_documents(cfg: dict):
     ds = cfg["dataset"]
-    docs = []
+    candidates = []
     for feed in ds["benzinga_feeds"]:
-        docs += BenzingaAdapter(feed["path"], start_date=ds["start_date"]).load_documents()
-    tweets = StockTweetsAdapter(ds["tweets_path"]).load_documents()
+        candidates += BenzingaAdapter(feed["path"], start_date=ds["start_date"]).load_documents()
     start = pd.Timestamp(ds["start_date"], tz="UTC")
-    seen_text = set()
-    for d in tweets:
-        if d.published_at >= start and d.text not in seen_text:
-            seen_text.add(d.text)
+    candidates += [d for d in StockTweetsAdapter(ds["tweets_path"]).load_documents() if d.published_at >= start]
+    candidates += GdeltAdapter().load_snapshot()
+
+    # The same headline is often syndicated across Benzinga feeds and retweeted; keep one copy
+    # per (text, ticker hints) so a single story is not counted several times downstream.
+    docs, seen = [], set()
+    for d in candidates:
+        key = (d.text.strip().lower(), tuple(sorted(d.raw_entity_hints or [])))
+        if key not in seen:
+            seen.add(key)
             docs.append(d)
-    docs += GdeltAdapter().load_snapshot()
     return docs
 
 

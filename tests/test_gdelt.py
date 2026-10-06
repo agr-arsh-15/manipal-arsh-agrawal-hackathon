@@ -1,4 +1,6 @@
+import io
 import json
+import zipfile
 
 import requests
 
@@ -36,8 +38,34 @@ def test_falls_back_to_snapshot_when_offline(tmp_path, monkeypatch):
         raise requests.ConnectionError("no network")
 
     monkeypatch.setattr(adapter, "fetch_articles", offline)
+    monkeypatch.setattr(adapter, "fetch_gkg_articles", offline)
     docs = adapter.load_documents(queries=["inflation"])
 
     assert not adapter.last_fetch_was_live
     assert len(docs) == 1
     assert "rate hikes" in docs[0].text
+
+
+def _gkg_row(title, themes, collection="1"):
+    row = [""] * 27
+    row[0], row[1], row[2], row[3], row[4] = "r1", "20261006074500", collection, "example.com", "https://example.com/x"
+    row[7] = ";".join(themes)
+    row[26] = f"<PAGE_LINKS></PAGE_LINKS><PAGE_TITLE>{title}</PAGE_TITLE>"
+    return "\t".join(row)
+
+
+def test_gkg_parser_keeps_only_market_relevant_titles():
+    rows = [
+        _gkg_row("Central bank raises interest rates as inflation hits decade high", ["ECON_CENTRALBANK", "ECON_INFLATION"]),
+        _gkg_row("Local bakery wins award for best sourdough in town", ["EPU_POLICY", "ECON_INFLATION"]),
+        _gkg_row("Sanctions widen as armed conflict escalates near key oil routes", ["SANCTIONS", "ARMEDCONFLICT"],
+                 collection="2"),
+    ]
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        zf.writestr("x.gkg.csv", "\n".join(rows))
+
+    arts = GdeltAdapter._parse_gkg(buf.getvalue())
+
+    assert [a["title"] for a in arts] == ["Central bank raises interest rates as inflation hits decade high"]
+    assert arts[0]["seendate"] == "20261006T074500Z"
