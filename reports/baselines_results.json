@@ -1,21 +1,194 @@
 {
   "sentiment": {
     "model": "TF-IDF + Ridge",
-    "sample_size": 970,
-    "mae": 0.3668,
-    "pearson_corr": 0.6352,
-    "macro_f1": 0.67
+    "n": 730,
+    "mae": 0.3798,
+    "pearson_r": 0.5811,
+    "macro_f1": 0.6182,
+    "accuracy": 0.6863
   },
   "event_type": {
     "model": "TF-IDF + LogisticRegression",
-    "sample_size": 1129,
-    "macro_f1": 0.2883,
-    "accuracy": 0.9238
+    "n": 7151,
+    "macro_f1": 0.3782,
+    "weighted_f1": 0.9186,
+    "accuracy": 0.9353,
+    "per_class": {
+      "Credit Event": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 21
+      },
+      "Earnings/Guidance": {
+        "precision": 0.982,
+        "recall": 0.863,
+        "f1": 0.919,
+        "support": 779
+      },
+      "Geopolitical": {
+        "precision": 1.0,
+        "recall": 0.08,
+        "f1": 0.148,
+        "support": 25
+      },
+      "Macroeconomic": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 44
+      },
+      "Merger/Acquisition": {
+        "precision": 1.0,
+        "recall": 0.559,
+        "f1": 0.717,
+        "support": 161
+      },
+      "Operational/Supply-chain": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 35
+      },
+      "Other/None": {
+        "precision": 0.929,
+        "recall": 1.0,
+        "f1": 0.963,
+        "support": 5883
+      },
+      "Product Launch": {
+        "precision": 1.0,
+        "recall": 0.215,
+        "f1": 0.354,
+        "support": 130
+      },
+      "Regulatory/Legal": {
+        "precision": 1.0,
+        "recall": 0.178,
+        "f1": 0.302,
+        "support": 73
+      }
+    },
+    "labels": [
+      "Credit Event",
+      "Earnings/Guidance",
+      "Geopolitical",
+      "Macroeconomic",
+      "Merger/Acquisition",
+      "Operational/Supply-chain",
+      "Other/None",
+      "Product Launch",
+      "Regulatory/Legal"
+    ],
+    "confusion": [
+      [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        19,
+        0,
+        0
+      ],
+      [
+        0,
+        672,
+        0,
+        0,
+        0,
+        0,
+        107,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        23,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        41,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        0,
+        0,
+        90,
+        0,
+        68,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        35,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5883,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        99,
+        28,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        59,
+        0,
+        13
+      ]
+    ]
   },
   "impact_score": {
     "model": "TF-IDF + Ridge",
-    "sample_size": 160,
-    "mae": 2.5722,
-    "spearman_corr": 0.1762
+    "n": 6421,
+    "mae": 2.5753,
+    "spearman_rho": 0.0904,
+    "high_impact_precision": 0.4309,
+    "high_impact_recall": 0.1691,
+    "high_impact_base_rate": 0.3104
   }
 }

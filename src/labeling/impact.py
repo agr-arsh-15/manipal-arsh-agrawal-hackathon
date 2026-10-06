@@ -1,9 +1,14 @@
+import bisect
 import os
 import yaml
 import numpy as np
 import pandas as pd
-from datetime import datetime, time, timedelta, timezone
-from typing import Dict, Tuple, Optional
+from datetime import date, datetime, time, timedelta
+from typing import Dict, Optional
+from zoneinfo import ZoneInfo
+
+NEW_YORK = ZoneInfo("America/New_York")
+MARKET_CLOSE = time(16, 0)
 
 
 class MarketImpactEngine:
@@ -51,6 +56,28 @@ class MarketImpactEngine:
         self.price_cache[clean_ticker] = df
         return df
 
+    @staticmethod
+    def effective_event_date(pub_date) -> date:
+        """
+        Maps a publication timestamp to the first session whose close can reflect it.
+        Timezone-aware timestamps at or after 16:00 New York time belong to the next day.
+        """
+        if isinstance(pub_date, pd.Timestamp):
+            pub_date = pub_date.to_pydatetime()
+        if not isinstance(pub_date, datetime):
+            return pub_date
+        if pub_date.tzinfo is not None:
+            local = pub_date.astimezone(NEW_YORK)
+            if local.time() >= MARKET_CLOSE:
+                return local.date() + timedelta(days=1)
+            return local.date()
+        return pub_date.date()
+
+    def load_bins(self, bins_path: str = "config/impact_bins.yaml") -> np.ndarray:
+        with open(bins_path, "r", encoding="utf-8") as f:
+            self.bin_edges = np.array(yaml.safe_load(f)["bin_edges"], dtype=float)
+        return self.bin_edges
+
     def compute_abnormal_move(self, ticker: str, pub_date: datetime) -> Optional[float]:
         """
         Computes standardized abnormal return magnitude |z| for a given company event.
@@ -62,18 +89,13 @@ class MarketImpactEngine:
         except Exception:
             return None
 
-        event_date = pub_date.date() if isinstance(pub_date, datetime) else pub_date
+        event_date = self.effective_event_date(pub_date)
 
-        # Align market trading dates
+        # Roll forward to the first trading session on or after the effective date
         trading_dates = stock_df["date"].tolist()
-        if event_date not in trading_dates:
-            # Roll forward to next available trading date
-            future_dates = [d for d in trading_dates if d >= event_date]
-            if not future_dates:
-                return None
-            event_date = future_dates[0]
-
-        idx = trading_dates.index(event_date)
+        idx = bisect.bisect_left(trading_dates, event_date)
+        if idx >= len(trading_dates):
+            return None
         if idx < self.vol_lookback or idx + 1 >= len(trading_dates):
             return None
 

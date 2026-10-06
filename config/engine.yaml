@@ -1,6 +1,6 @@
 engine:
   name: "AI/NLP Financial Risk Engine"
-  version: "v0.1.0-alpha"
+  version: "v1.0.0"
   device: "auto" # options: auto, mps, cuda, cpu
   random_seed: 42
 
@@ -10,12 +10,31 @@ paths:
   prices_dir: "data/prices"
   models_dir: "models"
   reports_dir: "reports"
+  signals_file: "data/samples/signals.jsonl"
 
 model:
   encoder: "distilroberta-base"
-  fallback_encoder: "sentence-transformers/all-MiniLM-L6-v2"
-  max_length: 128
+  max_length: 64
   batch_size: 32
+  epochs: 4
+  learning_rate: 3.0e-5
+  checkpoint_dir: "models/risk_engine"
+
+# Chronological split for dated sources (Benzinga, Stock Tweets). Undated PhraseBank rows
+# are assigned by a deterministic hash of doc_id using the same 70/15/15 proportions.
+splits:
+  train_end: "2019-07-01"
+  val_end: "2019-11-01"
+
+dataset:
+  benzinga_feeds:
+    - path: "data/raw/benzinga/raw_analyst_ratings.csv"
+      max_rows: 9000
+    - path: "data/raw/benzinga/raw_partner_headlines.csv"
+      max_rows: 4000
+  tweets_path: "data/raw/stock_tweets/reduced_dataset-release.csv"
+  tweets_max_rows: 4000
+  start_date: "2018-04-01"
 
 impact:
   event_window_days: [0, 1]

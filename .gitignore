@@ -34,3 +34,9 @@ wandb/
 .DS_Store
 .vscode/
 .idea/
+.omni/
+.claude/
+.github/
+.cursor/
+.kiro/
+.agents/

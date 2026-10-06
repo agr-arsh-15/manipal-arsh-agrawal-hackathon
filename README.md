@@ -13,7 +13,7 @@ This project delivers a unified, production-grade AI/NLP Financial Risk Engine e
 2. `event_type`: Categorical classification across 9 taxonomy classes (Geopolitical, Macroeconomic, Credit Event, Merger/Acquisition, Product Launch, Regulatory/Legal, Earnings/Guidance, Operational/Supply-chain, Other/None).
 3. `impact_score`: Calibrated market-impact severity on a 1–10 scale, derived from empirical cumulative abnormal return (CAR) event-study metrics against trailing volatility.
 
-The signals are delivered via an asynchronous FastAPI service (`POST /analyze`, `GET /signals`, `GET /signals/{ticker}`) and reproducible structured file streams (`signals.jsonl`).
+The signals will be delivered via a FastAPI service (`POST /analyze`, `GET /signals`, `GET /signals/{ticker}`) and a reproducible file stream (`signals.jsonl`).
 
 ## 2. Architecture & Tech Stack
 - **Architecture Overview**: The pipeline decouples source ingestion through an extensible adapter pattern, normalizes raw text into a standard `Document` schema, executes rule-based disambiguated entity linking against a large-cap universe, and feeds a multi-task text transformer with masked task heads for sentiment regression, event classification, and impact severity estimation.
@@ -47,12 +47,17 @@ pip install -r requirements.txt
 # Run test suite
 pytest tests/
 
-# Start the Risk Engine API server
-python -m src.api.main
+# Rebuild the unified 3-source labelled dataset (requires Kaggle raw data, see scripts/download_*.py)
+python -m scripts.build_unified_dataset
+
+# Train and evaluate the TF-IDF baselines
+python -m scripts.train_eval_baselines
 ```
 
+> **Status:** ingestion (PhraseBank, Benzinga, Stock Tweets, GDELT), entity linking, event-study impact labelling and baselines are implemented. The multi-task transformer, FastAPI service, Module A / Module B and dashboard are in progress.
+
 ## 5. Key Results & Domain Impact
-- **Standardized Risk Ingestion**: Converts heterogeneous text feeds into uniform risk signals in sub-50ms inference latency on consumer hardware.
+- **Standardized Risk Ingestion**: Converts heterogeneous text feeds (news, social, global event feed) into a uniform `Document` schema ready for signal extraction.
 - **Empirically Grounded Impact**: Solves the synthetic label pitfall by training severity regression directly against market model abnormal returns normalized by idiosyncratic volatility.
 - **Downstream Ready**: Schema output matches requirements for Module A (Tactical Portfolio Rebalancing) and Module B (Event-Driven Stress Testing).
 
