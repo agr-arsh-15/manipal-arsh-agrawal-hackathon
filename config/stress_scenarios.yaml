@@ -1,0 +1,108 @@
+# Module B stress-scenario library.
+#
+# Each event type maps to a *full-severity* shock vector. At run time the vector is scaled by
+#   severity = impact_score / 10
+# so an impact-8 Geopolitical signal applies 80% of the shocks below.
+#
+# Units: equity / fx / commodity as fractional price moves; rates and spreads in basis points;
+# pd_multiplier is applied to 1-year PDs (sector overrides take precedence over "all").
+
+trigger:
+  min_impact: 8            # "impact_score > 7"
+  event_types: ["Geopolitical", "Macroeconomic", "Credit Event", "Operational/Supply-chain", "Regulatory/Legal"]
+
+capital:
+  cet1_ratio_start: 0.125          # synthetic starting CET1 ratio
+  cet1_minimum_with_buffer: 0.07   # Basel III 4.5% minimum + 2.5% conservation buffer
+  tax_rate: 0.0                    # losses are shown pre-tax
+
+scenarios:
+  Geopolitical:
+    narrative: "Armed conflict / sanctions shock: risk-off equities, flight to quality, commodity spike."
+    equity: -0.12
+    rates_bp: -25
+    ig_spread_bp: 60
+    hy_spread_bp: 220
+    fx_usd: 0.05
+    commodity: 0.25
+    pd_multiplier: {all: 1.4, Energy: 1.2, Industrials: 1.8, "Consumer Discretionary": 1.6}
+
+  Macroeconomic:
+    narrative: "Hawkish policy surprise: +200bp rates, equity drawdown, wider credit spreads."
+    equity: -0.10
+    rates_bp: 200
+    ig_spread_bp: 50
+    hy_spread_bp: 150
+    fx_usd: 0.03
+    commodity: -0.05
+    pd_multiplier: {all: 1.3, "Real Estate": 2.0, "Consumer Discretionary": 1.5}
+
+  Credit Event:
+    narrative: "Large default / downgrade wave: credit spreads gap wider, financials under pressure."
+    equity: -0.08
+    rates_bp: -15
+    ig_spread_bp: 100
+    hy_spread_bp: 350
+    fx_usd: 0.02
+    commodity: -0.03
+    pd_multiplier: {all: 1.8, Financials: 2.5, "Real Estate": 2.2}
+
+  Operational/Supply-chain:
+    narrative: "Supply-chain disruption: industrial and consumer borrowers hit, input costs rise."
+    equity: -0.05
+    rates_bp: 10
+    ig_spread_bp: 25
+    hy_spread_bp: 90
+    fx_usd: 0.0
+    commodity: 0.12
+    pd_multiplier: {all: 1.1, Industrials: 1.7, "Consumer Discretionary": 1.5, Technology: 1.3}
+
+  Regulatory/Legal:
+    narrative: "Sweeping regulatory action / litigation: sector-specific credit and equity repricing."
+    equity: -0.04
+    rates_bp: 0
+    ig_spread_bp: 20
+    hy_spread_bp: 60
+    fx_usd: 0.0
+    commodity: 0.0
+    pd_multiplier: {all: 1.05, Financials: 1.4, Technology: 1.4, Healthcare: 1.3}
+
+  Merger/Acquisition:
+    narrative: "Leveraged M&A wave: modest HY widening on increased issuance."
+    equity: 0.01
+    rates_bp: 0
+    ig_spread_bp: 10
+    hy_spread_bp: 40
+    fx_usd: 0.0
+    commodity: 0.0
+    pd_multiplier: {all: 1.05}
+
+  Earnings/Guidance:
+    narrative: "Broad earnings downgrade cycle."
+    equity: -0.06
+    rates_bp: -10
+    ig_spread_bp: 20
+    hy_spread_bp: 70
+    fx_usd: 0.0
+    commodity: -0.02
+    pd_multiplier: {all: 1.15}
+
+  Product Launch:
+    narrative: "Idiosyncratic product news: negligible portfolio-level effect."
+    equity: 0.01
+    rates_bp: 0
+    ig_spread_bp: 0
+    hy_spread_bp: 0
+    fx_usd: 0.0
+    commodity: 0.0
+    pd_multiplier: {all: 1.0}
+
+  Other/None:
+    narrative: "No identifiable event driver."
+    equity: 0.0
+    rates_bp: 0
+    ig_spread_bp: 0
+    hy_spread_bp: 0
+    fx_usd: 0.0
+    commodity: 0.0
+    pd_multiplier: {all: 1.0}

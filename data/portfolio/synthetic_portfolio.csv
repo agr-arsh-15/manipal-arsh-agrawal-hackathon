@@ -1,0 +1,145 @@
+position_id,asset_class,instrument,counterparty,sector,region,rating,notional,market_value,maturity_years,rate_type,pd_1y,lgd,risk_weight,modified_duration,convexity,spread_bucket,delta,gamma,dv01_usd,risk_factor
+LN-001,Loan,Term loan,Borrower-001,Healthcare,Europe,A,28800000.0,28800000.0,5.7,fixed,0.0006,0.45,0.5,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-002,Loan,Revolver,Borrower-002,Healthcare,Latin America,A,78600000.0,78600000.0,4.8,fixed,0.0006,0.45,0.5,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-003,Loan,Term loan,Borrower-003,Industrials,Europe,BBB,70600000.0,70600000.0,2.4,floating,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-004,Loan,Term loan,Borrower-004,Utilities,Europe,BBB,82300000.0,82300000.0,2.2,floating,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-005,Loan,Revolver,Borrower-005,Utilities,India,BBB,44600000.0,44600000.0,4.6,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-006,Loan,Revolver,Borrower-006,Energy,Europe,B,135700000.0,135700000.0,5.2,floating,0.035,0.45,1.5,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-007,Loan,Term loan,Borrower-007,Technology,Asia-Pacific,BBB,54800000.0,54800000.0,2.1,fixed,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-008,Loan,Term loan,Borrower-008,Real Estate,Asia-Pacific,BBB,596100000.0,596100000.0,5.1,floating,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-009,Loan,Term loan,Borrower-009,Real Estate,Europe,BBB,75600000.0,75600000.0,4.0,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-010,Loan,Term loan,Borrower-010,Healthcare,India,B,49300000.0,49300000.0,2.9,floating,0.035,0.45,1.5,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-011,Loan,Revolver,Borrower-011,Utilities,India,BBB,43400000.0,43400000.0,2.0,fixed,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-012,Loan,Revolver,Borrower-012,Energy,Asia-Pacific,AA,118300000.0,118300000.0,1.6,floating,0.0002,0.35,0.2,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-013,Loan,Revolver,Borrower-013,Industrials,North America,BB,93200000.0,93200000.0,6.7,fixed,0.009,0.35,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-014,Loan,Revolver,Borrower-014,Utilities,Europe,BB,135100000.0,135100000.0,4.6,fixed,0.009,0.45,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-015,Loan,Revolver,Borrower-015,Consumer Discretionary,North America,A,71500000.0,71500000.0,4.6,fixed,0.0006,0.45,0.5,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-016,Loan,Term loan,Borrower-016,Financials,India,BB,72700000.0,72700000.0,1.8,floating,0.009,0.35,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-017,Loan,Term loan,Borrower-017,Utilities,Asia-Pacific,AA,55600000.0,55600000.0,5.0,fixed,0.0002,0.35,0.2,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-018,Loan,Term loan,Borrower-018,Technology,India,BBB,142400000.0,142400000.0,5.9,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-019,Loan,Revolver,Borrower-019,Technology,Latin America,BBB,138700000.0,138700000.0,2.3,floating,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-020,Loan,Revolver,Borrower-020,Financials,India,BB,46500000.0,46500000.0,3.5,floating,0.009,0.45,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-021,Loan,Term loan,Borrower-021,Healthcare,Europe,BBB,49600000.0,49600000.0,1.6,floating,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-022,Loan,Term loan,Borrower-022,Healthcare,India,B,228500000.0,228500000.0,1.8,fixed,0.035,0.35,1.5,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-023,Loan,Term loan,Borrower-023,Consumer Discretionary,Asia-Pacific,BBB,84500000.0,84500000.0,2.4,fixed,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-024,Loan,Term loan,Borrower-024,Financials,North America,BBB,140500000.0,140500000.0,3.8,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-025,Loan,Revolver,Borrower-025,Financials,North America,BBB,144500000.0,144500000.0,6.1,floating,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-026,Loan,Revolver,Borrower-026,Industrials,Latin America,BB,196600000.0,196600000.0,6.9,floating,0.009,0.35,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-027,Loan,Revolver,Borrower-027,Technology,Europe,BB,178000000.0,178000000.0,2.0,floating,0.009,0.45,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-028,Loan,Term loan,Borrower-028,Technology,Latin America,BBB,79600000.0,79600000.0,2.1,floating,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-029,Loan,Term loan,Borrower-029,Real Estate,India,BBB,96400000.0,96400000.0,5.6,fixed,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-030,Loan,Revolver,Borrower-030,Consumer Discretionary,Europe,A,112400000.0,112400000.0,4.3,floating,0.0006,0.35,0.5,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-031,Loan,Term loan,Borrower-031,Technology,Latin America,BBB,103800000.0,103800000.0,4.5,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-032,Loan,Term loan,Borrower-032,Utilities,Asia-Pacific,BBB,95900000.0,95900000.0,2.9,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-033,Loan,Term loan,Borrower-033,Energy,Europe,CCC,93400000.0,93400000.0,6.2,floating,0.15,0.45,1.5,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-034,Loan,Revolver,Borrower-034,Healthcare,Europe,BBB,62200000.0,62200000.0,3.6,fixed,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-035,Loan,Term loan,Borrower-035,Consumer Discretionary,North America,B,45600000.0,45600000.0,4.0,floating,0.035,0.45,1.5,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-036,Loan,Term loan,Borrower-036,Consumer Discretionary,North America,A,43400000.0,43400000.0,6.5,floating,0.0006,0.35,0.5,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-037,Loan,Revolver,Borrower-037,Technology,Asia-Pacific,BB,133200000.0,133200000.0,6.9,floating,0.009,0.35,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-038,Loan,Term loan,Borrower-038,Real Estate,Asia-Pacific,BBB,111700000.0,111700000.0,1.1,fixed,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-039,Loan,Revolver,Borrower-039,Real Estate,India,BBB,148400000.0,148400000.0,3.6,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-040,Loan,Term loan,Borrower-040,Technology,India,AAA,30000000.0,30000000.0,2.0,floating,0.0001,0.35,0.2,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-041,Loan,Revolver,Borrower-041,Consumer Discretionary,Latin America,BB,91700000.0,91700000.0,4.1,fixed,0.009,0.45,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-042,Loan,Term loan,Borrower-042,Industrials,India,BBB,77700000.0,77700000.0,4.0,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-043,Loan,Revolver,Borrower-043,Technology,Europe,A,38600000.0,38600000.0,1.1,floating,0.0006,0.35,0.5,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-044,Loan,Term loan,Borrower-044,Utilities,Asia-Pacific,A,60900000.0,60900000.0,1.3,floating,0.0006,0.35,0.5,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-045,Loan,Revolver,Borrower-045,Industrials,North America,BB,105700000.0,105700000.0,3.4,floating,0.009,0.35,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-046,Loan,Revolver,Borrower-046,Consumer Discretionary,Europe,A,172500000.0,172500000.0,5.2,floating,0.0006,0.35,0.5,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-047,Loan,Revolver,Borrower-047,Technology,Latin America,BB,47700000.0,47700000.0,2.9,fixed,0.009,0.35,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-048,Loan,Term loan,Borrower-048,Real Estate,Latin America,BBB,52200000.0,52200000.0,3.8,fixed,0.002,0.45,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-049,Loan,Term loan,Borrower-049,Industrials,India,B,65000000.0,65000000.0,5.4,floating,0.035,0.45,1.5,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-050,Loan,Revolver,Borrower-050,Real Estate,North America,BBB,66000000.0,66000000.0,5.4,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-051,Loan,Term loan,Borrower-051,Consumer Discretionary,Asia-Pacific,BBB,63800000.0,63800000.0,2.7,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-052,Loan,Revolver,Borrower-052,Technology,Latin America,BB,73900000.0,73900000.0,3.3,fixed,0.009,0.35,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-053,Loan,Term loan,Borrower-053,Consumer Discretionary,North America,A,205400000.0,205400000.0,6.0,floating,0.0006,0.45,0.5,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-054,Loan,Term loan,Borrower-054,Real Estate,Europe,B,103900000.0,103900000.0,4.9,floating,0.035,0.35,1.5,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-055,Loan,Term loan,Borrower-055,Technology,Europe,BBB,62800000.0,62800000.0,2.5,fixed,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-056,Loan,Term loan,Borrower-056,Consumer Discretionary,Asia-Pacific,BBB,82600000.0,82600000.0,3.3,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-057,Loan,Revolver,Borrower-057,Healthcare,India,BB,153600000.0,153600000.0,2.3,floating,0.009,0.35,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-058,Loan,Revolver,Borrower-058,Industrials,Europe,BBB,62800000.0,62800000.0,5.3,floating,0.002,0.35,1.0,0.0,0.0,IG,0.0,0.0,0.0,credit
+LN-059,Loan,Revolver,Borrower-059,Technology,India,BB,216400000.0,216400000.0,3.4,floating,0.009,0.35,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+LN-060,Loan,Term loan,Borrower-060,Technology,North America,BB,35900000.0,35900000.0,3.7,floating,0.009,0.45,1.0,0.0,0.0,HY,0.0,0.0,0.0,credit
+BD-001,Bond,Corporate HY,Issuer-001,Utilities,Europe,BB,45900000.0,47078538.0,5.0,fixed,0.009,0.6,1.0,3.86,0.179,HY,0.0,0.0,0.0,rates+spread
+BD-002,Bond,Corporate IG,Issuer-002,Energy,North America,AA,52400000.0,53147037.0,20.0,fixed,0.0002,0.6,0.2,15.64,2.935,IG,0.0,0.0,0.0,rates+spread
+BD-003,Bond,Sovereign,Issuer-003,Sovereign,Asia-Pacific,AA,124300000.0,126470850.0,5.0,fixed,0.0002,0.6,0.0,4.3,0.222,SOV,0.0,0.0,0.0,rates+spread
+BD-004,Bond,Corporate IG,Issuer-004,Real Estate,North America,A,85900000.0,85227274.0,10.0,fixed,0.0006,0.6,0.5,7.95,0.758,IG,0.0,0.0,0.0,rates+spread
+BD-005,Bond,Corporate HY,Issuer-005,Utilities,Europe,BB,57400000.0,58975299.0,7.0,fixed,0.009,0.6,1.0,5.67,0.386,HY,0.0,0.0,0.0,rates+spread
+BD-006,Bond,Corporate IG,Issuer-006,Real Estate,North America,A,86200000.0,84653726.0,10.0,fixed,0.0006,0.6,0.5,8.42,0.851,IG,0.0,0.0,0.0,rates+spread
+BD-007,Bond,Sovereign,Issuer-007,Sovereign,North America,AA,61700000.0,59691185.0,5.0,fixed,0.0002,0.6,0.0,4.29,0.221,SOV,0.0,0.0,0.0,rates+spread
+BD-008,Bond,Corporate IG,Issuer-008,Real Estate,North America,BBB,26900000.0,27419566.0,10.0,fixed,0.002,0.6,1.0,8.09,0.785,IG,0.0,0.0,0.0,rates+spread
+BD-009,Bond,Corporate HY,Issuer-009,Technology,Latin America,BB,36700000.0,35896113.0,3.0,fixed,0.009,0.6,1.0,2.46,0.073,HY,0.0,0.0,0.0,rates+spread
+BD-010,Bond,Sovereign,Issuer-010,Sovereign,Latin America,AAA,30100000.0,28170644.0,2.0,fixed,0.0001,0.6,0.0,1.66,0.033,SOV,0.0,0.0,0.0,rates+spread
+BD-011,Bond,Corporate IG,Issuer-011,Industrials,India,A,42800000.0,42369569.0,7.0,fixed,0.0006,0.6,0.5,6.13,0.451,IG,0.0,0.0,0.0,rates+spread
+BD-012,Bond,Sovereign,Issuer-012,Sovereign,North America,AAA,65300000.0,67081624.0,3.0,fixed,0.0001,0.6,0.0,2.65,0.084,SOV,0.0,0.0,0.0,rates+spread
+BD-013,Bond,Sovereign,Issuer-013,Sovereign,North America,AAA,126100000.0,122515148.0,3.0,fixed,0.0001,0.6,0.0,2.45,0.072,SOV,0.0,0.0,0.0,rates+spread
+BD-014,Bond,Corporate IG,Issuer-014,Consumer Discretionary,Asia-Pacific,A,74400000.0,77266688.0,30.0,fixed,0.0006,0.6,0.5,15.88,3.026,IG,0.0,0.0,0.0,rates+spread
+BD-015,Bond,Corporate IG,Issuer-015,Utilities,Asia-Pacific,BBB,85400000.0,88063555.0,2.0,fixed,0.002,0.6,1.0,1.72,0.036,IG,0.0,0.0,0.0,rates+spread
+BD-016,Bond,Corporate IG,Issuer-016,Utilities,India,A,81400000.0,84027786.0,20.0,fixed,0.0006,0.6,0.5,17.94,3.862,IG,0.0,0.0,0.0,rates+spread
+BD-017,Bond,Corporate IG,Issuer-017,Real Estate,North America,BBB,81400000.0,80163900.0,30.0,fixed,0.002,0.6,1.0,17.33,3.604,IG,0.0,0.0,0.0,rates+spread
+BD-018,Bond,Sovereign,Issuer-018,Sovereign,India,AAA,95300000.0,96478623.0,7.0,fixed,0.0001,0.6,0.0,5.9,0.418,SOV,0.0,0.0,0.0,rates+spread
+BD-019,Bond,Sovereign,Issuer-019,Sovereign,India,AA,30500000.0,29923650.0,5.0,fixed,0.0002,0.6,0.0,3.95,0.187,SOV,0.0,0.0,0.0,rates+spread
+BD-020,Bond,Corporate HY,Issuer-020,Energy,North America,B,85500000.0,87433961.0,5.0,fixed,0.035,0.6,1.5,4.39,0.231,HY,0.0,0.0,0.0,rates+spread
+BD-021,Bond,Corporate IG,Issuer-021,Utilities,Asia-Pacific,A,48000000.0,45513540.0,5.0,fixed,0.0006,0.6,0.5,4.43,0.235,IG,0.0,0.0,0.0,rates+spread
+BD-022,Bond,Corporate IG,Issuer-022,Healthcare,Asia-Pacific,A,91400000.0,94330887.0,30.0,fixed,0.0006,0.6,0.5,17.12,3.517,IG,0.0,0.0,0.0,rates+spread
+BD-023,Bond,Corporate IG,Issuer-023,Real Estate,India,BBB,28700000.0,28234494.0,7.0,fixed,0.002,0.6,1.0,5.62,0.379,IG,0.0,0.0,0.0,rates+spread
+BD-024,Bond,Sovereign,Issuer-024,Sovereign,North America,AA,61500000.0,61139544.0,10.0,fixed,0.0002,0.6,0.0,8.57,0.881,SOV,0.0,0.0,0.0,rates+spread
+BD-025,Bond,Corporate IG,Issuer-025,Utilities,North America,BBB,113800000.0,112791676.0,10.0,fixed,0.002,0.6,1.0,8.0,0.768,IG,0.0,0.0,0.0,rates+spread
+BD-026,Bond,Corporate HY,Issuer-026,Utilities,North America,BB,63700000.0,65689734.0,2.0,fixed,0.009,0.6,1.0,1.74,0.036,HY,0.0,0.0,0.0,rates+spread
+BD-027,Bond,Sovereign,Issuer-027,Sovereign,Asia-Pacific,AA,51400000.0,52293430.0,10.0,fixed,0.0002,0.6,0.0,8.33,0.833,SOV,0.0,0.0,0.0,rates+spread
+BD-028,Bond,Corporate IG,Issuer-028,Energy,Europe,BBB,63700000.0,59316846.0,7.0,fixed,0.002,0.6,1.0,5.95,0.425,IG,0.0,0.0,0.0,rates+spread
+BD-029,Bond,Corporate HY,Issuer-029,Real Estate,Latin America,B,42000000.0,40072290.0,7.0,fixed,0.035,0.6,1.5,5.78,0.401,HY,0.0,0.0,0.0,rates+spread
+BD-030,Bond,Sovereign,Issuer-030,Sovereign,India,AAA,94300000.0,95046938.0,10.0,fixed,0.0001,0.6,0.0,8.77,0.923,SOV,0.0,0.0,0.0,rates+spread
+BD-031,Bond,Corporate IG,Issuer-031,Healthcare,India,A,52600000.0,52077314.0,30.0,fixed,0.0006,0.6,0.5,16.25,3.169,IG,0.0,0.0,0.0,rates+spread
+BD-032,Bond,Corporate HY,Issuer-032,Energy,Latin America,B,54600000.0,51398608.0,20.0,fixed,0.035,0.6,1.5,17.22,3.558,HY,0.0,0.0,0.0,rates+spread
+BD-033,Bond,Sovereign,Issuer-033,Sovereign,Latin America,AAA,83300000.0,78865573.0,5.0,fixed,0.0001,0.6,0.0,3.98,0.19,SOV,0.0,0.0,0.0,rates+spread
+BD-034,Bond,Corporate IG,Issuer-034,Healthcare,Europe,BBB,30000000.0,30939119.0,10.0,fixed,0.002,0.6,1.0,7.82,0.734,IG,0.0,0.0,0.0,rates+spread
+BD-035,Bond,Corporate IG,Issuer-035,Financials,Latin America,A,49800000.0,51538293.0,3.0,fixed,0.0006,0.6,0.5,2.67,0.086,IG,0.0,0.0,0.0,rates+spread
+BD-036,Bond,Corporate HY,Issuer-036,Technology,India,BB,87000000.0,80300698.0,5.0,fixed,0.009,0.6,1.0,4.03,0.195,HY,0.0,0.0,0.0,rates+spread
+BD-037,Bond,Sovereign,Issuer-037,Sovereign,Latin America,AA,46500000.0,45970898.0,30.0,fixed,0.0002,0.6,0.0,16.05,3.091,SOV,0.0,0.0,0.0,rates+spread
+BD-038,Bond,Corporate IG,Issuer-038,Technology,Europe,AA,40300000.0,38349651.0,5.0,fixed,0.0002,0.6,0.2,3.88,0.181,IG,0.0,0.0,0.0,rates+spread
+BD-039,Bond,Corporate IG,Issuer-039,Healthcare,Asia-Pacific,BBB,29500000.0,28697047.0,5.0,fixed,0.002,0.6,1.0,4.36,0.228,IG,0.0,0.0,0.0,rates+spread
+BD-040,Bond,Corporate IG,Issuer-040,Energy,North America,BBB,105200000.0,106251262.0,7.0,fixed,0.002,0.6,1.0,6.09,0.445,IG,0.0,0.0,0.0,rates+spread
+BD-041,Bond,Corporate HY,Issuer-041,Healthcare,Asia-Pacific,B,62200000.0,57382736.0,10.0,fixed,0.035,0.6,1.5,8.61,0.89,HY,0.0,0.0,0.0,rates+spread
+BD-042,Bond,Corporate HY,Issuer-042,Healthcare,Europe,BB,17700000.0,17383715.0,3.0,fixed,0.009,0.6,1.0,2.46,0.073,HY,0.0,0.0,0.0,rates+spread
+BD-043,Bond,Corporate IG,Issuer-043,Utilities,Latin America,AA,68100000.0,66782349.0,2.0,fixed,0.0002,0.6,0.2,1.78,0.038,IG,0.0,0.0,0.0,rates+spread
+BD-044,Bond,Corporate IG,Issuer-044,Real Estate,India,BBB,77300000.0,79851714.0,2.0,fixed,0.002,0.6,1.0,1.76,0.037,IG,0.0,0.0,0.0,rates+spread
+BD-045,Bond,Corporate HY,Issuer-045,Real Estate,Latin America,B,106600000.0,104812816.0,30.0,fixed,0.035,0.6,1.5,17.24,3.567,HY,0.0,0.0,0.0,rates+spread
+DV-001,Derivative,Interest rate swap (pay fixed),Dealer-06,Markets,Europe,A,115600000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,21964.0,rates
+DV-002,Derivative,Interest rate swap (pay fixed),Dealer-06,Markets,Europe,AA,96600000.0,0.0,2.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,18354.0,rates
+DV-003,Derivative,Interest rate swap (pay fixed),Dealer-08,Markets,Asia-Pacific,AA,95500000.0,0.0,1.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,45362.5,rates
+DV-004,Derivative,Interest rate swap (pay fixed),Dealer-03,Markets,Asia-Pacific,AA,363800000.0,0.0,1.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,345610.0,rates
+DV-005,Derivative,Interest rate swap (pay fixed),Dealer-05,Markets,North America,A,212700000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,101032.5,rates
+DV-006,Derivative,Interest rate swap (pay fixed),Dealer-04,Markets,Asia-Pacific,A,132300000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,25137.0,rates
+DV-007,Derivative,Interest rate swap (pay fixed),Dealer-07,Markets,Asia-Pacific,AA,151700000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,144115.0,rates
+DV-008,Derivative,Interest rate swap (pay fixed),Dealer-07,Markets,Asia-Pacific,AA,85100000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,16169.0,rates
+DV-009,Derivative,Interest rate swap (pay fixed),Dealer-07,Markets,North America,A,124200000.0,0.0,1.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,58995.0,rates
+DV-010,Derivative,Interest rate swap (pay fixed),Dealer-06,Markets,Europe,A,84200000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,79990.0,rates
+DV-011,Derivative,Interest rate swap (receive fixed),Dealer-02,Markets,Europe,A,102200000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,-19418.0,rates
+DV-012,Derivative,Interest rate swap (receive fixed),Dealer-02,Markets,Asia-Pacific,AA,210200000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,-39938.0,rates
+DV-013,Derivative,Interest rate swap (receive fixed),Dealer-04,Markets,North America,AA,71400000.0,0.0,2.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,-33915.0,rates
+DV-014,Derivative,Interest rate swap (receive fixed),Dealer-08,Markets,Europe,AA,28700000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,-13632.5,rates
+DV-015,Derivative,Equity index total return swap,Dealer-05,Markets,Europe,A,311600000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,equity
+DV-016,Derivative,Equity index total return swap,Dealer-08,Markets,Europe,A,80300000.0,0.0,2.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,equity
+DV-017,Derivative,Equity index total return swap,Dealer-02,Markets,Asia-Pacific,A,87400000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,equity
+DV-018,Derivative,Equity index total return swap,Dealer-03,Markets,Europe,A,106500000.0,0.0,1.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,equity
+DV-019,Derivative,Equity index total return swap,Dealer-03,Markets,Europe,A,241500000.0,0.0,1.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,equity
+DV-020,Derivative,Equity index put option,Dealer-07,Markets,North America,AA,115500000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,-0.449,1.494,0.0,equity
+DV-021,Derivative,Equity index put option,Dealer-02,Markets,North America,A,101400000.0,0.0,2.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,-0.446,1.779,0.0,equity
+DV-022,Derivative,Equity index put option,Dealer-08,Markets,Asia-Pacific,AA,64700000.0,0.0,2.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,-0.462,2.804,0.0,equity
+DV-023,Derivative,Equity index put option,Dealer-04,Markets,North America,AA,60900000.0,0.0,1.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,-0.5,1.559,0.0,equity
+DV-024,Derivative,FX forward (long USD),Dealer-06,Markets,Asia-Pacific,AA,139600000.0,0.0,2.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,fx
+DV-025,Derivative,FX forward (long USD),Dealer-03,Markets,North America,AA,198000000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,fx
+DV-026,Derivative,FX forward (long USD),Dealer-05,Markets,Asia-Pacific,AA,106900000.0,0.0,1.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,fx
+DV-027,Derivative,FX forward (long USD),Dealer-05,Markets,Europe,A,191800000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,fx
+DV-028,Derivative,FX forward (long USD),Dealer-06,Markets,North America,AA,113600000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,fx
+DV-029,Derivative,FX forward (short USD),Dealer-08,Markets,Europe,A,214300000.0,0.0,1.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,-1.0,0.0,0.0,fx
+DV-030,Derivative,FX forward (short USD),Dealer-07,Markets,North America,A,98800000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,-1.0,0.0,0.0,fx
+DV-031,Derivative,FX forward (short USD),Dealer-08,Markets,Europe,A,123300000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,-1.0,0.0,0.0,fx
+DV-032,Derivative,Commodity swap (long oil),Dealer-07,Markets,Europe,AA,167400000.0,0.0,1.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,commodity
+DV-033,Derivative,Commodity swap (long oil),Dealer-01,Markets,Asia-Pacific,AA,171300000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,commodity
+DV-034,Derivative,Commodity swap (long oil),Dealer-04,Markets,Europe,A,218200000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,1.0,0.0,0.0,commodity
+DV-035,Derivative,Credit default swap (protection bought),Dealer-06,Markets,Europe,AA,80600000.0,0.0,10.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,36270.0,credit_spread
+DV-036,Derivative,Credit default swap (protection bought),Dealer-07,Markets,North America,A,154500000.0,0.0,2.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,69525.0,credit_spread
+DV-037,Derivative,Credit default swap (protection bought),Dealer-07,Markets,Asia-Pacific,AA,57300000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,25785.0,credit_spread
+DV-038,Derivative,Credit default swap (protection bought),Dealer-07,Markets,Europe,AA,192200000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,86490.0,credit_spread
+DV-039,Derivative,Credit default swap (protection bought),Dealer-03,Markets,North America,AA,116300000.0,0.0,5.0,n/a,0.0,0.0,0.0,0.0,0.0,IG,0.0,0.0,52335.0,credit_spread
