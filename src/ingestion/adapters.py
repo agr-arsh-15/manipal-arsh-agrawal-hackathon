@@ -134,6 +134,9 @@ class BenzingaAdapter:
     """
     Ingests the Benzinga "Massive Stock News" archive (raw_analyst_ratings.csv), which carries
     timezone-aware publication timestamps and a native ticker per headline.
+
+    By default only headlines tagged with a universe ticker are kept; pass `tickers` to select
+    another set, e.g. index / credit ETFs whose headlines describe market-wide news.
     """
 
     def __init__(
@@ -142,12 +145,14 @@ class BenzingaAdapter:
         universe_config_path: str = "config/universe.yaml",
         text_column: str = "headline",
         start_date: str = "2018-04-01",
+        tickers: Optional[Iterable[str]] = None,
     ):
         self.file_path = file_path
         self.feed = os.path.splitext(os.path.basename(file_path))[0]
         self.text_column = text_column
         self.start_date = pd.Timestamp(start_date, tz="UTC")
-        self.universe_tickers = {e["ticker"].upper() for e in load_universe(universe_config_path)}
+        self.universe_tickers = ({t.upper() for t in tickers} if tickers is not None
+                                 else {e["ticker"].upper() for e in load_universe(universe_config_path)})
 
     def _iter_chunks(self, chunksize: int = 300_000) -> Iterable[pd.DataFrame]:
         cols = [self.text_column, "date", "stock"]

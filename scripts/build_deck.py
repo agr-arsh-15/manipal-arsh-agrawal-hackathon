@@ -204,7 +204,7 @@ def main():
     ev = load("reports/engine_eval.json")
     a = load("reports/module_a_backtest.json")
     b = load("reports/module_b_stress.json")
-    ds = pd.read_csv("data/samples/unified_risk_dataset.csv", usecols=["source", "split", "has_event_label",
+    ds = pd.read_csv("data/samples/unified_risk_dataset.csv", usecols=["source", "split", "impact_scope", "has_event_label",
                                                                        "has_impact_label", "has_sentiment_label"])
     n_signals = sum(1 for _ in open("data/samples/signals.jsonl", encoding="utf-8"))
     fig_module_a()
@@ -268,8 +268,9 @@ def main():
     bullets(c, [
         "<b>No look-ahead anywhere.</b> Chronological train/val/test split; weights formed on day t trade on t+1; "
         "post-16:00 ET headlines roll to the next session.",
-        "<b>Impact = event study.</b> Label = cumulative abnormal return over [0,+1] vs SPY, scaled by the "
-        "stock's own 60-day idiosyncratic volatility, binned into train-set deciles. A 9 means a top-decile surprise.",
+        "<b>Impact = event study, at the right scope.</b> Company news: abnormal return over [0,+1] vs SPY "
+        "÷ 60-day idiosyncratic vol. Market-wide news: the SPY move ÷ its own 60-day vol (a market model would "
+        "net systemic shocks out). Train-set deciles, so a 9 means a top-decile surprise.",
         "<b>Honest labels.</b> Event classes come from BART-MNLI zero-shot reconciled with keyword rules, and a "
         "268-row hand-labelled set is the independent check.",
         "<b>Uncertainty is first-class.</b> The impact head predicts a mean and a variance, so every signal "
@@ -297,11 +298,12 @@ def main():
 
     # 4 · Implementation
     header(c, "Implementation", 4)
-    src_counts = ds.groupby("source").size().to_dict()
+    src_counts = ds.groupby(["source", "impact_scope"]).size().to_dict()
     rows = [("Source", "Rows", "Supplies")]
-    pretty = {"financial_phrasebank": ("FinancialPhraseBank", "human sentiment labels"),
-              "benzinga_news": ("Benzinga news", "events + impact (event study)"),
-              "stock_tweets": ("Stock Tweets", "social events + impact")}
+    pretty = {("financial_phrasebank", "company"): ("FinancialPhraseBank", "human sentiment labels"),
+              ("benzinga_news", "company"): ("Benzinga company news", "events + company impact"),
+              ("benzinga_news", "market"): ("Benzinga market-wide news", "market impact (SPY move)"),
+              ("stock_tweets", "company"): ("Stock Tweets", "social events + impact")}
     for k, (name, what) in pretty.items():
         if k in src_counts:
             rows.append((name, f"{src_counts[k]:,}", what))
@@ -313,8 +315,8 @@ def main():
         c.setFont("Helvetica-Bold" if i == 0 else "Helvetica", 10)
         c.setFillColor(NAVY if i == 0 else HexColor("#1F2933"))
         c.drawString(44, y, r[0])
-        c.drawRightString(230, y, r[1])
-        c.drawString(244, y, r[2])
+        c.drawRightString(262, y, r[1])
+        c.drawString(276, y, r[2])
         y -= 16
     y = para(c, f"Total {len(ds):,} rows · {int(ds.has_sentiment_label.sum()):,} sentiment · "
                 f"{int(ds.has_event_label.sum()):,} event · {int(ds.has_impact_label.sum()):,} impact labels. "
@@ -334,15 +336,18 @@ def main():
     c.roundRect(490, 70, 434, 390, 8, fill=1, stroke=0)
     para(c, "<b>Downstream modules</b>", 506, 448, 400)
     bullets(c, [
-        f"<b>Module A</b>: per-stock EWMA of sentiment (half-life {a['config']['halflife_days']:.0f}d); target "
-        f"w ∝ (1/N)·exp(λ·s), λ={a['config']['tilt_lambda']:.0f}; bounds "
+        f"<b>Module A</b>: per-stock EWMA of {'impact-weighted ' if a['config'].get('impact_weighted') else ''}"
+        f"sentiment (half-life {a['config']['halflife_days']:.0f}d); target "
+        f"w ∝ (1/N)·exp(λ·s), λ={a['config']['tilt_lambda']:g}; bounds "
         f"[{a['config']['min_weight']:.0%}, {a['config']['max_weight']:.0%}]; "
-        f"{a['config']['max_daily_turnover']:.0%} daily turnover budget; {a['config']['cost_bps']:.0f} bps costs.",
+        f"{a['config']['max_daily_turnover']:.0%} daily turnover budget; {a['config']['cost_bps']:.0f} bps costs. "
+        f"λ, half-life and weighting chosen on the in-sample window only ({len(a['parameter_selection']['grid'])}-point grid).",
         f"<b>Module B</b>: synthetic wholesale book of {b['portfolio']['positions']} positions — "
         "corporate loans, IG/HY & sovereign bonds, rates swaps, equity TRS & puts, FX forwards, commodity "
         "swaps, CDS.",
-        "Trigger: impact ≥ 8 and a systemic event type. Shock vector (equity, rates, IG/HY spreads, USD, "
-        "commodities, sector PD multipliers) is scaled by impact/10.",
+        "Trigger: impact ≥ 8, a systemic event type, adverse sentiment and event confidence ≥ 0.6; one "
+        "scenario per event-day. Shock vector (equity, rates, IG/HY spreads, USD, commodities, sector PD "
+        "multipliers) is scaled by impact/10.",
         "Revaluation: bonds by duration + convexity; loans by IFRS 9 ECL with SICR staging (2× PD) and "
         "floating-rate PD uplift; derivatives by DV01 / delta-gamma / CS01; capital via standardised RWA → CET1.",
     ], 506, 420, 404, SMALL, gap=5)
@@ -404,7 +409,7 @@ def main():
         "<b>Capital planning.</b> The CET1 waterfall shows which desks and sectors consume the buffer — the "
         "input for hedging or limit decisions.",
         "<b>Systematic overlay for index products.</b> Module A's tilt is bounded, turnover-capped and "
-        "cost-aware, with a positive, significant IC out-of-sample.",
+        "cost-aware; weighting sentiment by predicted impact beat plain averaging in-sample.",
         f"<b>Audit trail.</b> Every signal keeps source, timestamp, model version and confidence; history "
         f"replay scanned {replay['signals_scanned']:,} signals and triggered {replay['stress_tests_triggered']} "
         "stress tests.",
@@ -420,14 +425,17 @@ def main():
     bullets(c, [
         "<b>Label quality.</b> Event labels are zero-shot + rules (a teacher), so test macro-F1 measures "
         f"agreement with the teacher, not ground truth. {hand_txt}",
-        "<b>Impact is noisy by nature.</b> Daily abnormal returns are dominated by non-news variance; a "
-        "Spearman ρ in the 0.1-0.2 range is typical for headline-level event studies. Intraday prices would sharpen it.",
+        "<b>Impact is noisy by nature.</b> Daily returns are dominated by non-news variance: company-impact ρ is "
+        f"{tr.get('impact_score_company', tr['impact_score'])['spearman_rho']:.2f} on test, and the day-level "
+        f"market-wide label does not yet generalise to the COVID window (ρ "
+        f"{tr.get('impact_score_market', tr['impact_score'])['spearman_rho']:.2f}). Intraday prices would sharpen both.",
         "<b>Data window.</b> Free Benzinga and Stock Tweets data end in mid-2020 and cover 20 large caps; "
         "social posts are sparse outside 2018 H2. GDELT is live but rate-limited.",
         "<b>Module B is a sensitivity model.</b> Linear / quadratic revaluation, a static balance sheet and "
         "a hand-calibrated scenario library; no full revaluation, liquidity or second-round effects.",
-        "<b>Module A is a 2-year backtest</b> on 20 names with simple costs; the edge is small and should "
-        "be validated on a longer, wider universe before any capital is allocated.",
+        f"<b>Module A is a 2-year backtest</b> on 20 names with simple costs; the out-of-sample edge is small "
+        f"(IC t-stat {oos['sentiment_ic']['t_stat']:.1f}, not significant) and needs a longer, wider universe "
+        "before any capital is allocated.",
     ], 36, H - 92, 440, SMALL, gap=8)
     c.setFillColor(LIGHT)
     c.roundRect(500, 70, 424, 390, 8, fill=1, stroke=0)

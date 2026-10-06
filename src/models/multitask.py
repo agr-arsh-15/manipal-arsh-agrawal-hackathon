@@ -93,6 +93,22 @@ def impact_confidence(sigma: np.ndarray, tolerance: float = 1.5) -> np.ndarray:
     return np.array([math.erf(tolerance / (s * math.sqrt(2))) for s in np.atleast_1d(sigma)])
 
 
+def fit_impact_deciles(raw_predictions: np.ndarray) -> List[float]:
+    """Nine knots that split held-out impact predictions into equal-count deciles."""
+    return [round(float(q), 5) for q in np.quantile(raw_predictions, np.linspace(0.1, 0.9, 9))]
+
+
+def to_impact_score(raw: np.ndarray, knots: Optional[List[float]]) -> np.ndarray:
+    """
+    Maps the regression mean onto the 1-10 decile scale the labels were built on. The Gaussian
+    head shrinks toward the centre when news is ambiguous, so without this the score rarely
+    leaves 4-7; rank order (and Spearman) is unchanged.
+    """
+    if not knots:
+        return np.clip(np.round(raw), 1, 10).astype(int)
+    return (1 + np.searchsorted(np.asarray(knots), raw, side="right")).astype(int)
+
+
 class RiskModelPredictor:
     """Loads a trained checkpoint and runs batched inference on raw strings."""
 
@@ -122,12 +138,14 @@ class RiskModelPredictor:
             imp_sigma.append(torch.exp(0.5 * out["impact_log_var"].float()).cpu().numpy())
         probs = np.vstack(ev_probs) if ev_probs else np.zeros((0, len(self.labels)))
         sigma = np.concatenate(imp_sigma) if imp_sigma else np.zeros(0)
+        raw = np.concatenate(imp_mu) if imp_mu else np.zeros(0)
         return {
             "sentiment": np.concatenate(sent) if sent else np.zeros(0),
             "event_probs": probs,
             "event_type": np.array([self.labels[j] for j in probs.argmax(1)]),
             "event_confidence": probs.max(1) if len(probs) else np.zeros(0),
-            "impact_raw": np.concatenate(imp_mu) if imp_mu else np.zeros(0),
+            "impact_raw": raw,
+            "impact_score": to_impact_score(raw, self.config.get("impact_deciles")),
             "impact_sigma": sigma,
             "impact_confidence": impact_confidence(sigma) if len(sigma) else np.zeros(0),
         }

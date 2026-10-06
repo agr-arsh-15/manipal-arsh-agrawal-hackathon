@@ -2,7 +2,8 @@
 Module B: event-driven stress testing of a synthetic wholesale-banking portfolio.
 
 Subscribes to `event_type` and `impact_score`. When a signal crosses the trigger (default:
-impact_score > 7 for a configured event type) the matching scenario from
+impact_score > 7 for a configured event type, adverse sentiment and a confident event
+classification) the matching scenario from
 config/stress_scenarios.yaml is scaled by severity = impact_score / 10 and applied:
 
   Bonds        dP = MV * (-D_mod * dy + 0.5 * C * dy^2), dy = rates + spread shock by bucket
@@ -65,7 +66,9 @@ class StressTestEngine:
     # ---- subscription -------------------------------------------------------------------
     def should_trigger(self, signal: Signal) -> bool:
         return (signal.impact_score >= self.trigger["min_impact"]
-                and signal.event_type in self.trigger["event_types"])
+                and signal.event_type in self.trigger["event_types"]
+                and signal.sentiment_score < self.trigger.get("max_sentiment", 1.0)
+                and signal.event_confidence >= self.trigger.get("min_event_confidence", 0.0))
 
     def shock_for(self, event_type: str, impact_score: float) -> Shock:
         spec = self.scenarios.get(event_type, self.scenarios["Other/None"])
@@ -172,12 +175,23 @@ class StressTestEngine:
         return result
 
     def scan(self, signals: Iterable[Signal]) -> pd.DataFrame:
-        """Replays a signal stream and records every stress test it would have triggered."""
-        rows = []
-        cache: Dict[tuple, Dict] = {}
+        """
+        Replays a signal stream and records every stress test it would have triggered. Several
+        headlines about the same event type on the same day are one event: only the most severe
+        (then most confident) signal of each (day, event_type) runs a scenario.
+        """
+        events: Dict[tuple, Signal] = {}
         for s in signals:
             if not self.should_trigger(s):
                 continue
+            day_key = (s.timestamp.date(), s.event_type)
+            best = events.get(day_key)
+            if best is None or (s.impact_score, s.event_confidence) > (best.impact_score, best.event_confidence):
+                events[day_key] = s
+
+        rows = []
+        cache: Dict[tuple, Dict] = {}
+        for s in events.values():
             key = (s.event_type, s.impact_score)
             if key not in cache:
                 cache[key] = self.run(self.shock_for(*key))

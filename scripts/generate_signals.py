@@ -5,11 +5,13 @@ stream that Module A and Module B consume (data/samples/signals.jsonl).
     python -m scripts.generate_signals [--backend auto|transformer|baseline]
 """
 import argparse
+import re
 from collections import Counter
 
 import pandas as pd
 import yaml
 
+from scripts.build_unified_dataset import HOLDINGS_LIST
 from src.engine.pipeline import RiskEngine
 from src.engine.store import SignalStore
 from src.ingestion.adapters import BenzingaAdapter, StockTweetsAdapter
@@ -21,6 +23,8 @@ def collect_documents(cfg: dict):
     candidates = []
     for feed in ds["benzinga_feeds"]:
         candidates += BenzingaAdapter(feed["path"], start_date=ds["start_date"]).load_documents()
+        market = BenzingaAdapter(feed["path"], start_date=ds["start_date"], tickers=ds["market_proxies"])
+        candidates += [d for d in market.load_documents() if not re.search(HOLDINGS_LIST, d.text)]
     start = pd.Timestamp(ds["start_date"], tz="UTC")
     candidates += [d for d in StockTweetsAdapter(ds["tweets_path"]).load_documents() if d.published_at >= start]
     candidates += GdeltAdapter().load_snapshot()
@@ -49,6 +53,7 @@ def main(backend: str):
     print("By source:", dict(Counter(s.source for s in signals)))
     print("By event_type:", dict(Counter(s.event_type for s in signals).most_common()))
     print("Impact > 7:", sum(s.impact_score > 7 for s in signals))
+    print("Event-level (no ticker):", sum(s.ticker is None for s in signals))
 
 
 if __name__ == "__main__":

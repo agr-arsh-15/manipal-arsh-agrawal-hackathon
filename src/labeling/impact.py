@@ -125,6 +125,24 @@ class MarketImpactEngine:
         z_score = abs(car) / (sigma_resid * np.sqrt(len(event_stock_returns)))
         return float(z_score)
 
+    def compute_market_move(self, pub_date: datetime) -> Optional[float]:
+        """
+        Severity of a market-wide headline: |R_SPY[0, +1]| / (sigma_SPY * sqrt(2)), with sigma
+        from the 60 sessions before the event. Abnormal returns cannot score systemic news
+        because the market model nets the market's own move out.
+        """
+        try:
+            spy_df = self._load_price_history(self.benchmark_ticker)
+        except Exception:
+            return None
+        dates = spy_df["date"].tolist()
+        idx = bisect.bisect_left(dates, self.effective_event_date(pub_date))
+        if idx < self.vol_lookback or idx + 1 >= len(dates):
+            return None
+        sigma = np.std(spy_df.iloc[idx - self.vol_lookback: idx]["return"].values, ddof=1)
+        move = np.sum(spy_df.iloc[idx: idx + 2]["return"].values)
+        return float(abs(move) / (max(sigma, 1e-4) * np.sqrt(2)))
+
     def fit_bins(self, z_scores: list) -> np.ndarray:
         """Fits decile thresholds on historical training observations."""
         clean = [z for z in z_scores if z is not None and not np.isnan(z)]

@@ -182,28 +182,32 @@ with tab_engine:
 with tab_a:
     st.subheader("Tactical index rebalancing from real-time sentiment")
     st.write("A 20-stock mock index starts equal-weighted. Each session the engine's company-level "
-             "`sentiment_score` updates an EWMA state per stock; weights tilt as "
-             "w ∝ exp(λ · sentiment) within per-name bounds and a daily turnover budget. "
-             "Weights set after a session's news only earn the following session's return.")
+             "`sentiment_score` (weighted by each headline's predicted `impact_score`) updates an EWMA "
+             "state per stock; weights tilt as w ∝ exp(λ · sentiment) within per-name bounds and a daily "
+             "turnover budget. Weights set after a session's news only earn the following session's return. "
+             "Defaults are the parameters selected on the in-sample window (before 2019-11-01).")
 
+    chosen = load_json("reports/module_a_backtest.json").get("config", {})
     with st.expander("Strategy parameters", expanded=False):
-        p1, p2, p3, p4 = st.columns(4)
-        lam = p1.slider("Tilt strength λ", 0.5, 8.0, 3.0, 0.5)
-        hl = p2.slider("Sentiment half-life (days)", 1.0, 20.0, 5.0, 1.0)
-        wmax = p3.slider("Max weight per stock", 0.06, 0.25, 0.12, 0.01)
-        to = p4.slider("Max daily turnover", 0.02, 0.30, 0.10, 0.01)
+        p1, p2, p3, p4, p5 = st.columns(5)
+        lam = p1.slider("Tilt strength λ", 0.5, 8.0, float(chosen.get("tilt_lambda", 3.0)), 0.5)
+        hl = p2.slider("Sentiment half-life (days)", 1.0, 20.0, float(chosen.get("halflife_days", 5.0)), 1.0)
+        wmax = p3.slider("Max weight per stock", 0.06, 0.25, float(chosen.get("max_weight", 0.12)), 0.01)
+        to = p4.slider("Max daily turnover", 0.02, 0.30, float(chosen.get("max_daily_turnover", 0.10)), 0.01)
+        iw = p5.checkbox("Impact-weighted sentiment", value=bool(chosen.get("impact_weighted", True)))
 
     @st.cache_data(show_spinner="Backtesting...")
-    def backtest(lam, hl, wmax, to, mtime):
+    def backtest(lam, hl, wmax, to, iw, mtime):
         signals = SignalStore(SIGNALS).read()
         out = run_backtest(signals, "2018-04-02", "2020-06-10", OOS_START,
-                           RebalancerConfig(tilt_lambda=lam, halflife_days=hl, max_weight=wmax, max_daily_turnover=to))
+                           RebalancerConfig(tilt_lambda=lam, halflife_days=hl, max_weight=wmax,
+                                            max_daily_turnover=to, impact_weighted=iw))
         return out["report"], out["nav"], out["weights"], out["sentiment_state"]
 
     if sig_df.empty:
         st.info("Generate the signal stream first.")
     else:
-        report, nav, weights, state = backtest(lam, hl, wmax, to, os.path.getmtime(SIGNALS))
+        report, nav, weights, state = backtest(lam, hl, wmax, to, iw, os.path.getmtime(SIGNALS))
         oos = report["out_of_sample"]
         k1, k2, k3, k4, k5 = st.columns(5)
         k1.metric("Excess return (out-of-sample)", f"{oos['active']['excess_total_return']:+.2%}")
@@ -212,7 +216,7 @@ with tab_a:
                   f"{oos['strategy']['sharpe'] - oos['equal_weight_benchmark']['sharpe']:+.2f}")
         k4.metric("Sentiment IC (OOS)", f"{oos['sentiment_ic']['mean']:.3f}", f"t = {oos['sentiment_ic']['t_stat']:.2f}",
                   delta_color="off")
-        k5.metric("Avg daily turnover", f"{report['full_period']['avg_daily_turnover']:.2%}")
+        k5.metric("Avg daily turnover (OOS)", f"{oos['avg_daily_turnover']:.2%}")
 
         spy = prices()["SPY"].loc[nav.index]
         fig = go.Figure()
@@ -251,7 +255,8 @@ with tab_b:
     stress = get_stress()
     st.subheader("Event-driven stress testing of a wholesale banking portfolio")
     st.write(f"Subscribes to `event_type` and `impact_score`. A signal with impact ≥ "
-             f"{stress.trigger['min_impact']} in {', '.join(stress.trigger['event_types'])} triggers the matching "
+             f"{stress.trigger['min_impact']} in {', '.join(stress.trigger['event_types'])}, with adverse sentiment "
+             f"and event confidence ≥ {stress.trigger.get('min_event_confidence', 0):.0%}, triggers the matching "
              "scenario, scaled by impact / 10, across loans (ECL with IFRS 9 staging), bonds (duration + convexity) "
              "and derivatives (sensitivities).")
 
@@ -353,7 +358,11 @@ with tab_perf:
         rows = []
         for task, metrics in [("sentiment", ["pearson_r", "mae", "macro_f1"]),
                               ("event_type", ["macro_f1", "weighted_f1", "accuracy"]),
-                              ("impact_score", ["spearman_rho", "mae", "high_impact_precision", "high_impact_recall"])]:
+                              ("impact_score", ["spearman_rho", "mae", "high_impact_precision", "high_impact_recall"]),
+                              ("impact_score_company", ["spearman_rho", "high_impact_precision"]),
+                              ("impact_score_market", ["spearman_rho", "high_impact_precision"])]:
+            if task not in ev["test"]["baseline"]:
+                continue
             for m in metrics:
                 rows.append({"task": task, "metric": m,
                              "baseline": ev["test"]["baseline"][task].get(m),
@@ -380,5 +389,5 @@ with tab_perf:
             st.subheader("Human-labelled evaluation set")
             st.json(ev["hand_labelled"])
         if ev.get("latency"):
-            st.subheader("Inference latency (single headline)")
-            st.json(ev["latency"])
+            st.subheader("Inference latency")
+            st.dataframe(pd.DataFrame(ev["latency"]).T.rename_axis("backend / device"), width="stretch")

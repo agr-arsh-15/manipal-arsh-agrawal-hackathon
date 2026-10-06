@@ -32,11 +32,13 @@ class _BaselineBackend:
         probs = self.suite.model_event.predict_proba(X_e)
         classes = self.suite.model_event.classes_
         sigma = np.full(len(texts), BASELINE_IMPACT_SIGMA)
+        impact = self.suite.predict_impact(texts)
         return {
             "sentiment": self.suite.predict_sentiment(texts),
             "event_type": classes[probs.argmax(1)],
             "event_confidence": probs.max(1),
-            "impact_raw": self.suite.predict_impact(texts),
+            "impact_raw": impact,
+            "impact_score": np.clip(np.round(impact), 1, 10).astype(int),
             "impact_sigma": sigma,
             "impact_confidence": np.array([math.erf(1.5 / (s * math.sqrt(2))) for s in sigma]),
         }
@@ -97,7 +99,7 @@ class RiskEngine:
                         sentiment_label=labels[i],
                         event_type=str(preds["event_type"][i]),
                         event_confidence=round(float(preds["event_confidence"][i]), 4),
-                        impact_score=int(np.clip(round(float(preds["impact_raw"][i])), 1, 10)),
+                        impact_score=int(preds["impact_score"][i]),
                         impact_confidence=round(float(preds["impact_confidence"][i]), 4),
                         text_excerpt=doc.text[:200],
                         model_version=self.model_version,

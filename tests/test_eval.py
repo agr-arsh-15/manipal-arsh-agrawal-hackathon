@@ -23,6 +23,16 @@ def test_impact_high_impact_precision_recall():
     assert m["high_impact_recall"] == 0.5
 
 
+def test_impact_deciles_map_compressed_raw_output_onto_full_scale():
+    from src.models.multitask import fit_impact_deciles, to_impact_score
+    raw = np.linspace(5.0, 7.0, 1001)
+    knots = fit_impact_deciles(raw)
+    scores = to_impact_score(raw, knots)
+    assert scores.min() == 1 and scores.max() == 10
+    assert np.all(np.diff(scores) >= 0)
+    assert np.array_equal(to_impact_score(np.array([0.2, 6.4, 12.0]), None), [1, 6, 10])
+
+
 def test_impact_calibration_buckets_predictions():
     df = pd.DataFrame({"pred": [1.2, 1.4, 8.6, 9.2], "true": [2, 4, 9, 7]})
     cal = {c["predicted_bucket"]: c for c in evaluate.impact_calibration(df)}

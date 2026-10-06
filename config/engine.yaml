@@ -35,6 +35,9 @@ dataset:
   tweets_path: "data/raw/stock_tweets/reduced_dataset-release.csv"
   tweets_max_rows: 4000
   start_date: "2018-04-01"
+  # Benzinga headlines tagged to index / credit / commodity ETFs describe market-wide news.
+  # They are labelled with the SPY move (market scope) rather than an abnormal return.
+  market_proxies: ["SPY", "QQQ", "DIA", "IWM", "XLF", "HYG", "LQD", "TLT", "EEM", "GLD", "USO", "VXX"]
 
 impact:
   event_window_days: [0, 1]

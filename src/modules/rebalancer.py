@@ -3,7 +3,8 @@ Module A: tactical index rebalancing driven by the engine's sentiment_score.
 
 The mock index is the 20-name universe in config/universe.yaml. Each day the module:
 
-  1. aggregates that day's company signals into a mean sentiment per ticker,
+  1. aggregates that day's company signals into one sentiment per ticker (optionally
+     weighted by each headline's predicted impact_score),
   2. updates an exponentially-weighted sentiment state (no news decays toward neutral),
   3. tilts weights away from equal-weight: w_i ∝ (1/N) · exp(λ · s_i),
   4. enforces per-name bounds and a daily turnover budget, and
@@ -34,6 +35,7 @@ class RebalancerConfig:
     max_daily_turnover: float = 0.10  # one-way fraction of the book that may trade per day
     cost_bps: float = 5.0             # transaction cost per unit of one-way turnover
     min_signal_confidence: float = 0.0
+    impact_weighted: bool = False     # weight each headline's sentiment by its predicted impact_score
 
 
 def load_universe(path: str = "config/universe.yaml") -> List[str]:
@@ -63,21 +65,27 @@ def project_to_bounds(w: np.ndarray, lo: float, hi: float, iters: int = 50) -> n
     return w / w.sum()
 
 
-def daily_sentiment_matrix(signals: Iterable[Signal], tickers: List[str],
-                           trading_days: pd.DatetimeIndex, min_conf: float = 0.0) -> pd.DataFrame:
-    """Mean sentiment per (session, ticker); a headline counts on the first session that can react to it."""
+def daily_sentiment_matrix(signals: Iterable[Signal], tickers: List[str], trading_days: pd.DatetimeIndex,
+                           min_conf: float = 0.0, impact_weighted: bool = False) -> pd.DataFrame:
+    """
+    Sentiment per (session, ticker); a headline counts on the first session that can react to it.
+    With impact weighting, headlines the engine expects to move the stock dominate routine chatter.
+    """
     rows = []
     for s in signals:
         if s.ticker not in tickers or s.entity_type != "company" or s.event_confidence < min_conf:
             continue
-        rows.append((pd.Timestamp(MarketImpactEngine.effective_event_date(s.timestamp)), s.ticker, s.sentiment_score))
+        weight = float(s.impact_score) if impact_weighted else 1.0
+        rows.append((pd.Timestamp(MarketImpactEngine.effective_event_date(s.timestamp)), s.ticker,
+                     s.sentiment_score * weight, weight))
     if not rows:
         return pd.DataFrame(np.nan, index=trading_days, columns=tickers)
-    df = pd.DataFrame(rows, columns=["date", "ticker", "sentiment"])
+    df = pd.DataFrame(rows, columns=["date", "ticker", "weighted", "weight"])
     pos = trading_days.searchsorted(df["date"])
     df = df[pos < len(trading_days)]
     df["session"] = trading_days[pos[pos < len(trading_days)]]
-    mat = df.pivot_table(index="session", columns="ticker", values="sentiment", aggfunc="mean")
+    sums = df.groupby(["session", "ticker"])[["weighted", "weight"]].sum()
+    mat = (sums["weighted"] / sums["weight"]).unstack("ticker")
     return mat.reindex(index=trading_days, columns=tickers)
 
 
@@ -106,7 +114,8 @@ class SentimentRebalancer:
         px = prices.loc[start:end, self.tickers].dropna(how="any")
         rets = px.pct_change().fillna(0.0)
         days = px.index
-        sent = daily_sentiment_matrix(signals, self.tickers, days, self.cfg.min_signal_confidence)
+        sent = daily_sentiment_matrix(signals, self.tickers, days, self.cfg.min_signal_confidence,
+                                      self.cfg.impact_weighted)
 
         n = len(self.tickers)
         w = np.full(n, 1.0 / n)

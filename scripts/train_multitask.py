@@ -1,7 +1,7 @@
 """
 Gate 4: fine-tunes the multi-task DistilRoBERTa risk model on the unified dataset.
 
-    python -m scripts.train_multitask [--epochs N] [--limit N]
+    python -m scripts.train_multitask [--epochs N] [--limit N] [--calibrate-only]
 
 Uses the `split` column from build_unified_dataset.py (chronological for dated sources), so
 the test period is never seen during training or model selection. The best epoch by a
@@ -22,10 +22,15 @@ from sklearn.metrics import f1_score
 from torch.utils.data import DataLoader, Dataset
 from transformers import AutoTokenizer, get_linear_schedule_with_warmup
 
-from src.models.multitask import MultiTaskRiskModel, masked_multitask_loss
+from src.models.multitask import MultiTaskRiskModel, RiskModelPredictor, fit_impact_deciles, masked_multitask_loss
 from src.utils import resolve_device
 
 DATASET = "data/samples/unified_risk_dataset.csv"
+
+
+def load_config() -> dict:
+    with open("config/engine.yaml", "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
 
 
 def set_seed(seed: int):
@@ -110,8 +115,7 @@ def evaluate(model, loader, device, labels):
 
 
 def train(epochs: int = None, limit: int = None):
-    with open("config/engine.yaml", "r", encoding="utf-8") as f:
-        cfg = yaml.safe_load(f)
+    cfg = load_config()
     mcfg = cfg["model"]
     seed = cfg["engine"]["random_seed"]
     set_seed(seed)
@@ -203,11 +207,32 @@ def train(epochs: int = None, limit: int = None):
     os.makedirs("reports", exist_ok=True)
     with open("reports/training_history.json", "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2)
+    calibrate_impact(out_dir, va)
+
+
+def calibrate_impact(out_dir: str, va: pd.DataFrame):
+    """Fits decile knots for the impact score on validation predictions of the best checkpoint."""
+    predictor = RiskModelPredictor(out_dir)
+    texts = va.loc[va["has_impact_label"].astype(bool), "text"].tolist()
+    knots = fit_impact_deciles(predictor.predict(texts)["impact_raw"])
+    path = os.path.join(out_dir, "config.json")
+    with open(path, "r", encoding="utf-8") as f:
+        config = json.load(f)
+    config["impact_deciles"] = knots
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(config, f, indent=2)
+    print(f"Impact decile knots (fitted on {len(texts)} validation rows): {knots}")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--epochs", type=int, default=None)
     parser.add_argument("--limit", type=int, default=None, help="rows per split, for smoke tests")
+    parser.add_argument("--calibrate-only", action="store_true",
+                        help="refit the impact decile knots for an existing checkpoint")
     args = parser.parse_args()
-    train(args.epochs, args.limit)
+    if args.calibrate_only:
+        frame = pd.read_csv(DATASET)
+        calibrate_impact(load_config()["model"]["checkpoint_dir"], frame[frame["split"] == "val"])
+    else:
+        train(args.epochs, args.limit)

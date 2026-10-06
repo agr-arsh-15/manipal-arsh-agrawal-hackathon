@@ -31,8 +31,12 @@ def evaluate_predictor(predict: Callable[[List[str]], Dict[str, np.ndarray]], te
 
     i = test[test["has_impact_label"]]
     pi = predict(i["text"].tolist())
-    out["impact_score"] = impact_metrics(i["impact_score"].values, np.clip(np.round(pi["impact_raw"]), 1, 10))
-    out["_impact_predictions"] = pd.DataFrame({"pred": pi["impact_raw"], "true": i["impact_score"].values,
+    out["impact_score"] = impact_metrics(i["impact_score"].values, pi["impact_score"])
+    if "impact_scope" in i.columns:
+        for scope in sorted(i["impact_scope"].dropna().unique()):
+            m = (i["impact_scope"] == scope).values
+            out[f"impact_score_{scope}"] = impact_metrics(i["impact_score"].values[m], pi["impact_score"][m])
+    out["_impact_predictions"] = pd.DataFrame({"pred": pi["impact_score"], "true": i["impact_score"].values,
                                                "conf": pi.get("impact_confidence", np.full(len(i), np.nan))})
     return out
 

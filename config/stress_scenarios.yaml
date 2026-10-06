@@ -10,6 +10,10 @@
 trigger:
   min_impact: 8            # "impact_score > 7"
   event_types: ["Geopolitical", "Macroeconomic", "Credit Event", "Operational/Supply-chain", "Regulatory/Legal"]
+  # A stress test answers "what if this adverse event hits the book": benign high-impact news
+  # (e.g. deregulation relief) and low-confidence classifications should not fire it.
+  max_sentiment: 0.0       # only adverse (negative-tone) signals
+  min_event_confidence: 0.6
 
 capital:
   cet1_ratio_start: 0.125          # synthetic starting CET1 ratio

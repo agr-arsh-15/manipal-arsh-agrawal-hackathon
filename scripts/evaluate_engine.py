@@ -102,7 +102,11 @@ def write_markdown(report: dict, path: str):
     for task, metrics in [("sentiment", ["n", "pearson_r", "mae", "macro_f1"]),
                           ("event_type", ["n", "macro_f1", "weighted_f1", "accuracy"]),
                           ("impact_score", ["n", "spearman_rho", "mae", "high_impact_precision",
-                                            "high_impact_recall", "high_impact_base_rate"])]:
+                                            "high_impact_recall", "high_impact_base_rate"]),
+                          ("impact_score_company", ["n", "spearman_rho", "high_impact_precision"]),
+                          ("impact_score_market", ["n", "spearman_rho", "high_impact_precision"])]:
+        if task not in t[models[0]]:
+            continue
         for m in metrics:
             lines.append(f"| {task} | {m} | " + " | ".join(str(t[k][task].get(m)) for k in models) + " |")
     lines += ["", "## Human-labelled event set", "", "```json", json.dumps(report["hand_labelled"], indent=2), "```",

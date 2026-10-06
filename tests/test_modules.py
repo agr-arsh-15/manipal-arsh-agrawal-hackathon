@@ -63,6 +63,26 @@ def test_trigger_rule(stress):
     assert stress.should_trigger(make_signal(None, -0.8, ts, "Geopolitical", 9))
     assert not stress.should_trigger(make_signal(None, -0.8, ts, "Geopolitical", 7))
     assert not stress.should_trigger(make_signal(None, -0.8, ts, "Product Launch", 10))
+    assert not stress.should_trigger(make_signal(None, 0.6, ts, "Macroeconomic", 9))  # benign news
+
+
+def test_scan_runs_one_scenario_per_event_day(stress):
+    ts = datetime(2020, 3, 9, 14, tzinfo=timezone.utc)
+    same_day = [make_signal(None, -0.7, ts, "Macroeconomic", 8), make_signal(None, -0.9, ts, "Macroeconomic", 10),
+                make_signal(None, -0.5, ts, "Geopolitical", 9)]
+    out = stress.scan(same_day)
+    assert len(out) == 2
+    assert out.loc[out["event_type"] == "Macroeconomic", "impact_score"].item() == 10
+
+
+def test_impact_weighting_lets_high_impact_news_dominate():
+    from src.modules.rebalancer import daily_sentiment_matrix
+    ts = datetime(2020, 3, 2, 14, tzinfo=timezone.utc)
+    sigs = [make_signal("AAPL", 0.8, ts, impact=9), make_signal("AAPL", -0.8, ts, impact=1)]
+    days = pd.DatetimeIndex(["2020-03-02"])
+    plain = daily_sentiment_matrix(sigs, ["AAPL"], days).iloc[0, 0]
+    weighted = daily_sentiment_matrix(sigs, ["AAPL"], days, impact_weighted=True).iloc[0, 0]
+    assert abs(plain) < 1e-9 and weighted > 0.6
 
 
 def test_shock_scales_with_impact(stress):
