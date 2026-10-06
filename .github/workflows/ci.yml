@@ -47,8 +47,17 @@ jobs:
           path: models/risk_engine
           key: risk-engine-${{ hashFiles('config/engine.yaml') }}
 
+      # Anonymous download is what reviewers use; while the repo is private it needs the token.
       - name: Download fine-tuned model
-        run: python run.py fetch-model
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python run.py fetch-model || {
+            echo "Anonymous download failed; retrying with gh release download"
+            gh release download v1.0.0 --repo "$GITHUB_REPOSITORY" -p 'risk_engine-*.zip' -D dist --clobber
+            python run.py fetch-model --url dist/risk_engine-v1.0.0.zip
+          }
 
       - name: Smoke test (fine-tuned transformer)
         run: python run.py smoke --backend transformer
