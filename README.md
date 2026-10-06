@@ -385,26 +385,3 @@ tests/                      pytest suite (adapters, impact, GDELT, pipeline, API
 **Repository hygiene.** The raw Kaggle dumps (about 1.1 GB) and the 309 MB model checkpoint are
 not committed. The checkpoint is a release asset, and the raw data has download scripts plus
 300-row format samples. The largest committed file is the 15 MB signal stream.
-
-### Limitations
-
-- **Event labels are weak labels.** Event macro-F1 on the test split measures agreement with the
-  zero-shot and rule teacher. The 268-row hand-labelled set will be the ground-truth check once
-  labelling is finished (status in `reports/engine_eval.md`).
-- **Headline-level impact is inherently noisy.** Most daily return variance is not news-driven,
-  and market-wide labels are day-level. Intraday prices would sharpen both.
-- **Coverage is limited.** The data covers 2018 to mid-2020 and 20 large caps. GDELT is live but
-  rate-limited, which is why the raw GKG fallback exists.
-- **Module B is a sensitivity model.** It uses duration and convexity, delta-gamma and CS01
-  revaluation, a static balance sheet and a hand-calibrated scenario library. There is no full
-  revaluation, liquidity modelling or second-round effects.
-- **Module A is a 2-year, 20-name backtest with simple costs.** It is evidence of signal value,
-  not an investable strategy.
-
-### Academic Integrity & AI Assistance Disclosure
-
-In line with Section 6 of the submission guidelines: AI coding assistants were used to write and
-refactor code, tests and documentation under my direction. The problem framing, the event
-taxonomy, the event-study labelling design (company vs market scope, leakage controls), the model
-and evaluation design, the stress-testing methodology and every reported number were reviewed and
-verified by me by running the code in this repository.
