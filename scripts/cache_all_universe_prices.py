@@ -5,7 +5,7 @@ import yfinance as yf
 import pandas as pd
 
 def cache_universe():
-    with open("config/universe.yaml", "r") as f:
+    with open("config/universe.yaml", "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
     tickers = [entry["ticker"] for entry in data["universe"]]
     tickers = ["SPY", "^VIX"] + tickers

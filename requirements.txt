@@ -9,6 +9,7 @@ numpy==2.4.6
 scipy==1.17.1
 requests==2.34.2
 tqdm==4.70.1
+tzdata==2026.5   # IANA time zones for zoneinfo; Windows has no system tz database
 
 # Market data (only needed to re-download prices; cached CSVs ship in data/prices)
 yfinance==1.7.0

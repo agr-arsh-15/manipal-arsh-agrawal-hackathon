@@ -1,49 +1,19 @@
-.PHONY: setup data label train evaluate signals modules dashboard api deck test clean
+# Convenience aliases for macOS / Linux. Every target delegates to run.py, which also works on
+# Windows:  python run.py <task>
+.PHONY: setup fetch-model test smoke dashboard api evaluate signals modules deck train data label clean
 
-PYTHON = python3.11
+PYTHON ?= python3.11
 VENV = .venv
 PY = $(VENV)/bin/python
-OFFLINE = HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false TRANSFORMERS_VERBOSITY=error
 
 setup:
 	$(PYTHON) -m venv $(VENV)
-	$(VENV)/bin/pip install --upgrade pip
-	$(VENV)/bin/pip install -r requirements.txt
+	$(PY) -m pip install --upgrade pip
+	$(PY) -m pip install -r requirements.txt
 
-# Rebuild the labelled training table from data/raw (needs the Kaggle downloads)
-data:
-	$(PY) -m scripts.build_unified_dataset
-
-# Zero-shot BART-MNLI event labels (slow: ~1 hour on Apple MPS), then merge into the dataset
-label:
-	$(PY) -m scripts.relabel_events_zeroshot
-
-train:
-	$(OFFLINE) $(PY) -m scripts.train_multitask
-
-evaluate:
-	$(OFFLINE) $(PY) -m scripts.evaluate_engine
-
-signals:
-	$(OFFLINE) $(PY) -m scripts.generate_signals
-
-modules:
-	$(PY) -m scripts.build_synthetic_portfolio
-	$(PY) -m scripts.run_module_a
-	$(PY) -m scripts.run_module_b
-
-dashboard:
-	$(OFFLINE) $(VENV)/bin/streamlit run app/dashboard.py
-
-api:
-	$(OFFLINE) $(VENV)/bin/uvicorn src.api.main:app --host 0.0.0.0 --port 8000
-
-deck:
-	$(PY) -m scripts.build_deck
-	dot -Tpng docs/architecture.dot -o docs/architecture.png
-
-test:
-	$(VENV)/bin/pytest tests/ -q
+fetch-model test smoke dashboard api evaluate signals modules deck train data label:
+	$(PY) run.py $@
 
 clean:
-	rm -rf __pycache__ .pytest_cache
+	rm -rf .pytest_cache .cache dist
+	find . -name __pycache__ -type d -prune -not -path "./.venv/*" -exec rm -rf {} +

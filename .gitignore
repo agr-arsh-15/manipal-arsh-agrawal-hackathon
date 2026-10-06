@@ -27,8 +27,10 @@ models/baseline/*
 !models/baseline/*.joblib
 !models/baseline/*.json
 
-# Local previews
+# Local previews, caches and release packaging
 .deck_preview/
+.cache/
+dist/
 
 # Logs / runs
 runs/
@@ -41,7 +43,8 @@ wandb/
 .idea/
 .omni/
 .claude/
-.github/
+.github/*
+!.github/workflows/
 .cursor/
 .kiro/
 .agents/

@@ -31,7 +31,7 @@ def test_live_fetch_normalises_and_snapshots(tmp_path, monkeypatch):
 
 def test_falls_back_to_snapshot_when_offline(tmp_path, monkeypatch):
     snapshot = tmp_path / "gdelt.json"
-    snapshot.write_text(json.dumps([dict(FAKE_ARTICLES[0], _query="inflation")]))
+    snapshot.write_text(json.dumps([dict(FAKE_ARTICLES[0], _query="inflation")]), encoding="utf-8")
     adapter = GdeltAdapter(snapshot_path=str(snapshot), min_interval_s=0)
 
     def offline(*args, **kwargs):

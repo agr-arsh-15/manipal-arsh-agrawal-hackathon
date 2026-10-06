@@ -1,0 +1,17 @@
+# Keep LF line endings on every OS so data files and hashes are identical on Windows checkouts.
+* text=auto eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.csv text eol=lf
+*.jsonl text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.dot text eol=lf
+
+*.joblib binary
+*.pt binary
+*.safetensors binary
+*.png binary
+*.pdf binary
+*.zip binary
