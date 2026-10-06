@@ -59,5 +59,9 @@ jobs:
             python run.py fetch-model --url dist/risk_engine-v1.0.0.zip
           }
 
+      # GitHub's virtualised macOS runners expose MPS but return different scores from CPU (an
+      # Apple-silicon laptop's MPS matches CPU). CPU matches Streamlit Cloud and the other runners.
       - name: Smoke test (fine-tuned transformer)
+        env:
+          RISK_ENGINE_DEVICE: cpu
         run: python run.py smoke --backend transformer

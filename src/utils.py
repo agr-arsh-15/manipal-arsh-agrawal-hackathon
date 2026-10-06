@@ -1,7 +1,11 @@
+import os
+
 import torch
 
 
 def resolve_device(device: str = "auto") -> str:
+    if device == "auto":
+        device = os.environ.get("RISK_ENGINE_DEVICE", "auto")
     if device != "auto":
         return device
     if torch.cuda.is_available():

@@ -45,6 +45,7 @@ def check_engine(backend: str) -> str:
               f"{s.ticker or '-':5s} {s.text_excerpt[:60]}")
     detail = f"{engine.backend} backend ({engine.model_version}), {len(signals)} signals"
     if engine.backend == "transformer":
+        detail += f" on {engine.model.device}"
         from src.modules.stress import StressTestEngine
 
         sig = engine.analyze_texts([STRESS_DEFAULT_HEADLINE])[0]
