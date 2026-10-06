@@ -97,6 +97,10 @@ sig_df = load_signals(os.path.getmtime(SIGNALS) if os.path.exists(SIGNALS) else 
 st.title("AI/NLP Financial Risk Engine")
 st.caption(f"Backend: **{engine.backend}** · model `{engine.model_version}` · "
            f"{len(sig_df):,} signals in stream · sources: news, social, global event feed")
+if engine.backend == "baseline":
+    st.info("Live scoring is using the TF-IDF baseline because the fine-tuned transformer is not installed. "
+            "Run `python run.py fetch-model` and restart the dashboard to use it. The precomputed "
+            "signal stream, backtests and reports below come from the transformer either way.")
 
 tab_engine, tab_a, tab_b, tab_perf = st.tabs(
     ["Risk Engine", "Module A · Index Rebalancer", "Module B · Stress Testing", "Model Performance"]

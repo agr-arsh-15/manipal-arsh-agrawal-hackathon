@@ -1,4 +1,5 @@
 import hashlib
+import logging
 import math
 import os
 import time
@@ -68,6 +69,10 @@ class RiskEngine:
             self.model = RiskModelPredictor(transformer_dir, device=device)
             self.backend = "transformer"
         else:
+            if backend == "auto":
+                logging.getLogger(__name__).warning(
+                    "Fine-tuned transformer not found in %s; using the TF-IDF baseline. "
+                    "Run `python run.py fetch-model` to download it.", transformer_dir)
             self.model = _BaselineBackend(baseline_dir)
             self.backend = "baseline"
         self.model_version = self.model.version

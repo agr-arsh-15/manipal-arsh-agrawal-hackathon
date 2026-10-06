@@ -19,6 +19,9 @@ model:
   epochs: 4
   learning_rate: 3.0e-5
   checkpoint_dir: "models/risk_engine"
+  # Published checkpoint (python run.py fetch-model). The hash is written by scripts/package_model.py.
+  release_url: "https://github.com/agr-arsh-15/manipal-arsh-agrawal-hackathon/releases/download/v1.0.0/risk_engine-v1.0.0.zip"
+  release_sha256: "3266cf61ac8dff64658542ca5f4793fbe1eaf2ee9fe1ad8a61700d0838e04a9e"
 
 # Chronological split for dated sources (Benzinga, Stock Tweets). Undated PhraseBank rows
 # are assigned by a deterministic hash of doc_id using the same 70/15/15 proportions.
