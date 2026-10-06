@@ -402,8 +402,9 @@ def render_stress(result: dict, label: str, trigger_signal: dict = None):
     k4.metric("CET1 ratio", f"{result['cet1_ratio_after']:.2%}",
               f"{(result['cet1_ratio_after'] - result['cet1_ratio_before']) * 100:+.2f} pp",
               help="Common Equity Tier 1 capital / risk-weighted assets.")
-    k5.metric("Loans moved to Stage 2", result["loans_moved_to_stage2"],
-              help="Loans whose PD at least doubled (significant increase in credit risk).")
+    k5.metric("Stage 2 loans", f"+{result['loans_moved_to_stage2']}",
+              help="Loans moved to IFRS 9 Stage 2 because their PD at least doubled (significant increase "
+                   "in credit risk).")
     if result["breaches_buffer"]:
         st.error(f"CET1 falls below the {result['cet1_minimum_with_buffer']:.0%} minimum-plus-buffer threshold.")
 
