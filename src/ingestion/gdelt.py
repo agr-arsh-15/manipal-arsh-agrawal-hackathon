@@ -128,6 +128,16 @@ class GdeltAdapter:
             with open(self.snapshot_path, "r", encoding="utf-8") as f:
                 raw = json.load(f)
 
+        return self._dedupe(raw)
+
+    def load_snapshot(self) -> List[Document]:
+        """Replays the last persisted GDELT pull without touching the network."""
+        if not os.path.exists(self.snapshot_path):
+            return []
+        with open(self.snapshot_path, "r", encoding="utf-8") as f:
+            return self._dedupe(json.load(f))
+
+    def _dedupe(self, raw: List[dict]) -> List[Document]:
         docs: List[Document] = []
         seen = set()
         for art in raw:
