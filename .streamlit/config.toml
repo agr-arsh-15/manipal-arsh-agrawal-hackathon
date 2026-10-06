@@ -1,0 +1,8 @@
+[server]
+# The watcher walks every imported module; transformers' lazy optional imports (torchvision, ...)
+# then flood the log with ModuleNotFoundError tracebacks. Restart the app to pick up code edits.
+fileWatcherType = "none"
+headless = true
+
+[browser]
+gatherUsageStats = false

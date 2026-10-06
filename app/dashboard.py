@@ -5,6 +5,7 @@ Risk Engine dashboard.
 """
 import json
 import os
+import subprocess
 import sys
 
 import numpy as np
@@ -13,7 +14,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
 
 from src.engine.pipeline import RiskEngine  # noqa: E402
 from src.engine.store import SignalStore  # noqa: E402
@@ -41,9 +43,16 @@ st.set_page_config(page_title="AI/NLP Financial Risk Engine", layout="wide")
 
 # ---- cached resources --------------------------------------------------------------------
 
-@st.cache_resource(show_spinner="Loading risk engine...")
+BACKEND = os.environ.get("RISK_ENGINE_BACKEND", "auto")
+
+
+@st.cache_resource(show_spinner="Loading risk engine (the first start downloads the ~300 MB model)...")
 def get_engine() -> RiskEngine:
-    return RiskEngine(backend=os.environ.get("RISK_ENGINE_BACKEND", "auto"))
+    if BACKEND != "baseline":
+        # No-op when the checkpoint exists; on a fresh host (e.g. Streamlit Cloud) it pulls the
+        # release asset. A failed download leaves "auto" on the committed TF-IDF baseline.
+        subprocess.run([sys.executable, "-m", "scripts.fetch_model"], cwd=ROOT, check=False)
+    return RiskEngine(backend=BACKEND)
 
 
 @st.cache_resource
@@ -98,9 +107,11 @@ st.title("AI/NLP Financial Risk Engine")
 st.caption(f"Backend: **{engine.backend}** · model `{engine.model_version}` · "
            f"{len(sig_df):,} signals in stream · sources: news, social, global event feed")
 if engine.backend == "baseline":
-    st.info("Live scoring is using the TF-IDF baseline because the fine-tuned transformer is not installed. "
-            "Run `python run.py fetch-model` and restart the dashboard to use it. The precomputed "
-            "signal stream, backtests and reports below come from the transformer either way.")
+    reason = ("is set to the lightweight TF-IDF baseline on this deployment" if BACKEND == "baseline" else
+              "is using the TF-IDF baseline because the fine-tuned transformer could not be downloaded. "
+              "Run `python run.py fetch-model` and restart the dashboard to use it")
+    st.info(f"Live scoring {reason}. The precomputed signal stream, backtests and reports below "
+            "come from the transformer either way.")
 
 tab_engine, tab_a, tab_b, tab_perf = st.tabs(
     ["Risk Engine", "Module A · Index Rebalancer", "Module B · Stress Testing", "Model Performance"]

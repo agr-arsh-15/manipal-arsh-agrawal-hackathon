@@ -348,7 +348,9 @@ impact 9:
 
 ```
 run.py                      cross-platform task runner (python run.py <task>)
-app/dashboard.py            Streamlit dashboard (4 tabs)
+app/dashboard.py            Streamlit dashboard (4 tabs); fetches the model on first start
+app/requirements.txt        slim CPU-only dependencies used by Streamlit Community Cloud
+.streamlit/config.toml      dashboard server settings (file watcher off, headless)
 config/                     engine, taxonomy, universe, impact bins, stress scenarios
 data/                       prices, labels, samples (dataset, signals, GDELT snapshot), portfolio, outputs, raw_samples
 docs/                       architecture.{dot,png}, presentation.pdf, figures/, demo_script.md

@@ -1,0 +1,26 @@
+# Streamlit Community Cloud installs this file (it sits next to the entrypoint) instead of the
+# root requirements.txt: dashboard dependencies only, with the CPU-only torch build so the image
+# skips the multi-GB CUDA wheels. Versions match the root file. torch is pinned by wheel URL
+# rather than --extra-index-url because uv (Cloud's installer) would then take every package the
+# PyTorch index also mirrors (requests, numpy, ...) from that index, where our pins do not exist.
+
+python-dotenv==1.2.4
+pydantic==2.13.5
+PyYAML==6.0.3
+pandas==3.0.6
+numpy==2.4.6
+scipy==1.17.1
+requests==2.34.2
+tqdm==4.70.1
+tzdata==2026.5
+
+torch @ https://download.pytorch.org/whl/cpu/torch-2.14.1%2Bcpu-cp311-cp311-manylinux_2_28_x86_64.whl ; sys_platform == "linux" and platform_machine == "x86_64" and python_version == "3.11"
+torch==2.14.1 ; sys_platform != "linux" or platform_machine != "x86_64" or python_version != "3.11"
+transformers==5.18.0
+tokenizers==0.23.2
+safetensors==0.8.0
+scikit-learn==1.9.1
+joblib==1.6.0
+
+streamlit==1.65.0
+plotly==7.1.0
