@@ -30,7 +30,8 @@ GKG_THEME_PREFIXES = (
 )
 GKG_MIN_THEMES = 2
 PAGE_TITLE = re.compile(r"<PAGE_TITLE>(.*?)</PAGE_TITLE>", re.S)
-csv.field_size_limit(sys.maxsize)
+# GKG rows carry very long fields; the limit must fit a C long, which is 32-bit on Windows.
+csv.field_size_limit(min(sys.maxsize, 2**31 - 1))
 
 # Macro / geopolitical / credit themes the engine monitors when no query is supplied.
 DEFAULT_QUERIES = [

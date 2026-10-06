@@ -1,7 +1,15 @@
+import os
+
 import pytest
 from src.ingestion.adapters import BenzingaAdapter, PhraseBankAdapter, StockTweetsAdapter
 
 
+def requires_raw(path: str):
+    return pytest.mark.skipif(not os.path.exists(path),
+                              reason=f"{path} not downloaded (gitignored Kaggle data; see README 4.5)")
+
+
+@requires_raw("data/raw/phrasebank/all-data.csv")
 def test_phrasebank_adapter():
     adapter = PhraseBankAdapter()
     docs = adapter.load_documents(limit=10)
@@ -13,6 +21,7 @@ def test_phrasebank_adapter():
     assert first.metadata["ground_truth_sentiment"] in [-1.0, 0.0, 1.0]
 
 
+@requires_raw("data/raw/stock_tweets/reduced_dataset-release.csv")
 def test_stock_tweets_adapter():
     adapter = StockTweetsAdapter()
     docs = adapter.load_documents(limit=10)
@@ -25,6 +34,7 @@ def test_stock_tweets_adapter():
     assert all(d.published_at.year in (2017, 2018) for d in docs)
 
 
+@requires_raw("data/raw/benzinga/raw_analyst_ratings.csv")
 def test_benzinga_adapter_remaps_legacy_tickers():
     adapter = BenzingaAdapter(start_date="2020-01-01")
     df = adapter.load_frame()

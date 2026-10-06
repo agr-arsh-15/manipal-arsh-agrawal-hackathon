@@ -205,7 +205,7 @@ same commands.
 
 | Command | What it does | Time on a laptop CPU |
 |---|---|---|
-| `python run.py test` | Full pytest suite (44 tests) | about 15 s |
+| `python run.py test` | Full pytest suite (44 tests; the 3 raw-adapter tests skip unless the Kaggle data is downloaded) | about 15 s |
 | `python run.py smoke` | Scores 5 demo headlines, runs Module A and Module B, loads all reports, executes the dashboard script and checks the Streamlit server | about 1 min |
 | `python run.py dashboard` | Streamlit UI on http://localhost:8501 (engine, Module A, Module B and model-performance tabs) | starts in about 10 s |
 | `python run.py api` | FastAPI on http://127.0.0.1:8000, with interactive docs at http://127.0.0.1:8000/docs | starts in about 10 s |
