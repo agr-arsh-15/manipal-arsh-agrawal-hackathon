@@ -1,10 +1,13 @@
 # AI/NLP Financial Risk Engine — S&P Global × Crisil Campus Hackathon 2026
 
+[![CI](https://github.com/agr-arsh-15/manipal-arsh-agrawal-hackathon/actions/workflows/ci.yml/badge.svg)](https://github.com/agr-arsh-15/manipal-arsh-agrawal-hackathon/actions/workflows/ci.yml)
+Tested on Windows, macOS and Ubuntu (Python 3.11) on every push.
+
 **Candidate Name:** Arsh Agrawal  
 **College Email ID:** ARSH.23FE10CDS00069@muj.manipal.edu  
 **College / Campus:** Manipal University Jaipur  
 **Demo Video Link:** _to be added — unlisted YouTube link (script in [`docs/demo_script.md`](docs/demo_script.md))_  
-**Slide Deck Link:** [`docs/presentation.pdf`](docs/presentation.pdf) (7 slides, built reproducibly by `scripts/build_deck.py`)
+**Slide Deck Link:** [docs/presentation.pdf](https://github.com/agr-arsh-15/manipal-arsh-agrawal-hackathon/blob/main/docs/presentation.pdf) (7 slides, built reproducibly by `scripts/build_deck.py`)
 
 ---
 
@@ -113,42 +116,153 @@ format-preserving 300-row extracts are committed in [`data/raw_samples/`](data/r
 - Market-wide impact labels are day-level, so all market headlines published on the same day
   share one label.
 - The PhraseBank licence is non-commercial, which is fine for this research prototype.
+- The news data is public, published headlines. A handful mention listed companies such as
+  rating agencies, as any financial newswire does. No client data, client names or engagement
+  details from S&P Global or Crisil are used anywhere.
+- The Module B book is fully synthetic. Counterparties are named `Borrower-001`, `Issuer-001` and
+  `Dealer-001` and so on, and the balances, ratings and PDs are drawn from a seeded generator.
 
 ## 4. Quickstart & Installation
 
-Runtime: Python 3.11 on macOS (Apple-silicon MPS), Linux (CUDA) or CPU.
+The same commands work on **Windows, macOS and Linux**. Every task runs through `run.py`, a small
+standard-library script, so neither `make` nor a Unix shell is needed. CI runs the full install,
+the test suite and an end-to-end smoke check on all three operating systems on every push.
+
+### 4.1 Prerequisites
+
+| | Windows 10/11 | macOS 12+ (Intel or Apple silicon) | Linux (Ubuntu 22.04+ or similar) |
+|---|---|---|---|
+| Python **3.11** (64-bit) | `winget install Python.Python.3.11` or the [python.org installer](https://www.python.org/downloads/release/python-3119/) (tick "Add python.exe to PATH") | `brew install python@3.11` or python.org | `sudo apt install python3.11 python3.11-venv` (or deadsnakes PPA / pyenv) |
+| Git | `winget install Git.Git` | `xcode-select --install` | `sudo apt install git` |
+| Disk / RAM | about 3 GB free, 8 GB RAM | same | same |
+| GPU | not needed (CPU inference is about 12 ms per headline) | Apple-silicon GPU (MPS) used automatically | NVIDIA CUDA used automatically if present |
+
+Python 3.11 is the tested version. All dependencies are pinned in `requirements.txt`.
+
+### 4.2 Install and run
+
+**Windows (PowerShell)**
+
+```powershell
+git clone https://github.com/agr-arsh-15/manipal-arsh-agrawal-hackathon.git
+cd manipal-arsh-agrawal-hackathon
+py -3.11 -m venv .venv
+# If activation is blocked: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python run.py fetch-model        # downloads the fine-tuned transformer (309 MB, SHA256-verified)
+python run.py smoke              # end-to-end check, about 1 minute
+python run.py dashboard          # opens http://localhost:8501
+```
+
+If you use Command Prompt instead of PowerShell, activate with `.venv\Scripts\activate.bat`.
+
+**macOS**
 
 ```bash
 git clone https://github.com/agr-arsh-15/manipal-arsh-agrawal-hackathon.git
 cd manipal-arsh-agrawal-hackathon
-make setup && source .venv/bin/activate      # python3.11 -m venv .venv && pip install -r requirements.txt
-make test                                     # full pytest suite
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python run.py fetch-model
+python run.py smoke
+python run.py dashboard
+```
 
-make dashboard                                # Streamlit UI on http://localhost:8501
-make api                                      # FastAPI on http://localhost:8000  (docs at /docs)
-curl -s -X POST localhost:8000/analyze -H 'content-type: application/json' \
+**Linux**
+
+```bash
+git clone https://github.com/agr-arsh-15/manipal-arsh-agrawal-hackathon.git
+cd manipal-arsh-agrawal-hackathon
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+# Optional, without an NVIDIA GPU: install the CPU-only torch first, which saves about 2.5 GB.
+python -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements.txt
+python run.py fetch-model
+python run.py smoke
+python run.py dashboard
+```
+
+On macOS and Linux, `make setup`, `make smoke`, `make dashboard` and so on are shortcuts for the
+same commands.
+
+**The model weights.** The fine-tuned transformer is too large for git, so it is published as a
+[GitHub Release asset](https://github.com/agr-arsh-15/manipal-arsh-agrawal-hackathon/releases/tag/v1.0.0).
+`python run.py fetch-model` downloads it and checks its hash.
+
+- If the download is blocked, download `risk_engine-v1.0.0.zip` from the Releases page in a
+  browser, then run `python run.py fetch-model --url path\to\risk_engine-v1.0.0.zip`.
+- Without the weights, every command still works: live scoring falls back to the committed TF-IDF
+  baseline, and the dashboard says so.
+- The precomputed signal stream, backtests and reports always come from the transformer.
+
+### 4.3 What each command does
+
+| Command | What it does | Time on a laptop CPU |
+|---|---|---|
+| `python run.py test` | Full pytest suite (44 tests) | about 15 s |
+| `python run.py smoke` | Scores 5 demo headlines, runs Module A and Module B, loads all reports, executes the dashboard script and checks the Streamlit server | about 1 min |
+| `python run.py dashboard` | Streamlit UI on http://localhost:8501 (engine, Module A, Module B and model-performance tabs) | starts in about 10 s |
+| `python run.py api` | FastAPI on http://127.0.0.1:8000, with interactive docs at http://127.0.0.1:8000/docs | starts in about 10 s |
+| `python run.py evaluate` | Baseline vs transformer report (`reports/engine_eval.*`) and figures | about 5 min |
+| `python run.py signals` | Re-scores the full 27k-signal stream (`data/samples/signals.jsonl`) | about 10 min |
+| `python run.py modules` | Synthetic book, Module A backtest, Module B scenarios (`reports/`, `data/outputs/`) | about 1 min |
+| `python run.py deck` | Rebuilds `docs/presentation.pdf` (and `docs/architecture.png` if Graphviz is installed) | about 10 s |
+
+Extra arguments are passed through, for example `python run.py dashboard --server.port 8600`.
+
+**Calling the API** (start it first with `python run.py api` in another terminal):
+
+```bash
+# macOS / Linux
+curl -s -X POST http://127.0.0.1:8000/analyze -H "content-type: application/json" \
   -d '{"items":[{"text":"Moody'\''s downgrades Boeing to junk as cash burn accelerates"}]}'
 ```
 
-**About the model weights.** The fine-tuned transformer (~330 MB) is gitignored. Without it the
-engine **automatically falls back to the committed TF-IDF baseline**, so every command above still
-works. To reproduce the transformer:
-
-```bash
-make train          # ~25 min on an Apple M3 (MPS); writes models/risk_engine/
-make evaluate       # reports/engine_eval.{json,md} + docs/figures/
-make signals        # re-score the full stream -> data/samples/signals.jsonl
-make modules        # Module A backtest + Module B scenarios -> reports/, data/outputs/
-make deck           # docs/presentation.pdf + docs/architecture.png
+```powershell
+# Windows PowerShell
+$body = @{ items = @(@{ text = "Moody's downgrades Boeing to junk as cash burn accelerates" }) } | ConvertTo-Json -Depth 3
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/analyze -ContentType "application/json" -Body $body | ConvertTo-Json -Depth 5
 ```
 
-To rebuild the dataset from scratch:
+The easiest option on any OS is the Swagger UI at http://127.0.0.1:8000/docs: open `POST /analyze`,
+click "Try it out", and paste a headline.
 
-1. Run `pip install kaggle`.
-2. Download the three Kaggle datasets into `data/raw/` with `python scripts/download_data.py` and
-   `python scripts/download_benzinga.py`. Both scripts read `KAGGLE_USERNAME` / `KAGGLE_KEY` from
-   `.env` (see `.env.example`).
-3. Run `make data label`. The zero-shot labelling step takes about 1 hour on MPS.
+### 4.4 Troubleshooting
+
+| Symptom | Fix |
+|---|---|
+| `py` or `python3.11` not found | Install Python 3.11 (see 4.1). On Windows, reopen the terminal after installing so PATH updates. |
+| `Activate.ps1 cannot be loaded because running scripts is disabled` | Run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` in the same PowerShell window, then activate again. |
+| `[error] Missing packages` from `run.py` | The virtual environment is not active, or the install failed. Activate `.venv` and rerun `python -m pip install -r requirements.txt`. |
+| Port 8501 or 8000 already in use | `python run.py dashboard --server.port 8600` or `python run.py api --port 8001`. |
+| `fetch-model` fails behind a proxy or offline | Download the zip from the Releases page and pass `--url` with its local path. Everything also runs on the TF-IDF baseline without it. |
+| The first run is slow | PyTorch and Transformers take 10-20 s to import the first time. Later runs are faster. |
+| `python run.py deck` skips the architecture diagram | Graphviz is optional and only re-renders `docs/architecture.png`. The committed PNG is current. |
+| Training is very slow on CPU | Training is not needed to run anything. Use `fetch-model`. |
+
+### 4.5 Reproduce everything from scratch (optional)
+
+These steps rebuild the labelled dataset and retrain the model. Judges do not need them, because
+all outputs are committed.
+
+1. Install the Kaggle client with `python -m pip install kaggle`. Put `KAGGLE_USERNAME` and
+   `KAGGLE_KEY` in a `.env` file (see `.env.example`).
+2. Download the raw data into `data/raw/` (about 1.1 GB):
+   `python scripts/download_data.py` and `python scripts/download_benzinga.py`.
+3. `python run.py data`: builds `data/samples/unified_risk_dataset.csv` with event-study impact
+   labels.
+4. `python run.py label`: zero-shot BART-MNLI event labels (about 1 hour on a GPU; downloads the
+   model from the Hugging Face Hub on first use).
+5. `python run.py train`: fine-tunes DistilRoBERTa (about 25 min on an Apple M3; much longer on
+   CPU).
+6. `python run.py evaluate`, then `python run.py signals`, `python run.py modules` and
+   `python run.py deck`.
 
 ## 5. Key Results & Domain Impact
 
@@ -233,15 +347,22 @@ impact 9:
 ### Repository layout
 
 ```
+run.py                      cross-platform task runner (python run.py <task>)
 app/dashboard.py            Streamlit dashboard (4 tabs)
 config/                     engine, taxonomy, universe, impact bins, stress scenarios
 data/                       prices, labels, samples (dataset, signals, GDELT snapshot), portfolio, outputs, raw_samples
 docs/                       architecture.{dot,png}, presentation.pdf, figures/, demo_script.md
 reports/                    engine_eval, module_a_backtest, module_b_stress, event_labels, training_history
-scripts/                    dataset build, labelling, training, evaluation, signal generation, modules, deck
+scripts/                    dataset build, labelling, training, evaluation, signal generation, modules,
+                            deck, model packaging / download, smoke check
 src/                        ingestion, linking, labeling, models, engine, api, modules, eval
 tests/                      pytest suite (adapters, impact, GDELT, pipeline, API, modules, eval)
+.github/workflows/ci.yml    install + tests + smoke on Windows, macOS and Ubuntu
 ```
+
+**Repository hygiene.** The raw Kaggle dumps (about 1.1 GB) and the 309 MB model checkpoint are
+not committed. The checkpoint is a release asset, and the raw data has download scripts plus
+300-row format samples. The largest committed file is the 15 MB signal stream.
 
 ### Limitations
 

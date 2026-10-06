@@ -5,12 +5,16 @@ Upload to YouTube as **Unlisted** and paste the link into the README header.
 
 **Before recording**
 
+Activate the virtual environment first (`source .venv/bin/activate`, or `.venv\Scripts\Activate.ps1`
+on Windows), then:
+
 ```bash
-source .venv/bin/activate
-make test                      # show the green suite in the first minute
-make api        &              # FastAPI on :8000 (new terminal)
-make dashboard                 # Streamlit on :8501
+python run.py test             # show the green suite in the first minute
+python run.py api              # FastAPI on :8000 (in a second terminal)
+python run.py dashboard        # Streamlit on :8501
 ```
+
+Optionally show the green CI badge (Windows, macOS, Ubuntu) on the GitHub page.
 
 Open `docs/presentation.pdf` in a second window for the opening and closing slides.
 
@@ -51,10 +55,10 @@ Open `docs/presentation.pdf` in a second window for the opening and closing slid
    show sentiment plotted over its price.
 5. In the terminal, show the API working:
    ```bash
-   curl -s localhost:8000/health
-   curl -s -X POST localhost:8000/analyze -H 'content-type: application/json' \
-     -d '{"items":[{"text":"S&P cuts Boeing outlook to negative on cash burn"}]}' | python -m json.tool
-   curl -s 'localhost:8000/signals/BA?limit=3' | python -m json.tool
+   curl -s 127.0.0.1:8000/health
+   curl -s -X POST 127.0.0.1:8000/analyze -H 'content-type: application/json' \
+     -d '{"items":[{"text":"Rating agency cuts Boeing outlook to negative on cash burn"}]}' | python -m json.tool
+   curl -s '127.0.0.1:8000/signals/BA?limit=3' | python -m json.tool
    ```
 
 ## 4:30 – 6:30 · Module A (tab "Module A · Index Rebalancer")
