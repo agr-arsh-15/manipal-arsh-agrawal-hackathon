@@ -7,7 +7,7 @@ Tested on Windows, macOS and Ubuntu (Python 3.11) on every push.
 **College Email ID:** ARSH.23FE10CDS00069@muj.manipal.edu  
 **College / Campus:** Manipal University Jaipur  
 **Live Dashboard:** [manipal-arsh-agrawal-hackathon.streamlit.app](https://manipal-arsh-agrawal-hackathon.streamlit.app/) (public, no login; the first load after a quiet period can take about a minute while the app wakes up)  
-**Demo Video Link:** https://youtu.be/WYfm6g9ED_U 
+**Demo Video Link:** 
 **Slide Deck Link:** [docs/presentation.pdf](https://github.com/agr-arsh-15/manipal-arsh-agrawal-hackathon/blob/main/docs/presentation.pdf) 
 
 ### Evaluate it in 60 seconds
